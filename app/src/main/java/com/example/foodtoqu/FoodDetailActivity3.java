@@ -153,13 +153,13 @@ public class FoodDetailActivity3 extends AppCompatActivity {
 
         // Create PieEntries for the nutritional information
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(calorieValue, "Calories"));
-        entries.add(new PieEntry(totalFatValue, "Total Fat"));
-        entries.add(new PieEntry(cholesterolValue, "Cholesterol"));
-        entries.add(new PieEntry(sodiumValue, "Sodium"));
-        entries.add(new PieEntry(carboValue, "Carbohydrates"));
-        entries.add(new PieEntry(totalSugarValue, "Total Sugar"));
-        entries.add(new PieEntry(proteinValue, "Protein"));
+        entries.add(new PieEntry(calorieValue));
+        entries.add(new PieEntry(totalFatValue));
+        entries.add(new PieEntry(cholesterolValue));
+        entries.add(new PieEntry(sodiumValue));
+        entries.add(new PieEntry(carboValue));
+        entries.add(new PieEntry(totalSugarValue));
+        entries.add(new PieEntry(proteinValue));
 
         PieDataSet dataSet = new PieDataSet(entries, "Nutritional Info");
         dataSet.setColors(Color.rgb(255, 0, 0), Color.rgb(0, 255, 0), Color.rgb(255, 165, 0),

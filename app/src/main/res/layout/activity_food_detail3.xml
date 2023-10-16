@@ -40,7 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_button_black"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pieChart"
@@ -48,17 +49,165 @@
                     android:layout_height="300dp"
                     android:layout_margin="25dp"/>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center_horizontal">
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/red_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Calorie"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"/>
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/green_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Total Fat"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"/>
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/orange_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Cholesterol"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"/>
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/blue_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Sodium"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/pink_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Total Carbohydrate"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"/>
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/yellow_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Total Sugar"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"/>
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/purple_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Protein"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"/>
+
+                </LinearLayout>
+
             </LinearLayout>
 
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_button_black"
                 android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
                 android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:padding="20dp"
+                    android:text="Amount Per Serving"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,12 +223,21 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:id="@+id/detailCalorie"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="20dp"
                         android:text="Calorie"
+                        android:textColor="@color/greenBtn"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="kcal"
                         android:textColor="@color/greenBtn"
                         android:textSize="18sp"/>
                 </LinearLayout>
@@ -100,12 +258,21 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:id="@+id/detailFat"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="20dp"
                         android:text="Total Fat"
+                        android:textColor="@color/greenBtn"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="g"
                         android:textColor="@color/greenBtn"
                         android:textSize="18sp"/>
                 </LinearLayout>
@@ -125,12 +292,21 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:id="@+id/detailCholesterol"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="20dp"
                         android:text="Cholesterol"
+                        android:textColor="@color/greenBtn"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="mg"
                         android:textColor="@color/greenBtn"
                         android:textSize="18sp"/>
                 </LinearLayout>
@@ -150,12 +326,21 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:id="@+id/detailSodium"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="20dp"
                         android:text="Sodium"
+                        android:textColor="@color/greenBtn"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="mg"
                         android:textColor="@color/greenBtn"
                         android:textSize="18sp"/>
                 </LinearLayout>
@@ -175,12 +360,21 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:id="@+id/detailCarbo"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="20dp"
                         android:text="Total Carbohydrate"
+                        android:textColor="@color/greenBtn"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="g"
                         android:textColor="@color/greenBtn"
                         android:textSize="18sp"/>
                 </LinearLayout>
@@ -200,12 +394,21 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:id="@+id/detailSugar"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="20dp"
                         android:text="Total Sugar"
+                        android:textColor="@color/greenBtn"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="g"
                         android:textColor="@color/greenBtn"
                         android:textSize="18sp"/>
                 </LinearLayout>
@@ -225,12 +428,21 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:id="@+id/detailProtein"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="20dp"
                         android:text="Protein"
+                        android:textColor="@color/greenBtn"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="g"
                         android:textColor="@color/greenBtn"
                         android:textSize="18sp"/>
                 </LinearLayout>
@@ -246,7 +458,7 @@
                 android:text="Description: "
                 android:textColor="@color/black"
                 android:textSize="18sp"/>
-            <TextView
+            <com.uncopt.android.widget.text.justify.JustifiedTextView
                 android:id="@+id/detailDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

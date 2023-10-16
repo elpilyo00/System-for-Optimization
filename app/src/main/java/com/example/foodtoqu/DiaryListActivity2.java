@@ -94,9 +94,9 @@ public class DiaryListActivity2 extends AppCompatActivity {
                     public void run() {
                         removeOldDiaryEntriesForCurrentUser();
                         // Schedule the task to run again after one minute
-                        handler.postDelayed(this, 60 * 1000); // 60,000 milliseconds = 1 minute
+                        handler.postDelayed(this, 30L * 24L * 60L * 60L * 1000L); // 30 days in milliseconds
                     }
-                }, 60 * 1000); // Initial delay of 1 minute
+                },  30L * 24L * 60L * 60L * 1000L); // Initial delay of approximately 1 month
 
                 // Set the formatted local date and time as the text for the TextView
                 updateTimerText(); // Initial delay of 1 minute
@@ -355,7 +355,7 @@ public class DiaryListActivity2 extends AppCompatActivity {
                             legend.setYEntrySpace(5f);
 
                             // Create custom legend labels with colors and square markers
-                            String[] customLabels = new String[]{"Calorie", "Fat", "Cholesterol", "Sodium", "Carbohydrates", "Sugar", "Protein"};
+                            String[] customLabels = new String[]{""};//"Calorie", "Fat", "Cholesterol", "Sodium", "Carbohydrates", "Sugar", "Protein"  Original content
                             LegendEntry[] legendEntries = new LegendEntry[customLabels.length];
                             for (int i = 0; i < customLabels.length; i++) {
                                 LegendEntry entry = new LegendEntry();

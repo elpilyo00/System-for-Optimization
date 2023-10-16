@@ -27,11 +27,181 @@
                     app:civ_border_color="#FF000000"
                     app:civ_border_width="2dp" />
 
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/diary"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/bungee"
+                    android:text="My Monthly Food Diary"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/bar_chart"
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
-                    android:layout_below="@+id/splashLogo" />
+                    android:layout_below="@+id/title" />
+
+
+
+                <LinearLayout
+                    android:id="@+id/nutritional_value"
+                    android:layout_below="@+id/bar_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_centerHorizontal="true">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Chart order:"
+                        android:textColor="@color/black"
+                        android:textSize="8sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Calorie"
+                        android:textColor="@color/black"
+                        android:textSize="8sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Total Fat"
+                        android:textColor="@color/black"
+                        android:textSize="8sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Cholesterol"
+                        android:textColor="@color/black"
+                        android:textSize="8sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Sodium"
+                        android:textColor="@color/black"
+                        android:textSize="8sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Total Carbohydrate"
+                        android:textColor="@color/black"
+                        android:textSize="8sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Total Sugar"
+                        android:textColor="@color/black"
+                        android:textSize="8sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Protein"
+                        android:textColor="@color/black"
+                        android:textSize="8sp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/mealTime"
+                    android:layout_below="@+id/nutritional_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_horizontal"
+                    android:layout_centerHorizontal="true">
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/red_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Breakfast"
+                        android:textColor="@color/black"
+                        android:textSize="10sp"/>
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/green_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Lunch"
+                        android:textColor="@color/black"
+                        android:textSize="10sp"/>
+
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/orange_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Dinner"
+                        android:textColor="@color/black"
+                        android:textSize="10sp"/>
+                </LinearLayout>
+
 
                 <ImageButton
                     android:id="@+id/diary"
@@ -57,9 +227,9 @@
                     android:id="@+id/splashLogo2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/bar_chart"
+                    android:layout_below="@+id/mealTime"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="10dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

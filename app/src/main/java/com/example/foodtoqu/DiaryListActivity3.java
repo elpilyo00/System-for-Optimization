@@ -308,7 +308,7 @@ public class DiaryListActivity3 extends AppCompatActivity {
                 legend.setYEntrySpace(5f);
 
                 // Create custom legend labels with colors and square markers
-                String[] customLabels = new String[]{"Calorie", "Fat", "Cholesterol", "Sodium", "Carbohydrates", "Sugar", "Protein"};
+                String[] customLabels = new String[]{""};//"Calorie", "Fat", "Cholesterol", "Sodium", "Carbohydrates", "Sugar", "Protein" Original Content
                 LegendEntry[] legendEntries = new LegendEntry[customLabels.length];
                 for (int i = 0; i < customLabels.length; i++) {
                     LegendEntry entry = new LegendEntry();

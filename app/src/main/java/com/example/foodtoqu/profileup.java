@@ -285,6 +285,8 @@ public class profileup extends AppCompatActivity {
                                                                 progressDialog.dismiss();
                                                             }
                                                             Toast.makeText(profileup.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                                                            Intent intent = new Intent(profileup.this, profs.class);
+                                                            startActivity(intent);
                                                         }
                                                     })
                                                     .addOnFailureListener(new OnFailureListener() {

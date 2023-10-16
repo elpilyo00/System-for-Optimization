@@ -33,6 +33,7 @@
                     android:layout_height="350dp"
                     android:layout_below="@+id/splashLogo" />
 
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/splashLogo2"
                     android:layout_width="match_parent"

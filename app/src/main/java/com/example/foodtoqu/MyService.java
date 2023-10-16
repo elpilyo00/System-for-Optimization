@@ -25,17 +25,17 @@ public class MyService extends Service {
     public MyService() {
     }
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
+    public int onStartCommand(Intent intent, int flags, int startId) {
         onTaskRemoved(intent);
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 removeOldDiaryEntriesForCurrentUser();
-                // Schedule the task to run again after one minute
-                handler.postDelayed(this, 60 * 1000); // 60,000 milliseconds = 1 minute
+                // Schedule the task to run again after approximately 1 month (30 days)
+                handler.postDelayed(this, 30L * 24L * 60L * 60L * 1000L); // 30 days in milliseconds
             }
-        }, 60 * 1000); // Initial delay of 1 minute
+        }, 30L * 24L * 60L * 60L * 1000L); // Initial delay of approximately 1 month
 
         return START_STICKY;
     }
@@ -54,14 +54,14 @@ public class MyService extends Service {
             long currentTimeMillis = System.currentTimeMillis();
 
             // Calculate one minute ago
-            long oneMinuteAgoMillis = currentTimeMillis - (60 * 1000);
+            long oneMonthAgoMillis = currentTimeMillis - (30L * 24L * 60L * 60L * 1000L);
 
             // Construct a date string for one minute ago
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault());
-            String oneMinuteAgoDateString = dateFormat.format(new Date(oneMinuteAgoMillis));
+            String oneMonthAgoDateString  = dateFormat.format(new Date(oneMonthAgoMillis));
 
             // Query and remove entries older than one minute
-            diaryRef.orderByChild("timestamp").endAt(oneMinuteAgoDateString)
+            diaryRef.orderByChild("timestamp").endAt(oneMonthAgoDateString)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

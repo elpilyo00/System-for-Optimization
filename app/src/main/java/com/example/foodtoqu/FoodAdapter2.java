@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -63,7 +63,9 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.FoodViewHold
         // Load the food image using Picasso
         String imageUrl = food.getImageUrl();
         if (imageUrl != null && !imageUrl.isEmpty()) {
-            Picasso.get().load(imageUrl).into(holder.foodImageView);
+            Glide.with(context)  // Replace 'context' with your actual context
+                    .load(imageUrl)
+                    .into(holder.foodImageView);
         } else {
             // Set a default drawable image if the image URL is empty
             holder.foodImageView.setImageResource(R.drawable.ic_baseline_person_24);

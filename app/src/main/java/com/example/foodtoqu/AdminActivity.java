@@ -197,7 +197,6 @@ public class AdminActivity extends AppCompatActivity {
 
 
     }
-
     private void filterData(String query) {
         List<FoodItem> filteredList = new ArrayList<>();
 

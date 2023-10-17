@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -38,7 +38,9 @@ public class UserAdapte2 extends RecyclerView.Adapter<UserAdapte2.ViewHolder> {
         holder.usernameTextView.setText(user.getUsername());
 
         // Load the user image using Picasso
-        Picasso.get().load(user.getImage()).into(holder.userImageView);
+        Glide.with(context)  // Replace 'context' with your actual context
+                .load(user.getImage())
+                .into(holder.userImageView);
     }
 
     @Override

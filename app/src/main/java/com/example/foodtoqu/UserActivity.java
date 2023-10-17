@@ -2,14 +2,9 @@ package com.example.foodtoqu;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
-import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Menu;
@@ -27,9 +22,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,11 +65,9 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_user);
-
-
+        startService(new Intent(getApplicationContext(), MyService.class));
         initWidgets();
         hideFilter();
-
         //CheckBoxes
         //Health Conditions
         diabetesCB = findViewById(R.id.diabetes);
@@ -106,6 +96,18 @@ public class UserActivity extends AppCompatActivity {
         recommendBtn = findViewById(R.id.recommendBtn);
 
         recyclerView2 = findViewById(R.id.recyclerView2);
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            Intent intent = new Intent();
+//            String packageName = getPackageName();
+//            PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+//            if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+//                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+//                intent.setData(Uri.parse("package:" + packageName));
+//                startService(new Intent(getApplicationContext(), MyService.class));
+//                startActivity(intent);
+//            }
+//        }
         foodList = new ArrayList<Food3>();
         foodAdapter = new FoodAdapter2(this, foodList);
         int spanCount = 2; // You can adjust the number of columns in the grid as needed
@@ -196,6 +198,7 @@ public class UserActivity extends AppCompatActivity {
                                 FirebaseAuth.getInstance().signOut();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 overridePendingTransition(0, 0);
+                                stopService(new Intent(UserActivity.this,MyService.class));
                                 startActivity(intent);
                                 finish();
                             }

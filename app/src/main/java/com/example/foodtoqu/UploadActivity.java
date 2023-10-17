@@ -392,7 +392,7 @@ public class UploadActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 
             // Define the desired image size in kilobytes
-            int maxSizeKB = 500; // Adjust this value as needed
+            int maxSizeKB = 50; // Adjust this value as needed
 
             // Compress the bitmap to the desired size
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

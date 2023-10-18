@@ -172,76 +172,31 @@
                 android:padding="20dp">
 
                 <CheckBox
-                    android:id="@+id/diabetes"
+                    android:id="@+id/Pregnant"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:button="@drawable/checkbox"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:padding="5dp"
-                    android:text="Diabetes" />
+                    android:text="Pregnant" />
 
                 <CheckBox
-                    android:id="@+id/gastrointestinal"
+                    android:id="@+id/cardio"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:button="@drawable/checkbox"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:padding="5dp"
-                    android:text="Pulmonary Disease" />
+                    android:text="Cardiovascular Diseases" />
 
                 <CheckBox
-                    android:id="@+id/bowel"
+                    android:id="@+id/gastroes"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:button="@drawable/checkbox"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:padding="5dp"
-                    android:text="Allergies" />
-
-                <CheckBox
-                    android:id="@+id/highBlood"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="5dp"
-                    android:text="High Blood Pressure" />
-
-                <CheckBox
-                    android:id="@+id/weight"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="5dp"
-                    android:text="Weight Management" />
-
-                <CheckBox
-                    android:id="@+id/anemia"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="5dp"
-                    android:text="Anemia" />
-
-                <CheckBox
-                    android:id="@+id/highCholesterol"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="5dp"
-                    android:text="High Cholesterol" />
-
-                <CheckBox
-                    android:id="@+id/heartDisease"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="5dp"
-                    android:text="Heart Disease" />
+                    android:text="Gastroesophageal Reflux Disease" />
 
                 <CheckBox
                     android:id="@+id/osteoporosis"
@@ -253,40 +208,40 @@
                     android:text="Osteoporosis" />
 
                 <CheckBox
-                    android:id="@+id/celiac"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="5dp"
-                    android:text="Digestive disorders" />
-
-                <CheckBox
-                    android:id="@+id/renal"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="5dp"
-                    android:text="Renal Disease" />
-
-                <CheckBox
                     android:id="@+id/hypothyroidism"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:button="@drawable/checkbox"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:padding="5dp"
-                    android:text="Thyroid disorders" />
+                    android:text="Hypothyroidism" />
 
                 <CheckBox
-                    android:id="@+id/obesity"
+                    android:id="@+id/anemia"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:button="@drawable/checkbox"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:padding="5dp"
-                    android:text="obesity" />
+                    android:text="Anemia" />
+
+                <CheckBox
+                    android:id="@+id/hyper"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:padding="5dp"
+                    android:text="Hyperthyroidism" />
+
+                <CheckBox
+                    android:id="@+id/hypoallergy"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:padding="5dp"
+                    android:text="Hypoallergenic" />
 
                 <CheckBox
                     android:id="@+id/Arthritis"
@@ -298,33 +253,13 @@
                     android:text="Arthritis" />
 
                 <CheckBox
-                    android:id="@+id/Mental_health"
+                    android:id="@+id/diabetes"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:button="@drawable/checkbox"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:padding="5dp"
-                    android:text="Mental health" />
-
-                <CheckBox
-                    android:id="@+id/gastroes"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="5dp"
-                    android:text="Gastroesophageal Rellux Disease" />
-
-                <CheckBox
-                    android:id="@+id/Autoimmune"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="5dp"
-                    android:text="Autoimmune Diseases" />
-
-
+                    android:text="Diabetes" />
             </LinearLayout>
 
             <TextView
@@ -332,7 +267,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/bungee"
-            android:text="Mood"
+            android:text="BMI"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"/>
@@ -349,113 +284,46 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <HorizontalScrollView
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/underweight"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <CheckBox
-                        android:id="@+id/happy"
-                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:button="@drawable/checkbox"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="5dp"
-                        android:text="Happy" />
+                        android:text="Underweight" />
 
                     <CheckBox
-                        android:id="@+id/sad"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:button="@drawable/checkbox"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="5dp"
-                        android:text="Sad" />
-
-                    <CheckBox
-                        android:id="@+id/excited"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:button="@drawable/checkbox"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:padding="5dp"
-                        android:text="Excited" />
-                </LinearLayout>
-                    </HorizontalScrollView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <HorizontalScrollView
+                        android:id="@+id/normal_weight"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-
-                        <CheckBox
-                            android:id="@+id/angry"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:button="@drawable/checkbox"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:padding="5dp"
-                            android:text="Angry" />
-
-                        <CheckBox
-                            android:id="@+id/stress"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:button="@drawable/checkbox"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:padding="5dp"
-                            android:text="Stress" />
-
-                        <CheckBox
-                            android:id="@+id/nostalgia"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:button="@drawable/checkbox"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:padding="5dp"
-                            android:text="Nostalgia" />
-                        </LinearLayout>
-                    </HorizontalScrollView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/inLove"
-                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:button="@drawable/checkbox"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="5dp"
-                        android:text="In Love" />
+                        android:text="Normal weight" />
+
 
                     <CheckBox
-                        android:id="@+id/calm"
-                        android:layout_width="100dp"
+                        android:id="@+id/overweight"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/checkbox"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="5dp"
-                        android:text="Calm" />
+                        android:text="Overweight" />
+
+                    <CheckBox
+                        android:id="@+id/obese"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/checkbox"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:padding="5dp"
+                        android:text="Obesity" />
+
                 </LinearLayout>
-
-
             </LinearLayout>
 
             <TextView

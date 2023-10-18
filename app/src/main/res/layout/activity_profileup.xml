@@ -58,6 +58,7 @@
                 android:hint="Fullname:"
                 android:textSize="20sp" />
 
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/card"
                 android:layout_width="290dp"
@@ -78,50 +79,85 @@
                     <EditText
                         android:id="@+id/age"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_background"
+                        android:layout_height="50dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginTop="15dp"
                         android:hint="Age"
                         android:textSize="18dp" />
+                    <View
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:background="@color/black"
+                        android:layout_below="@+id/username2"
+                        android:layout_height="2dp"/>
 
                     <EditText
                         android:id="@+id/gender"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_background"
+                        android:layout_height="50dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
                         android:hint="Gender"
                         android:textSize="18dp" />
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:background="@color/black"
+                        android:layout_below="@+id/username2"
+                        android:layout_height="2dp"/>
 
                     <EditText
                         android:id="@+id/username"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/edittext_background"
+                        android:layout_height="50dp"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="20dp"
                         android:hint="UserName"
                         android:textSize="18dp" />
 
-                    <Spinner
-                        android:id="@+id/health"
+                    <View
+                        android:id="@+id/view3"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:hint="UserName"
-                        android:textSize="18dp"
-                        android:visibility="gone" />
+                        android:background="@color/black"
+                        android:layout_below="@+id/username2"
+                        android:layout_height="2dp"/>
 
-                    <Spinner
-                        android:id="@+id/moods"
+                    <EditText
+                        android:id="@+id/height"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_background"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:hint="Height in cm"
+                        android:text="Height"
+                        android:textSize="18dp" />
+
+                    <View
+                        android:id="@+id/view4"
+                        android:layout_width="match_parent"
+                        android:background="@color/black"
+                        android:layout_below="@+id/username2"
+                        android:layout_height="2dp"/>
+
+                    <EditText
+                        android:id="@+id/weight"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edittext_background"
+                        android:layout_height="50dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:hint="UserName"
-                        android:visibility="gone"
+                        android:layout_marginBottom="20dp"
+                        android:hint="weight in kg/pounds"
+                        android:text="Weight"
                         android:textSize="18dp" />
 
                 </LinearLayout>

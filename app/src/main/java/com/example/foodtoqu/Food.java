@@ -13,7 +13,7 @@ public class Food {
     private String protein;
     private String imageUrl;
     private Map<String, Boolean> healthConditions;
-    private Map<String, Boolean> moods;
+    private Map<String, Boolean> BMI;
     private String description;
 
 
@@ -23,7 +23,7 @@ public class Food {
 
     // Default constructor (required for Firebase)
 
-    public Food(String foodId, String foodName, String calorie, String totalFat, String cholesterol, String sodium, String carbo, String totalSugar, String protein, String imageUrl, Map<String, Boolean> healthConditions, Map<String, Boolean> moods, String description) {
+    public Food(String foodId, String foodName, String calorie, String totalFat, String cholesterol, String sodium, String carbo, String totalSugar, String protein, String imageUrl, Map<String, Boolean> healthConditions, Map<String, Boolean> BMI, String description) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.calorie = calorie;
@@ -35,7 +35,7 @@ public class Food {
         this.protein = protein;
         this.imageUrl = imageUrl;
         this.healthConditions = healthConditions;
-        this.moods = moods;
+        this.BMI = BMI;
         this.description = description;
     }
 
@@ -83,8 +83,8 @@ public class Food {
         return healthConditions;
     }
 
-    public Map<String, Boolean> getMoods() {
-        return moods;
+    public Map<String, Boolean> getBMI() {
+        return BMI;
     }
     public String getDescription() {return description;}
 }

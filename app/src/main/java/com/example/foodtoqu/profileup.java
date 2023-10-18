@@ -44,9 +44,7 @@ import java.io.IOException;
 
 public class profileup extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
-    Spinner healthSpinner;
-    Spinner moodsSpinner;
-    TextView emailEditText;
+    EditText heightTextView,weightTextView;
     private ProgressDialog progressDialog;
     private EditText age2, gender2,name2,username2;
     private Button updateButton;
@@ -61,13 +59,13 @@ public class profileup extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // Initialize views
         age2 = findViewById(R.id.age);
+        heightTextView = findViewById(R.id.height);
+        weightTextView = findViewById(R.id.weight);
         gender2 = findViewById(R.id.gender);
         username2 = findViewById(R.id.username2);
         name2 = findViewById(R.id.username);
         updateButton = findViewById(R.id.update_btn);
         profileImageView = findViewById(R.id.categoryImage);
-        healthSpinner = findViewById(R.id.health);
-        moodsSpinner = findViewById(R.id.moods);
 
         // Initialize Firebase Database and Storage references
         databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
@@ -79,6 +77,8 @@ public class profileup extends AppCompatActivity {
             String username = intent.getStringExtra("username");
             String age = intent.getStringExtra("age");
             String gender = intent.getStringExtra("gender");
+            String height = intent.getStringExtra("height"); // Retrieve height value
+            String weight = intent.getStringExtra("weight"); // Retrieve weight value
             String imageUrl = intent.getStringExtra("imageUrl");
 
             // Set the retrieved data to the corresponding views
@@ -86,6 +86,9 @@ public class profileup extends AppCompatActivity {
             username2.setText(fullName);
             name2.setText(username);
             age2.setText(age);
+            // Set the height and weight values to the corresponding views
+            heightTextView.setText(height);
+            weightTextView.setText(weight);
 
 
             // Load the image into the ImageView using Picasso
@@ -96,15 +99,6 @@ public class profileup extends AppCompatActivity {
                 profileImageView.setImageResource(R.drawable.ic_baseline_person_24);
             }
         }
-
-        ArrayAdapter<CharSequence> healthAdapter = ArrayAdapter.createFromResource(this, R.array.health_conditions, android.R.layout.simple_spinner_item);
-        healthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        healthSpinner.setAdapter(healthAdapter);
-
-// Create ArrayAdapter for moods
-        ArrayAdapter<CharSequence> moodAdapter = ArrayAdapter.createFromResource(this, R.array.moods, android.R.layout.simple_spinner_item);
-        moodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        moodsSpinner.setAdapter(moodAdapter);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         Menu menu = bottomNavigationView.getMenu();
@@ -211,10 +205,37 @@ public class profileup extends AppCompatActivity {
                 String fullname = username2.getText().toString().trim();
                 String username = name2.getText().toString().trim();
                 String gender = gender2.getText().toString().trim();
-                //String selectedHealth = healthSpinner.getSelectedItem().toString();
-               // String selectedMood = moodsSpinner.getSelectedItem().toString();
+                String heightStr = heightTextView.getText().toString().trim();
+                String weightStr = weightTextView.getText().toString().trim();
 
-                // Check if all fields are filled
+// Check if height and weight are valid doubles
+                double height, weight;
+                if (TextUtils.isEmpty(heightStr)) {
+                    heightTextView.setError("Please enter your height");
+                    return;
+                } else {
+                    try {
+                        height = Double.parseDouble(heightStr);
+                        heightTextView.setError(null); // Clear the error
+                    } catch (NumberFormatException e) {
+                        heightTextView.setError("Invalid height format");
+                        return;
+                    }
+                }
+
+                if (TextUtils.isEmpty(weightStr)) {
+                    weightTextView.setError("Please enter your weight");
+                    return;
+                } else {
+                    try {
+                        weight = Double.parseDouble(weightStr);
+                        weightTextView.setError(null); // Clear the error
+                    } catch (NumberFormatException e) {
+                        weightTextView.setError("Invalid weight format");
+                        return;
+                    }
+                }
+
                 if (TextUtils.isEmpty(fullname)) {
                     name2.setError("Please enter your fullname");
                     return;
@@ -236,26 +257,16 @@ public class profileup extends AppCompatActivity {
                     gender2.setError(null); // Clear the error
                 }
 
-             //   if (selectedHealth.equals("Select conditions")) {
-                    // Show an error message for the health spinner
-                  //  Toast.makeText(profileup.this, "Please select a health condition", Toast.LENGTH_SHORT).show();
-                  //  return;
-            //    }
-
-                //if (selectedMood.equals("Select moods")) {
-                    // Show an error message for the mood spinner
-              //      Toast.makeText(profileup.this, "Please select a mood", Toast.LENGTH_SHORT).show();
-               //   return;
-            //    }
 
                 // Update the profile data in the database
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference userRef = databaseReference.child(userId);
+
                 userRef.child("name").setValue(fullname);
                 userRef.child("username").setValue(username);
                 userRef.child("gender").setValue(gender);
-               // userRef.child("health").setValue(selectedHealth);
-               // userRef.child("mood").setValue(selectedMood);
+                userRef.child("height").setValue(height);
+                userRef.child("weight").setValue(weight);
 
                 // Upload the image to storage
                 Uri imageUri = getImageUri();

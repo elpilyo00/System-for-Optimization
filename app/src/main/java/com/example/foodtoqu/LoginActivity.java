@@ -340,12 +340,12 @@ public class LoginActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         progressDialog.dismiss();
                         if (dataSnapshot.exists()) {
-                            if (dataSnapshot.hasChild("mood")) {
-                                // User has a nickname, go to fem_page
+                            if (dataSnapshot.hasChild("height")) {
+                                // User has a height, go to fem_page
                                 startActivity(new Intent(LoginActivity.this, UserActivity.class));
                             } else {
-                                // User does not have a nickname, go to details activity
-                                startActivity(new Intent(LoginActivity.this, moods.class));
+                                // User does not have a height, go to details activity
+                                startActivity(new Intent(LoginActivity.this,bodymass_index.class));
                             }
                         } else {
                             ValueEventListener adminListener = new ValueEventListener() {

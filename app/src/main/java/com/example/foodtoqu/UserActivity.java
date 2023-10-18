@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,12 +48,12 @@ public class UserActivity extends AppCompatActivity {
     RelativeLayout filterLayout;
     RecyclerView recyclerView2;
     DatabaseReference databaseReference;
+    TextView heightText, weightText, bmiTextView, categoryTextView;
     ArrayList<DataClass> list;
     UserAdapter adapter;
     int processedReferences = 0;
-    CheckBox diabetesCB, gastroCB, bowelCB, highBloodCB, weightCB, anemiaCB, cholesterolCB, heartCB, osteoporosisCB, celiacCB, renalCB, hypothyroidismCB;
-    CheckBox obesity, Arthritis, Mental_health, gastroes, autoimmune;
-    CheckBox happyCB, sadCB, angryCB, stressCB, excitedCB, nostalgiaCB, inLoveCB, calmCB;
+    CheckBox diabetesCB,cardioCB,gastroC,osteoporosisCB,hypothyroidismCB,anemiaCB,hypoallergenicCB,
+            hyperthyroidCb,PregnantCb,ArthritisCB;
     ValueEventListener eventListener;
     TextView fullName;
     boolean filterHidden = true;
@@ -70,28 +71,21 @@ public class UserActivity extends AppCompatActivity {
         //CheckBoxes
         //Health Conditions
         diabetesCB = findViewById(R.id.diabetes);
-        categoryImageView = findViewById(R.id.categoryImage);
-        gastroCB = findViewById(R.id.gastrointestinal);
-        bowelCB = findViewById(R.id.bowel);
-        highBloodCB = findViewById(R.id.highBlood);
-        weightCB = findViewById(R.id.weight);
-        anemiaCB = findViewById(R.id.anemia);
-
-        cholesterolCB = findViewById(R.id.highCholesterol);
-        heartCB = findViewById(R.id.heartDisease);
-        osteoporosisCB = findViewById(R.id.osteoporosis);
-        celiacCB = findViewById(R.id.celiac);
-        renalCB = findViewById(R.id.renal);
-        fullName = findViewById(R.id.name);
+        gastroC = findViewById(R.id.gastro);
+        osteoporosisCB = findViewById(R.id.osteo);
+        hypoallergenicCB = findViewById(R.id.hypoallergenic);
         hypothyroidismCB = findViewById(R.id.hypothyroidism);
-        obesity = findViewById(R.id.obesity);
-        Arthritis = findViewById(R.id.Arthritis);
-        Mental_health = findViewById(R.id.Mental_health);
-        gastroes = findViewById(R.id.gastroes2);
-        autoimmune = findViewById(R.id.Autoimmune);
-
-        //Moods
-
+        anemiaCB = findViewById(R.id.anemia);
+        hyperthyroidCb = findViewById(R.id.hyper);
+        PregnantCb = findViewById(R.id.Pregnant);
+        categoryImageView = findViewById(R.id.categoryImage);
+        heightText = findViewById(R.id.height);
+        weightText = findViewById(R.id.weights);
+        bmiTextView = findViewById(R.id.bmi);
+        categoryTextView = findViewById(R.id.category);
+        cardioCB = findViewById(R.id.cardio);
+        ArthritisCB = findViewById(R.id.Arthritis);
+        fullName = findViewById(R.id.name);
         recommendBtn = findViewById(R.id.recommendBtn);
 
         recyclerView2 = findViewById(R.id.recyclerView2);
@@ -136,7 +130,7 @@ public class UserActivity extends AppCompatActivity {
         // Load all foods initially
         loadFoods();
         retrieveUserDetails();
-
+        retrieveUserDetails2();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         Menu menu = bottomNavigationView.getMenu();
 
@@ -197,7 +191,7 @@ public class UserActivity extends AppCompatActivity {
                                 FirebaseAuth.getInstance().signOut();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 overridePendingTransition(0, 0);
-                                stopService(new Intent(UserActivity.this,MyService.class));
+                                stopService(new Intent(UserActivity.this, MyService.class));
                                 startActivity(intent);
                                 finish();
                             }
@@ -215,50 +209,84 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+
+            // Construct the database reference using the UID
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Body_massIndex/" + uid);
+
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // Get the BMI category from the data
+                        String bmiCategory = dataSnapshot.child("category").getValue(String.class);
+
+                        // Select the corresponding radio button based on the BMI category
+                        RadioGroup bmiRadioGroup = findViewById(R.id.bmi_radio_group);
+                        if (bmiCategory != null) {
+                            switch (bmiCategory) {
+                                case "Underweight":
+                                    bmiRadioGroup.check(R.id.underweight);
+                                    break;
+                                case "Normal weight":
+                                    bmiRadioGroup.check(R.id.normal_weight);
+                                    break;
+                                case "Overweight":
+                                    bmiRadioGroup.check(R.id.overweight);
+                                    break;
+                                case "Obesity":
+                                    bmiRadioGroup.check(R.id.obese);
+                                    break;
+                                default:
+                                    // Handle any other cases or set a default selection
+                                    break;
+                            }
+                        }
+
+                        // Continue with the rest of your filter logic here...
+                        // (The code for filtering food items remains the same)
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle database error
+                }
+            });
+        }
     }
 
-
     private void applyFilters() {
-        // Create arrays for mood RadioGroups
-        RadioGroup[] moodRadioGroups = {
-                findViewById(R.id.mood_radio_group),
-                findViewById(R.id.mood_radio_group2),
-                findViewById(R.id.mood_radio_group3)
-        };
+             RadioGroup[] bmiRadioGroups = {findViewById(R.id.bmi_radio_group)
+            };
 
-        // Create an array for health condition CheckBoxes
-        CheckBox[] healthConditionCheckboxes = {diabetesCB, gastroCB, bowelCB, highBloodCB, weightCB, anemiaCB, cholesterolCB, heartCB, osteoporosisCB, celiacCB, renalCB, hypothyroidismCB, obesity, Arthritis, Mental_health, gastroes, autoimmune};
+            // Create an array for health condition CheckBoxes
+            CheckBox[] healthConditionCheckboxes = { diabetesCB,cardioCB,gastroC,osteoporosisCB,hypothyroidismCB,anemiaCB,hypoallergenicCB,
+                    hyperthyroidCb,PregnantCb,ArthritisCB};
 
-        // Check if at least one mood RadioButton or health condition checkbox is selected
-        boolean anyFilterSelected = false;
+            // Check if at least one BMI RadioButton or health condition checkbox is selected
+            boolean anyFilterSelected = false;
 
-        // Check mood RadioButtons
-        for (RadioGroup moodRadioGroup : moodRadioGroups) {
-            int selectedRadioButtonId = moodRadioGroup.getCheckedRadioButtonId();
-            if (selectedRadioButtonId != -1) {
-                anyFilterSelected = true;
-                break;
-            }
-        }
-
-        // Check health condition checkboxes
-        if (!anyFilterSelected) {
-            for (CheckBox healthConditionCheckbox : healthConditionCheckboxes) {
-                if (healthConditionCheckbox.isChecked()) {
+            // Check BMI RadioButtons
+            for (RadioGroup bmiRadioGroup : bmiRadioGroups) {
+                int selectedRadioButtonId = bmiRadioGroup.getCheckedRadioButtonId();
+                if (selectedRadioButtonId != -1) {
                     anyFilterSelected = true;
                     break;
                 }
             }
-        }
 
-        // If no filter is selected, re-enter the UserActivity
-        if (!anyFilterSelected) {
-            Intent intent = new Intent(UserActivity.this, UserActivity.class);
-            startActivity(intent);
-            overridePendingTransition(0, 0);
-            finish();
-            return;
-        }
+            // Check health condition checkboxes
+            if (!anyFilterSelected) {
+                for (CheckBox healthConditionCheckbox : healthConditionCheckboxes) {
+                    if (healthConditionCheckbox.isChecked()) {
+                        anyFilterSelected = true;
+                        break;
+                    }
+                }
+            }
 
         // Rest of your filter logic here...
         // Create a list to store the filtered foods
@@ -267,16 +295,16 @@ public class UserActivity extends AppCompatActivity {
         // Loop through the data and apply filters only if at least one filter is selected
         if (anyFilterSelected) {
             for (Food3 food : foodList) {
-                boolean moodMatched = false;
+                boolean bmiMatched = false;
                 boolean healthConditionMatched = false;
 
-                // Check mood RadioButtons
-                for (RadioGroup moodRadioGroup : moodRadioGroups) {
-                    int selectedRadioButtonId = moodRadioGroup.getCheckedRadioButtonId();
+                // Check BMI RadioButtons
+                for (RadioGroup bmiRadioGroup : bmiRadioGroups) {
+                    int selectedRadioButtonId = bmiRadioGroup.getCheckedRadioButtonId();
                     if (selectedRadioButtonId != -1) {
                         RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
-                        if (containsIgnoreCase(food.getMoods(), selectedRadioButton.getText().toString())) {
-                            moodMatched = true;
+                        if (containsIgnoreCase(food.getBMI(), selectedRadioButton.getText().toString())) {
+                            bmiMatched = true;
                             break;
                         }
                     }
@@ -290,8 +318,8 @@ public class UserActivity extends AppCompatActivity {
                     }
                 }
 
-                // If mood or health condition matched, add the food to the filtered list
-                if (moodMatched || healthConditionMatched) {
+                // If BMI or health condition matched, add the food to the filtered list
+                if (bmiMatched || healthConditionMatched) {
                     filteredFoods.add(food);
                 }
             }
@@ -305,16 +333,18 @@ public class UserActivity extends AppCompatActivity {
         foodAdapter.notifyDataSetChanged();
     }
 
+
     // Helper function to check if a map contains a key (case-insensitive)
     private boolean containsIgnoreCase(Map<String, Boolean> map, String key) {
-        for (Map.Entry<String, Boolean> entry : map.entrySet()) {
-            if (entry.getKey().equalsIgnoreCase(key) && entry.getValue()) {
-                return true;
+        if (map != null) {
+            for (Map.Entry<String, Boolean> entry : map.entrySet()) {
+                if (entry.getKey().equalsIgnoreCase(key) && entry.getValue()) {
+                    return true;
+                }
             }
         }
         return false;
     }
-
 
 
     private void retrieveUserDetails() {
@@ -326,14 +356,24 @@ public class UserActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     String imageUrl = dataSnapshot.child("image").getValue(String.class);
                     String name = dataSnapshot.child("name").getValue(String.class);
-                    String condition = dataSnapshot.child("health").getValue(String.class);
-                    String mood = dataSnapshot.child("mood").getValue(String.class);
+                    Double height = dataSnapshot.child("height").getValue(Double.class);
+                    Double weight = dataSnapshot.child("weight").getValue(Double.class);
 
                     // Set the image URL to the ImageView's tag for later retrieval
                     categoryImageView.setTag(imageUrl);
                     fullName.setText(name);
-                   // conditions.setText(condition);
-                   // moods23.setText(mood);
+
+                    // Format height as 5'11
+                    if (height != null) {
+                        int feet = (int) (height / 30.48);  // 1 foot = 30.48 cm
+                        int inches = (int) ((height % 30.48) / 2.54);  // 1 inch = 2.54 cm
+                        heightText.setText("Your height: " + feet + "'" + inches + "\"");
+                    }
+
+                    // Format weight as "Your weight: XX.XX kg"
+                    if (weight != null) {
+                        weightText.setText("Your weight: " + String.format("%.2f kg", weight));
+                    }
 
                     // Load the image into the ImageView using a library like Picasso or Glide
                     // For example, using Picasso:
@@ -356,7 +396,38 @@ public class UserActivity extends AppCompatActivity {
     }
 
 
+    private void retrieveUserDetails2() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference bmiRef = FirebaseDatabase.getInstance().getReference().child("Body_massIndex").child(userId);
+        bmiRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Retrieve BMI and category as per the data structure
+                    Double bmi = dataSnapshot.child("bmi").getValue(Double.class);
 
+                    if (bmi != null) {
+                        // Now you can set the retrieved data to your UI elements
+                        String bmiText = "Your BMI: " + String.valueOf(bmi);
+                        bmiTextView.setText(bmiText);
+                    } else {
+                        // Handle the case if the BMI data is null
+                        bmiTextView.setText("Your BMI: N/A");
+                    }
+
+                    String category = dataSnapshot.child("category").getValue(String.class);
+                    categoryTextView.setText(category); // Assuming categoryTextView is a TextView
+                } else {
+                    // Handle the case if the data for the user doesn't exist
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error if necessary
+            }
+        });
+    }
 
 
 

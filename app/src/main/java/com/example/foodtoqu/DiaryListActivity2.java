@@ -1,5 +1,6 @@
 package com.example.foodtoqu;
 
+import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,7 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +45,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,7 +70,8 @@ public class DiaryListActivity2 extends AppCompatActivity {
     private ImageButton diaryButton;
     private ImageButton userButton;
     private TextView timerTextView;
-
+    private Calendar selectedDate  = Calendar.getInstance();
+    Button filterByDateButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +81,7 @@ public class DiaryListActivity2 extends AppCompatActivity {
         TextView dateTextView = findViewById(R.id.date);
         diaryButton = findViewById(R.id.diary);
         userButton = findViewById(R.id.user);
+        filterByDateButton = findViewById(R.id.filterByDateButton);
         timerTextView = findViewById(R.id.countdownTextView);
         // Initialize RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
@@ -90,7 +97,7 @@ public class DiaryListActivity2 extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("diary");
 
         // Retrieve data from Firebase and update the RecyclerView and BarChart
-        fetchDataFromFirebase();
+        fetchDataFromFirebase(selectedDate);
 
         // Set the formatted local date and time as the text for the TextView
         updateTimerText(); // Initial delay of 1 minute
@@ -104,6 +111,15 @@ public class DiaryListActivity2 extends AppCompatActivity {
 
         diaryButton.setBackgroundResource(R.drawable.button_highlight);
         userButton.setBackgroundResource(R.drawable.button_highlight);
+
+
+        filterByDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(selectedDate);
+            }
+        });
+
 
         diaryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -267,22 +283,41 @@ public class DiaryListActivity2 extends AppCompatActivity {
         timerTextView.setText(currentTime);
     }
 
+    private void showDatePickerDialog(Calendar selectedDate) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        selectedDate.set(year, month, dayOfMonth);
 
-    private void fetchDataFromFirebase() {
+                        // Call the fetchDataFromFirebase method with the selected date
+                        fetchDataFromFirebase(selectedDate);
+                    }
+                },
+                selectedDate.get(Calendar.YEAR),
+                selectedDate.get(Calendar.MONTH),
+                selectedDate.get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+
+    private void fetchDataFromFirebase(Calendar selectedDate) {
         // Get the current user
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
 
         if (currentUser != null) {
             String userUid = currentUser.getUid();
-            // Now you have the user's UID (userUid)
-
-            // Continue with your Firebase Realtime Database operations using userUid
             databaseReference.child(userUid).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     List<Object> diaryEntries = new ArrayList<>();
                     List<BarEntry> barEntries = new ArrayList<>();
+                    String currentSection = null;
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
 
                     for (DataSnapshot mealSnapshot : dataSnapshot.getChildren()) {
                         String mealType = mealSnapshot.getKey();
@@ -294,21 +329,42 @@ public class DiaryListActivity2 extends AppCompatActivity {
                         float totalTotalSugar = 0f;
                         float totalProtein = 0f;
 
-                        diaryEntries.add(mealType);
-
                         for (DataSnapshot entrySnapshot : mealSnapshot.getChildren()) {
-                            String foodItemUid = entrySnapshot.getKey(); // Get the UID of the food item
+                            String foodItemUid = entrySnapshot.getKey();
                             FoodItem2 diaryEntry = entrySnapshot.getValue(FoodItem2.class);
-                            diaryEntry.setUid(foodItemUid); // Set the uid for the food item
-                            diaryEntries.add(diaryEntry);
+                            diaryEntry.setUid(foodItemUid);
 
-                            totalCalorie += Float.parseFloat(diaryEntry.getCalorie());
-                            totalFat += Float.parseFloat(diaryEntry.getTotalFat());
-                            totalCholesterol += Float.parseFloat(diaryEntry.getCholesterol());
-                            totalSodium += Float.parseFloat(diaryEntry.getSodium());
-                            totalCarbo += Float.parseFloat(diaryEntry.getCarbo());
-                            totalTotalSugar += Float.parseFloat(diaryEntry.getTotalSugar());
-                            totalProtein += Float.parseFloat(diaryEntry.getProtein());
+                            String mealDate = diaryEntry.getDate();
+
+                            // Compare the mealDate with the selected date
+                            Calendar entryCalendar = Calendar.getInstance();
+                            try {
+                                entryCalendar.setTime(sdf.parse(mealDate));
+
+                                if (selectedDate.get(Calendar.YEAR) == entryCalendar.get(Calendar.YEAR) &&
+                                        selectedDate.get(Calendar.MONTH) == entryCalendar.get(Calendar.MONTH) &&
+                                        selectedDate.get(Calendar.DAY_OF_MONTH) == entryCalendar.get(Calendar.DAY_OF_MONTH)) {
+
+                                    String sectionHeader = mealType + " - " + mealDate;
+
+                                    if (!sectionHeader.equals(currentSection)) {
+                                        currentSection = sectionHeader;
+                                        diaryEntries.add(currentSection);
+                                    }
+
+                                    diaryEntries.add(diaryEntry);
+
+                                    totalCalorie += Float.parseFloat(diaryEntry.getCalorie());
+                                    totalFat += Float.parseFloat(diaryEntry.getTotalFat());
+                                    totalCholesterol += Float.parseFloat(diaryEntry.getCholesterol());
+                                    totalSodium += Float.parseFloat(diaryEntry.getSodium());
+                                    totalCarbo += Float.parseFloat(diaryEntry.getCarbo());
+                                    totalTotalSugar += Float.parseFloat(diaryEntry.getTotalSugar());
+                                    totalProtein += Float.parseFloat(diaryEntry.getProtein());
+                                }
+                            } catch (ParseException e) {
+                                // Handle parsing exception if needed
+                            }
                         }
 
                         barEntries.add(new BarEntry(barEntries.size(), totalCalorie));
@@ -321,6 +377,7 @@ public class DiaryListActivity2 extends AppCompatActivity {
                     }
 
                     adapter.setData(diaryEntries);
+
 
                     BarDataSet dataSet = new BarDataSet(barEntries, "Nutritional Values");
                     BarData barData = new BarData(dataSet);

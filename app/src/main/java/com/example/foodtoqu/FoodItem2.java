@@ -3,6 +3,7 @@ package com.example.foodtoqu;
 import java.util.List;
 
 public class FoodItem2 {
+    private String date;
     private String foodName;
     private String calorie;
     private String email;
@@ -166,5 +167,13 @@ public class FoodItem2 {
 
     public void setMealType(String mealType) {
         this.mealType = mealType;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

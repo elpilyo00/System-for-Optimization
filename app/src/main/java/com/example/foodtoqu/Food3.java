@@ -12,6 +12,7 @@ public class Food3 {
     private String totalSugar;
     private String protein;
     private String description;
+    private Map<String, Boolean> bmi;
 
     private String imageUrl;
     private Map<String, Boolean> healthConditions;
@@ -24,7 +25,7 @@ public class Food3 {
     public Food3() {
     }
 
-    public Food3(String foodId, String foodName, String calorie, String totalFat, String cholesterol, String sodium, String carbo, String totalSugar, String protein, String imageUrl, Map<String, Boolean> healthConditions, Map<String, Boolean> moods, float rating, int likes, String description) {
+    public Food3(String foodId, String foodName, String calorie, String totalFat, String cholesterol, String sodium, String carbo, String totalSugar, String protein, String imageUrl, Map<String, Boolean> healthConditions, Map<String, Boolean> moods, Map<String, Boolean> bmi, float rating, int likes, String description) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.calorie = calorie;
@@ -39,6 +40,7 @@ public class Food3 {
         this.moods = moods;
         this.rating = rating;
         this.likes = likes;
+        this.bmi = bmi;
         this.description = description;
     }
 
@@ -113,5 +115,16 @@ public class Food3 {
     public void setLiked(boolean liked) {
         this.liked = liked;
     }
-    public String getDescription() {return description;}
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Map<String, Boolean> getBMI() {
+        return bmi;
+    }
+
+    public void setBMI(Map<String, Boolean> bmi) {
+        this.bmi = bmi;
+    }
 }

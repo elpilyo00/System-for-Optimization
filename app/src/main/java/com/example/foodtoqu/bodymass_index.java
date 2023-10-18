@@ -34,7 +34,7 @@ public class bodymass_index extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
     private FirebaseUser currentUser;
-
+    private double calculatedBMI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,13 +99,22 @@ public class bodymass_index extends AppCompatActivity {
 
             // Calculate BMI
             double heightInInches = (feet * 12) + inches;
-            double bmi = (weightInPounds / (heightInInches * heightInInches)) * 703;
+            calculatedBMI = Math.round((weightInPounds / (heightInInches * heightInInches)) * 703);
 
-            // Display BMI
-            bodyMassIndexTextView.setText("Body mass index: " + String.format("%.2f", bmi));
+            // Display BMI as an integer
+            bodyMassIndexTextView.setText("Body mass index: " + String.format("%.0f", calculatedBMI));
+
+            // Determine the weight category
+            String category = calculateBMICategory(calculatedBMI);
+
+            // Display the weight category
+            TextView weightCategoryTextView = findViewById(R.id.weight_category);
+            weightCategoryTextView.setText("Weight category: " + category);
         } else {
-            // Clear BMI if any of the input fields are empty
+            // Clear BMI and weight category if any of the input fields are empty
             bodyMassIndexTextView.setText("");
+            TextView weightCategoryTextView = findViewById(R.id.weight_category);
+            weightCategoryTextView.setText("");
         }
     }
 
@@ -120,57 +129,71 @@ public class bodymass_index extends AppCompatActivity {
             return;
         }
 
-        calculateBMI();
+        calculateBMI(); // This will update the calculatedBMI variable
 
         if (currentUser != null) {
             String uid = currentUser.getUid();
-            String bmiStr = bodyMassIndexTextView.getText().toString();
+            String category = calculateBMICategory(calculatedBMI);
+            String healthRisk = calculateHealthRisk(category);
 
-            if (!bmiStr.isEmpty()) {
-                double bmi = Double.parseDouble(bmiStr.substring(19)); // Remove "Body mass index: "
-                String category = calculateBMICategory(bmi);
-                String healthRisk = calculateHealthRisk(category);
+            // Create an instance of BMIInfo
+            BMIInfo bmiInfo = new BMIInfo(calculatedBMI, category, healthRisk);
 
-                // Create an instance of BMIInfo
-                BMIInfo bmiInfo = new BMIInfo(bmi, category, healthRisk);
+            // Convert height to centimeters
+            double feet = Double.parseDouble(feetStr);
+            double inches = Double.parseDouble(inchesStr);
+            double heightInCentimeters = convertHeightToCentimeters(feet, inches);
 
-                // Save BMIInfo to Firebase Realtime Database
-                databaseReference.child("Body_massIndex").child(uid).setValue(bmiInfo)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Data saved successfully", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), UserActivity.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(0, 0);
-                                    finish();
-                                } else {
-                                    // Handle the error
-                                }
+            // Create a reference to the user's profile
+            DatabaseReference userReference = databaseReference.child("User").child(uid);
+
+            // Set height (in centimeters) and weight under the user's profile
+            userReference.child("height").setValue(heightInCentimeters);
+            userReference.child("weight").setValue(Double.parseDouble(weightStr));
+
+            // Save BMIInfo to Firebase Realtime Database
+            databaseReference.child("Body_massIndex").child(uid).setValue(bmiInfo)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Data saved successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                finish();
+                            } else {
+                                // Handle the error
                             }
-                        });
-            }
+                        }
+                    });
         }
     }
+
+
+    private double convertHeightToCentimeters(double feet, double inches) {
+        // 1 foot = 30.48 centimeters, 1 inch = 2.54 centimeters
+        return (feet * 30.48) + (inches * 2.54);
+    }
+
 
 
     private String calculateBMICategory(double bmi) {
         if (bmi < 18.5) {
             return "Underweight";
-        } else if (bmi < 24.9) {
-            return "Normal Weight";
-        } else if (bmi < 29.9) {
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            return "Normal weight";
+        } else if (bmi >= 25 && bmi <= 29.9) {
             return "Overweight";
         } else {
-            return "Obese";
+            return "Obesity";
         }
     }
 
     private String calculateHealthRisk(String category) {
         if (category.equals("Underweight")) {
             return "Malnutrition risk";
-        } else if (category.equals("Normal Weight")) {
+        } else if (category.equals("Normal weight")) {
             return "Low risk";
         } else if (category.equals("Overweight")) {
             return "Enhanced risk";

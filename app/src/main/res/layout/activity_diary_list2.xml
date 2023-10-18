@@ -257,14 +257,26 @@
                             app:fontFamily="@font/arbutus"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+                <Button
+                    android:layout_below="@+id/splashLogo2"
+                    android:id="@+id/filterByDateButton"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/century_gothic"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content"
+                    android:text="Filter by Date" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/splashLogo2"
-                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/filterByDateButton"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:clickable="false"
                     android:scrollbars="vertical" />

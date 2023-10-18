@@ -36,7 +36,11 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
@@ -191,6 +195,10 @@ public class FoodDetailActivityU extends AppCompatActivity {
         foodItem.setRating(ratingBar.getRating());
         foodItem.setDescription(detailDescription.getText().toString());
         foodItem.setImageUrl(imageUrl);
+        Date currentDate = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
+        String formattedDate = dateFormat.format(currentDate);
+        foodItem.setDate(formattedDate);
 
         // Set meal type based on user selection
         foodItem.setMealType(selectedMeal);

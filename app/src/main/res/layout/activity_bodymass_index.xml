@@ -123,6 +123,7 @@
                             android:layout_height="45dp"
                             android:backgroundTint="@color/black"
                             android:layout_marginStart="10dp"
+                            android:inputType="number"
                             app:fontFamily="@font/century_gothic"
                             android:background="@drawable/edittext_background"
                             android:textColor="@color/black"
@@ -145,6 +146,7 @@
                             android:layout_width="100dp"
                             android:layout_height="45dp"
                             android:layout_marginStart="10dp"
+                            android:inputType="number"
                             android:backgroundTint="@color/black"
                             android:background="@drawable/edittext_background"
                             app:fontFamily="@font/century_gothic"
@@ -165,10 +167,25 @@
                 android:textSize="20dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/weight_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/body_massIndex"
+                android:layout_marginTop="20dp"
+                android:text="Weight Category: "
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="@font/century_gothic" />
+
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/saved"
                 android:layout_below="@id/body_massIndex"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="60dp"
                 android:textAllCaps="false"
                 android:layout_width="250dp"
                 android:text="Saved"

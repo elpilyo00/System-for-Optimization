@@ -45,15 +45,83 @@
                             android:fontFamily="@font/bungee"
                             android:text="Name"
                             android:textSize="20dp" />
+                        <androidx.cardview.widget.CardView
+                            android:layout_below="@+id/name"
+                            android:layout_marginTop="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:id="@+id/card1"
+                            android:layout_marginRight="20dp"
+                            app:cardCornerRadius="20dp"
+                            android:layout_width="200dp"
+                            app:cardElevation="10dp"
+                            android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textSize="15sp"
+                                            android:textColor="@color/black"
+                                            android:textStyle="bold"
+                                            android:layout_marginStart="20dp"
+                                            android:text="BMI"/>
 
-
+                                        <TextView
+                                            android:id="@+id/height"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textSize="15sp"
+                                            android:textColor="@color/black"
+                                            android:textStyle="bold"
+                                            android:layout_marginStart="20dp"
+                                            android:text="Your height: "/>
+                                        <TextView
+                                            android:id="@+id/weights"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textSize="15sp"
+                                            android:textColor="@color/black"
+                                            android:textStyle="bold"
+                                            android:layout_marginStart="20dp"
+                                            android:text="Your Weight"/>
+                                        <TextView
+                                            android:id="@+id/bmi"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textSize="15sp"
+                                            android:textColor="@color/black"
+                                            android:textStyle="bold"
+                                            android:layout_marginStart="20dp"
+                                            android:text="Your Bmi: "/>
+                                        <TextView
+                                            android:id="@+id/category"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textSize="15sp"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_gravity="center"
+                                            android:layout_marginBottom="10dp"
+                                            android:textColor="@color/black"
+                                            android:textStyle="bold"
+                                            android:text="BMI"/>
+                                </LinearLayout>
+                        </androidx.cardview.widget.CardView>
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/filterBtn"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/name"
+                            android:layout_below="@id/card1"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="-100dp"
                             android:background="@drawable/round_button_beige"
                             android:drawableStart="@drawable/list"
                             android:fontFamily="@font/bungee"
@@ -66,13 +134,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/filterBtn"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="80dp"
                             android:background="@color/black">
 
                                 <LinearLayout
                                     android:id="@+id/mood"
                                     android:layout_width="270dp"
-                                    android:layout_height="140dp"
+                                    android:layout_height="170dp"
                                     android:layout_marginStart="10dp"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginEnd="10dp"
@@ -84,104 +152,55 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/bungee"
-                                            android:text="Mood"
+                                            android:text="BMI"
                                             android:textAlignment="center"
                                             android:textColor="@color/black"
                                             android:textSize="18sp" />
 
                                         <RadioGroup
-                                            android:id="@+id/mood_radio_group"
+                                            android:id="@+id/bmi_radio_group"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
+                                            android:orientation="vertical">
 
                                                 <RadioButton
-                                                    android:id="@+id/happy"
-                                                    android:layout_width="90dp"
+                                                    android:id="@+id/underweight"
+                                                    android:layout_width="120dp"
                                                     android:layout_height="30dp"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="Happy"
+                                                    android:text="Underweight"
                                                     android:textSize="12sp" />
 
                                                 <RadioButton
-                                                    android:id="@+id/sad"
-                                                    android:layout_width="90dp"
+                                                    android:id="@+id/normal_weight"
+                                                    android:layout_width="120dp"
                                                     android:layout_height="30dp"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="Sad"
+                                                    android:text="Normal weight"
                                                     android:textSize="12sp" />
 
                                                 <RadioButton
-                                                    android:id="@+id/excited"
-                                                    android:layout_width="90dp"
+                                                    android:id="@+id/overweight"
+                                                    android:layout_width="120dp"
                                                     android:layout_height="30dp"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="Excited"
-                                                    android:textSize="12sp" />
-                                        </RadioGroup>
-
-                                        <RadioGroup
-                                            android:id="@+id/mood_radio_group2"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                                <RadioButton
-                                                    android:id="@+id/angry"
-                                                    android:layout_width="90dp"
-                                                    android:layout_height="30dp"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="Angry"
+                                                    android:text="Overweight"
                                                     android:textSize="12sp" />
 
                                                 <RadioButton
-                                                    android:id="@+id/stress"
+                                                    android:id="@+id/obese"
                                                     android:layout_width="90dp"
                                                     android:layout_height="30dp"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="Stress"
-                                                    android:textSize="12sp" />
-
-                                                <RadioButton
-                                                    android:id="@+id/nostalgia"
-                                                    android:layout_width="90dp"
-                                                    android:layout_height="30dp"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="Nostalgia"
-                                                    android:textSize="12sp" />
-                                        </RadioGroup>
-
-                                        <RadioGroup
-                                            android:id="@+id/mood_radio_group3"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                                <RadioButton
-                                                    android:id="@+id/inLove"
-                                                    android:layout_width="90dp"
-                                                    android:layout_height="30dp"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="In Love"
-                                                    android:textSize="12sp" />
-
-                                                <RadioButton
-                                                    android:id="@+id/calm"
-                                                    android:layout_width="90dp"
-                                                    android:layout_height="30dp"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="Calm"
+                                                    android:text="Obesity"
                                                     android:textSize="12sp" />
                                         </RadioGroup>
                                 </LinearLayout>
+
 
                                 <LinearLayout
                                     android:id="@+id/healthCondition"
@@ -205,6 +224,8 @@
                                             android:textSize="18sp" />
 
                                         <LinearLayout
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginRight="5dp"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="horizontal">
@@ -220,55 +241,59 @@
                                                     android:textSize="12sp" />
 
                                                 <CheckBox
-                                                    android:id="@+id/gastrointestinal"
+                                                    android:id="@+id/cardio"
                                                     android:layout_width="180dp"
                                                     android:layout_height="30dp"
                                                     android:button="@drawable/checkbox"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="Digestive disorders"
+                                                    android:text="Cardiovascular Diseases"
                                                     android:textSize="12sp" />
                                         </LinearLayout>
 
                                         <LinearLayout
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginRight="5dp"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="horizontal">
 
                                                 <CheckBox
-                                                    android:id="@+id/bowel"
+                                                    android:id="@+id/gastro"
                                                     android:layout_width="180dp"
-                                                    android:layout_height="30dp"
+                                                    android:layout_height="50dp"
                                                     android:button="@drawable/checkbox"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="Pulmonary Disease"
+                                                    android:text="Gastroesophageal Reflux Disease"
                                                     android:textSize="12sp" />
 
                                                 <CheckBox
-                                                    android:id="@+id/highBlood"
+                                                    android:id="@+id/osteo"
                                                     android:layout_width="180dp"
                                                     android:layout_height="30dp"
                                                     android:button="@drawable/checkbox"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="High Blood Pressure"
+                                                    android:text="Osteoporosis"
                                                     android:textSize="12sp" />
                                         </LinearLayout>
 
                                         <LinearLayout
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginRight="5dp"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="horizontal">
 
                                                 <CheckBox
-                                                    android:id="@+id/weight"
+                                                    android:id="@+id/hypoallergenic"
                                                     android:layout_width="180dp"
                                                     android:layout_height="30dp"
                                                     android:button="@drawable/checkbox"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="Weight Management"
+                                                    android:text="Hypoallergenic"
                                                     android:textSize="12sp" />
 
                                                 <CheckBox
@@ -283,71 +308,11 @@
                                         </LinearLayout>
 
                                         <LinearLayout
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginRight="5dp"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="horizontal">
-
-                                                <CheckBox
-                                                    android:id="@+id/highCholesterol"
-                                                    android:layout_width="180dp"
-                                                    android:layout_height="30dp"
-                                                    android:button="@drawable/checkbox"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="High Cholesterol"
-                                                    android:textSize="12sp" />
-
-                                                <CheckBox
-                                                    android:id="@+id/heartDisease"
-                                                    android:layout_width="180dp"
-                                                    android:layout_height="30dp"
-                                                    android:button="@drawable/checkbox"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="Heart Disease"
-                                                    android:textSize="12sp" />
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                                <CheckBox
-                                                    android:id="@+id/osteoporosis"
-                                                    android:layout_width="180dp"
-                                                    android:layout_height="30dp"
-                                                    android:button="@drawable/checkbox"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="Osteoporosis"
-                                                    android:textSize="12sp" />
-
-                                                <CheckBox
-                                                    android:id="@+id/celiac"
-                                                    android:layout_width="180dp"
-                                                    android:layout_height="30dp"
-                                                    android:button="@drawable/checkbox"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="Thyroid disorders"
-                                                    android:textSize="12sp" />
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                                <CheckBox
-                                                    android:id="@+id/renal"
-                                                    android:layout_width="180dp"
-                                                    android:layout_height="30dp"
-                                                    android:button="@drawable/checkbox"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="Renal Disease"
-                                                    android:textSize="12sp" />
 
                                                 <CheckBox
                                                     android:id="@+id/hypothyroidism"
@@ -356,23 +321,38 @@
                                                     android:button="@drawable/checkbox"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="Allergies"
+                                                    android:text="hypothyroidism"
                                                     android:textSize="12sp" />
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
 
                                                 <CheckBox
-                                                    android:id="@+id/obesity"
+                                                    android:id="@+id/Pregnant"
                                                     android:layout_width="180dp"
                                                     android:layout_height="30dp"
                                                     android:button="@drawable/checkbox"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="Obesity"
+                                                    android:text="Pregnant"
+                                                    android:textSize="12sp" />
+                                        </LinearLayout>
+
+
+
+                                        <LinearLayout
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginRight="5dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_marginBottom="10dp"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                                <CheckBox
+                                                    android:id="@+id/hyper"
+                                                    android:layout_width="180dp"
+                                                    android:layout_height="30dp"
+                                                    android:button="@drawable/checkbox"
+                                                    android:fontFamily="sans-serif-condensed-medium"
+                                                    android:padding="5dp"
+                                                    android:text="Hyperthyroidism"
                                                     android:textSize="12sp" />
 
                                                 <CheckBox
@@ -385,47 +365,6 @@
                                                     android:text="Arthritis"
                                                     android:textSize="12sp" />
                                         </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-                                                <CheckBox
-                                                    android:id="@+id/Mental_health"
-                                                    android:layout_width="180dp"
-                                                    android:layout_height="30dp"
-                                                    android:button="@drawable/checkbox"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="Mental Health"
-                                                    android:textSize="12sp" />
-
-                                                <CheckBox
-                                                    android:id="@+id/gastroes2"
-                                                    android:layout_width="180dp"
-                                                    android:layout_height="50dp"
-                                                    android:button="@drawable/checkbox"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="Gastroesophageal Rellux Disease"
-                                                    android:textSize="12sp" />
-                                        </LinearLayout>
-
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-                                                <CheckBox
-                                                    android:id="@+id/Autoimmune"
-                                                    android:layout_width="180dp"
-                                                    android:layout_height="30dp"
-                                                    android:button="@drawable/checkbox"
-                                                    android:fontFamily="sans-serif-condensed-medium"
-                                                    android:padding="5dp"
-                                                    android:text="Autoimmune Diseases"
-                                                    android:textSize="12sp" />
-                                        </LinearLayout>
                                 </LinearLayout>
                         </RelativeLayout>
 
@@ -435,7 +374,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/filterTab"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="50dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:background="@drawable/round_button"

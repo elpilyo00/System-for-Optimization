@@ -48,7 +48,7 @@ public class UploadActivity extends AppCompatActivity {
     private ImageView foodImageView;
     private EditText foodNameEditText, calorieEditText, totalFatEditText, cholesterolEditText, sodiumEditText, carboEditText, totalSugarEditText, proteinEditText, descriptionEditText;
     private CheckBox[] healthConditions;
-    private CheckBox[] moods;
+    private CheckBox[] BMI;
     private Button uploadButton;
     private ProgressDialog progressDialog;
     private DatabaseReference databaseReference;
@@ -97,36 +97,26 @@ public class UploadActivity extends AppCompatActivity {
 
         // Initialize other CheckBox components
         healthConditions = new CheckBox[]{
-                findViewById(R.id.diabetes),
-                findViewById(R.id.gastrointestinal),
-                findViewById(R.id.bowel),
-                findViewById(R.id.highBlood),
-                findViewById(R.id.weight),
-                findViewById(R.id.anemia),
-                findViewById(R.id.highCholesterol),
-                findViewById(R.id.heartDisease),
-                findViewById(R.id.osteoporosis),
-                findViewById(R.id.celiac),
-                findViewById(R.id.renal),
-                findViewById(R.id.hypothyroidism),
-                findViewById(R.id.obesity),
-                findViewById(R.id.Arthritis),
-                findViewById(R.id.Mental_health),
+                findViewById(R.id.Pregnant),
+                findViewById(R.id.cardio),
                 findViewById(R.id.gastroes),
-                findViewById(R.id.Autoimmune)
+                findViewById(R.id.osteoporosis),
+                findViewById(R.id.hyper),
+                findViewById(R.id.hypoallergy),
+                findViewById(R.id.diabetes),
+                findViewById(R.id.Arthritis),
+                findViewById(R.id.hypothyroidism),
+                findViewById(R.id.anemia),
+
 
 
         };
 
-        moods = new CheckBox[]{
-                findViewById(R.id.happy),
-                findViewById(R.id.sad),
-                findViewById(R.id.excited),
-                findViewById(R.id.angry),
-                findViewById(R.id.stress),
-                findViewById(R.id.nostalgia),
-                findViewById(R.id.inLove),
-                findViewById(R.id.calm)
+        BMI = new CheckBox[]{
+                findViewById(R.id.underweight),
+                findViewById(R.id.normal_weight),
+                findViewById(R.id.overweight),
+                findViewById(R.id.obese),
         };
 
         uploadButton = findViewById(R.id.uploadBtn);
@@ -274,7 +264,7 @@ public class UploadActivity extends AppCompatActivity {
 
         // Create maps to store health conditions and moods
         Map<String, Boolean> healthConditionsMap = new HashMap<>();
-        Map<String, Boolean> moodsMap = new HashMap<>();
+        Map<String, Boolean> Body = new HashMap<>();
 
         // Populate the health conditions map based on checkbox selections
         for (CheckBox checkbox : healthConditions) {
@@ -282,11 +272,23 @@ public class UploadActivity extends AppCompatActivity {
         }
 
         // Populate the moods map based on checkbox selections
-        for (CheckBox checkbox : moods) {
-            moodsMap.put(checkbox.getText().toString(), checkbox.isChecked());
+        for (CheckBox checkbox : BMI) {
+            Body.put(checkbox.getText().toString(), checkbox.isChecked());
         }
 
         // Check if food name is empty
+
+
+        if (healthConditionsMap.isEmpty()) {
+            Toast.makeText(this, "Please enter a Health Conditions", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (Body.isEmpty()) {
+            Toast.makeText(this, "Please enter a BMI", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (foodName.isEmpty()) {
             Toast.makeText(this, "Please enter a food name", Toast.LENGTH_SHORT).show();
             return;
@@ -316,7 +318,7 @@ public class UploadActivity extends AppCompatActivity {
                                         String imageUrl = uri.toString();
 
                                         // Create a Food object with the data, including health conditions and moods
-                                        Food food = new Food(foodId, foodName, calorie, totalFat, cholesterol, sodium, carbo, totalSugar, protein, imageUrl, healthConditionsMap, moodsMap, description);
+                                        Food food = new Food(foodId, foodName, calorie, totalFat, cholesterol, sodium, carbo, totalSugar, protein, imageUrl, healthConditionsMap, Body, description);
 
                                         // Push the food data to the Realtime Database
                                         databaseReference.child(foodId).setValue(food)
@@ -342,7 +344,7 @@ public class UploadActivity extends AppCompatActivity {
                                                         for (CheckBox checkbox : healthConditions) {
                                                             checkbox.setChecked(false);
                                                         }
-                                                        for (CheckBox checkbox : moods) {
+                                                        for (CheckBox checkbox : BMI) {
                                                             checkbox.setChecked(false);
                                                         }
 

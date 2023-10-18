@@ -32,7 +32,7 @@ public class profs extends AppCompatActivity {
     private TextView ageTextView;
     private TextView genderTextView;
     private ImageView categoryImageView;
-    private TextView usernam2;
+    private TextView usernam2,heightTextView,weightTextView;
     private Button btnup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class profs extends AppCompatActivity {
 
         // Initialize UI elements
         usernam2 = findViewById(R.id.username2);
+        heightTextView = findViewById(R.id.height);
+        weightTextView = findViewById(R.id.weight);
         usernameTextView = findViewById(R.id.username);
         ageTextView = findViewById(R.id.age);
         genderTextView = findViewById(R.id.gender);
@@ -74,13 +76,18 @@ public class profs extends AppCompatActivity {
                 intent.putExtra("age", ageTextView.getText().toString());
                 intent.putExtra("gender", genderTextView.getText().toString());
 
+                // Pass the height and weight values as extras
+                intent.putExtra("height", heightTextView.getText().toString());
+                intent.putExtra("weight", weightTextView.getText().toString());
+
                 // Pass the image URL as an extra
                 intent.putExtra("imageUrl", (String) categoryImageView.getTag());
                 startActivity(intent);
-                overridePendingTransition(0,0);
+                overridePendingTransition(0, 0);
                 finish();
             }
         });
+
 
 
 
@@ -166,29 +173,46 @@ public class profs extends AppCompatActivity {
 
     private void retrieveUserDetails() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference studentRef = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
-        studentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String fullName = dataSnapshot.child("name").getValue(String.class);
                     String username = dataSnapshot.child("username").getValue(String.class);
-                    Long ageLong = dataSnapshot.child("age").getValue(Long.class); // Retrieve age as Long
+                    Long ageLong = dataSnapshot.child("age").getValue(Long.class);
                     String gender = dataSnapshot.child("gender").getValue(String.class);
+                    Double height = dataSnapshot.child("height").getValue(Double.class);
+                    Double weight = dataSnapshot.child("weight").getValue(Double.class);
                     String imageUrl = dataSnapshot.child("image").getValue(String.class);
-                    genderTextView.setText(gender);
-                    usernam2.setText(fullName);
-                    usernameTextView.setText(username);
 
-                    // Convert Long age to integer and set it to the ageTextView
+                    genderTextView.setText(gender);
+                    usernameTextView.setText(username);
+                    usernam2.setText(fullName);
+
                     if (ageLong != null) {
                         int age = ageLong.intValue();
-                        ageTextView.setText( String.valueOf(age));
+                        ageTextView.setText(String.valueOf(age));
                     } else {
                         // Handle the case if age data is missing
                     }
 
-                    // Set the image URL to the ImageView's tag for later retrieval
+                    if (height != null) {
+                        // Convert height from centimeters to feet and inches for display
+                        double heightInInches = height / 2.54;
+                        int feet = (int) (heightInInches / 12);
+                        int inches = (int) (heightInInches % 12);
+                        heightTextView.setText(feet + "'" + inches + "''");
+                    } else {
+                        // Handle the case if height data is missing
+                    }
+
+                    if (weight != null) {
+                        weightTextView.setText(String.format("%.2f kg", weight));
+                    } else {
+                        // Handle the case if weight data is missing
+                    }
+
                     categoryImageView.setTag(imageUrl);
 
                     // Load the image into the ImageView using a library like Picasso or Glide
@@ -200,7 +224,7 @@ public class profs extends AppCompatActivity {
                         categoryImageView.setImageResource(R.drawable.ic_baseline_person_24);
                     }
                 } else {
-                    // Handle the case if student data does not exist
+                    // Handle the case if user data does not exist
                 }
             }
 
@@ -210,6 +234,7 @@ public class profs extends AppCompatActivity {
             }
         });
     }
+
     public void onBackPressed(){
         Intent i = new Intent(getApplicationContext(),UserActivity.class);
         startActivity(i);

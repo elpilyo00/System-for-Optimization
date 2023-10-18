@@ -340,9 +340,13 @@ public class LoginActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         progressDialog.dismiss();
                         if (dataSnapshot.exists()) {
-                            // User is a student, navigate to StudentPageActivity
-                            startActivity(new Intent(LoginActivity.this, UserActivity.class));
-                            finish();
+                            if (dataSnapshot.hasChild("mood")) {
+                                // User has a nickname, go to fem_page
+                                startActivity(new Intent(LoginActivity.this, UserActivity.class));
+                            } else {
+                                // User does not have a nickname, go to details activity
+                                startActivity(new Intent(LoginActivity.this, moods.class));
+                            }
                         } else {
                             ValueEventListener adminListener = new ValueEventListener() {
                                 @Override

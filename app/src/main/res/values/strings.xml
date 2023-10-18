@@ -37,6 +37,18 @@
         <item>Stress</item>
     </string-array>
 
+    <string-array name="moods_array">
+        <item>Select Mood</item>
+        <item>Happy</item>
+        <item>Sad</item>
+        <item>Excited</item>
+        <item>Angry</item>
+        <item>Stress</item>
+        <item>Nostalgia</item>
+        <item>In Love</item>
+        <item>Calm</item>
+    </string-array>
+
 
     <string name="open">Open Navigation Drawer</string>
     <string name="close">Close Navigation Drawer</string>

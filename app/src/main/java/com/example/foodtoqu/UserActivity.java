@@ -42,7 +42,6 @@ import java.util.List;
 import java.util.Map;
 
 public class UserActivity extends AppCompatActivity {
-
     ImageView categoryImageView;
     AppCompatButton filterBtn, recommendBtn;
     RelativeLayout filterLayout;

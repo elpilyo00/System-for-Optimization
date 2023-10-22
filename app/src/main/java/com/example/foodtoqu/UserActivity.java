@@ -375,7 +375,7 @@ public class UserActivity extends AppCompatActivity {
 
                     // Format weight as "Your weight: XX.XX kg"
                     if (weight != null) {
-                        weightText.setText("Your weight: " + String.format("%.2f kg", weight));
+                        weightText.setText("Your weight: " + String.format("%.2f lbs", weight));
                     }
 
                     // Load the image into the ImageView using a library like Picasso or Glide

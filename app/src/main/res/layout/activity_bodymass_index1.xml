@@ -74,17 +74,18 @@
                                 android:layout_width="200dp"
                                 android:background="#E1DADA"
                                 android:layout_height="wrap_content">
+
                                 <EditText
                                     android:id="@+id/weight_in_pounds"
                                     android:layout_width="200dp"
                                     android:layout_height="50dp"
                                     android:layout_marginStart="10dp"
-                                    android:inputType="number"
-                                    android:backgroundTint="@color/black"
                                     android:background="@drawable/edittext_background"
-                                    app:fontFamily="@font/century_gothic"
+                                    android:backgroundTint="@color/black"
+                                    android:hint="pounds"
+                                    android:inputType="number"
                                     android:textColor="@color/black"
-                                    android:hint="(kg)"/>
+                                    app:fontFamily="@font/century_gothic" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -117,17 +118,18 @@
                                 android:layout_width="100dp"
                                 android:background="#E1DADA"
                                 android:layout_height="wrap_content">
+
                                 <EditText
                                     android:id="@+id/feet"
                                     android:layout_width="100dp"
                                     android:layout_height="45dp"
-                                    android:backgroundTint="@color/black"
                                     android:layout_marginStart="10dp"
-                                    android:inputType="number"
-                                    app:fontFamily="@font/century_gothic"
                                     android:background="@drawable/edittext_background"
+                                    android:backgroundTint="@color/black"
+                                    android:hint="feet"
+                                    android:inputType="number"
                                     android:textColor="@color/black"
-                                    android:hint="feeet"/>
+                                    app:fontFamily="@font/century_gothic" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 

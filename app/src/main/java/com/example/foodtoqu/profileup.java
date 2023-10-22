@@ -44,7 +44,7 @@ import java.io.IOException;
 
 public class profileup extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
-    EditText heightTextView,weightTextView;
+    TextView heightTextView,weightTextView;
     private ProgressDialog progressDialog;
     private EditText age2, gender2,name2,username2;
     private Button updateButton;
@@ -205,49 +205,19 @@ public class profileup extends AppCompatActivity {
                 String fullname = username2.getText().toString().trim();
                 String username = name2.getText().toString().trim();
                 String gender = gender2.getText().toString().trim();
-                String heightStr = heightTextView.getText().toString().trim();
-                String weightStr = weightTextView.getText().toString().trim();
-
-// Check if height and weight are valid doubles
-                double height, weight;
-                if (TextUtils.isEmpty(heightStr)) {
-                    heightTextView.setError("Please enter your height");
-                    return;
-                } else {
-                    try {
-                        height = Double.parseDouble(heightStr);
-                        heightTextView.setError(null); // Clear the error
-                    } catch (NumberFormatException e) {
-                        heightTextView.setError("Invalid height format");
-                        return;
-                    }
-                }
-
-                if (TextUtils.isEmpty(weightStr)) {
-                    weightTextView.setError("Please enter your weight");
-                    return;
-                } else {
-                    try {
-                        weight = Double.parseDouble(weightStr);
-                        weightTextView.setError(null); // Clear the error
-                    } catch (NumberFormatException e) {
-                        weightTextView.setError("Invalid weight format");
-                        return;
-                    }
-                }
 
                 if (TextUtils.isEmpty(fullname)) {
-                    name2.setError("Please enter your fullname");
-                    return;
-                } else {
-                    name2.setError(null); // Clear the error
-                }
-
-                if (TextUtils.isEmpty(username)) {
-                    username2.setError("Please enter your username");
+                    username2.setError("Please enter your fullname");
                     return;
                 } else {
                     username2.setError(null); // Clear the error
+                }
+
+                if (TextUtils.isEmpty(username)) {
+                    name2.setError("Please enter your username");
+                    return;
+                } else {
+                    name2.setError(null); // Clear the error
                 }
 
                 if (TextUtils.isEmpty(gender)) {
@@ -265,8 +235,8 @@ public class profileup extends AppCompatActivity {
                 userRef.child("name").setValue(fullname);
                 userRef.child("username").setValue(username);
                 userRef.child("gender").setValue(gender);
-                userRef.child("height").setValue(height);
-                userRef.child("weight").setValue(weight);
+//                userRef.child("height").setValue(height);
+//                userRef.child("weight").setValue(weight);
 
                 // Upload the image to storage
                 Uri imageUri = getImageUri();
@@ -295,9 +265,11 @@ public class profileup extends AppCompatActivity {
                                                             if (progressDialog != null) {
                                                                 progressDialog.dismiss();
                                                             }
-                                                            Toast.makeText(profileup.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
-                                                            Intent intent = new Intent(profileup.this, profs.class);
+                                                            Toast.makeText(profileup.this, "Please update the BMI to saved", Toast.LENGTH_SHORT).show();
+                                                            Intent intent = new Intent(profileup.this, bodymass_index1.class);
                                                             startActivity(intent);
+                                                            overridePendingTransition(0,0);
+                                                            finish();
                                                         }
                                                     })
                                                     .addOnFailureListener(new OnFailureListener() {

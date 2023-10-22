@@ -64,7 +64,6 @@ public class profs extends AppCompatActivity {
         // Call the new function to retrieve user details
         retrieveUserDetails();
 
-
         btnup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

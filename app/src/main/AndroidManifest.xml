@@ -20,6 +20,9 @@
         android:theme="@style/Theme.FoodToQu"
         tools:targetApi="31">
         <activity
+            android:name=".bodymass_index1"
+            android:exported="false" />
+        <activity
             android:name=".moods"
             android:exported="false">
             <meta-data

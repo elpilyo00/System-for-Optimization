@@ -84,7 +84,7 @@
                             android:background="@drawable/edittext_background"
                             app:fontFamily="@font/century_gothic"
                             android:textColor="@color/black"
-                            android:hint="pounds"/>
+                            android:hint="(kg)"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

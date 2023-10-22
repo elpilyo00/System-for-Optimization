@@ -114,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 if (dataSnapshot.exists()) {
                                                     // User is a student, navigate to StudentPageActivity
                                                     startActivity(new Intent(LoginActivity.this, UserActivity.class));
+                                                    overridePendingTransition(0,0);
                                                     finish();
                                                 } else {
                                                     // User is not a student, check if user is an admin
@@ -123,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                                                             if (dataSnapshot.exists()) {
                                                                 // User is an admin, navigate to AdminPageActivity
                                                                 startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                                                                overridePendingTransition(0,0);
                                                                 finish();
                                                             } else {
                                                                 // User is neither a student nor an admin
@@ -343,9 +345,13 @@ public class LoginActivity extends AppCompatActivity {
                             if (dataSnapshot.hasChild("height")) {
                                 // User has a height, go to fem_page
                                 startActivity(new Intent(LoginActivity.this, UserActivity.class));
+                                overridePendingTransition(0,0);
+                                finish();
                             } else {
                                 // User does not have a height, go to details activity
                                 startActivity(new Intent(LoginActivity.this,bodymass_index.class));
+                                overridePendingTransition(0,0);
+                                finish();
                             }
                         } else {
                             ValueEventListener adminListener = new ValueEventListener() {

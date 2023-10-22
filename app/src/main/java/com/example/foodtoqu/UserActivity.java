@@ -365,10 +365,13 @@ public class UserActivity extends AppCompatActivity {
 
                     // Format height as 5'11
                     if (height != null) {
-                        int feet = (int) (height / 30.48);  // 1 foot = 30.48 cm
-                        int inches = (int) ((height % 30.48) / 2.54);  // 1 inch = 2.54 cm
+                        double totalInches = height / 2.54; // Convert to inches
+                        int feet = (int) (totalInches / 12); // Get the feet part
+                        int inches = (int) (totalInches % 12); // Get the remaining inches
+
                         heightText.setText("Your height: " + feet + "'" + inches + "\"");
                     }
+
 
                     // Format weight as "Your weight: XX.XX kg"
                     if (weight != null) {
@@ -528,5 +531,10 @@ public class UserActivity extends AppCompatActivity {
     }
     private void showFilter() {
         filterLayout.setVisibility(View.VISIBLE);
+    }
+
+    public void onBackPressed(){
+        finish();
+        super.onBackPressed();
     }
 }

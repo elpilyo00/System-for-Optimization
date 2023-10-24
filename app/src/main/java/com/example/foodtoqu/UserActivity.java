@@ -331,6 +331,7 @@ public class UserActivity extends AppCompatActivity {
         // Update the RecyclerView with the filtered data
         foodAdapter.setFoods(filteredFoods);
         foodAdapter.notifyDataSetChanged();
+        hideFilter();
     }
 
 

@@ -330,13 +330,8 @@ public class DiaryListActivity2 extends AppCompatActivity {
                         float totalProtein = 0f;
 
                         for (DataSnapshot entrySnapshot : mealSnapshot.getChildren()) {
-                            String foodItemUid = entrySnapshot.getKey();
                             FoodItem2 diaryEntry = entrySnapshot.getValue(FoodItem2.class);
-                            diaryEntry.setUid(foodItemUid);
-
                             String mealDate = diaryEntry.getDate();
-
-                            // Compare the mealDate with the selected date
                             Calendar entryCalendar = Calendar.getInstance();
                             try {
                                 entryCalendar.setTime(sdf.parse(mealDate));
@@ -353,20 +348,22 @@ public class DiaryListActivity2 extends AppCompatActivity {
                                     }
 
                                     diaryEntries.add(diaryEntry);
-
-                                    totalCalorie += Float.parseFloat(diaryEntry.getCalorie());
-                                    totalFat += Float.parseFloat(diaryEntry.getTotalFat());
-                                    totalCholesterol += Float.parseFloat(diaryEntry.getCholesterol());
-                                    totalSodium += Float.parseFloat(diaryEntry.getSodium());
-                                    totalCarbo += Float.parseFloat(diaryEntry.getCarbo());
-                                    totalTotalSugar += Float.parseFloat(diaryEntry.getTotalSugar());
-                                    totalProtein += Float.parseFloat(diaryEntry.getProtein());
                                 }
+
+                                // Always collect data for bar entries
+                                totalCalorie += Float.parseFloat(diaryEntry.getCalorie());
+                                totalFat += Float.parseFloat(diaryEntry.getTotalFat());
+                                totalCholesterol += Float.parseFloat(diaryEntry.getCholesterol());
+                                totalSodium += Float.parseFloat(diaryEntry.getSodium());
+                                totalCarbo += Float.parseFloat(diaryEntry.getCarbo());
+                                totalTotalSugar += Float.parseFloat(diaryEntry.getTotalSugar());
+                                totalProtein += Float.parseFloat(diaryEntry.getProtein());
                             } catch (ParseException e) {
                                 // Handle parsing exception if needed
                             }
                         }
 
+                        // Add bar entries for all meal types without filtering
                         barEntries.add(new BarEntry(barEntries.size(), totalCalorie));
                         barEntries.add(new BarEntry(barEntries.size(), totalFat));
                         barEntries.add(new BarEntry(barEntries.size(), totalCholesterol));
@@ -423,7 +420,7 @@ public class DiaryListActivity2 extends AppCompatActivity {
                     legend.setYEntrySpace(5f);
 
                     // Create custom legend labels with colors and square markers
-                    String[] customLabels = new String[]{""};//"Calorie", "Fat", "Cholesterol", "Sodium", "Carbohydrates", "Sugar", "Protein"
+                    String[] customLabels = new String[]{""};//"Calorie", "Fat", "Cholesterol", "Sodium", "Carbohydrates", "Sugar", "Protein" Original Content
                     LegendEntry[] legendEntries = new LegendEntry[customLabels.length];
                     for (int i = 0; i < customLabels.length; i++) {
                         LegendEntry entry = new LegendEntry();
@@ -456,7 +453,7 @@ public class DiaryListActivity2 extends AppCompatActivity {
         }
     }
 
-    @Override
+        @Override
     protected void onStart() {
         super.onStart();
         // Register the BroadcastReceiver to receive timer updates

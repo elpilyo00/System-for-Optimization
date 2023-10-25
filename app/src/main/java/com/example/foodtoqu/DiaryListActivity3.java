@@ -284,20 +284,22 @@ public class DiaryListActivity3 extends AppCompatActivity {
                                 }
 
                                 diaryEntries.add(diaryEntry);
-
-                                totalCalorie += Float.parseFloat(diaryEntry.getCalorie());
-                                totalFat += Float.parseFloat(diaryEntry.getTotalFat());
-                                totalCholesterol += Float.parseFloat(diaryEntry.getCholesterol());
-                                totalSodium += Float.parseFloat(diaryEntry.getSodium());
-                                totalCarbo += Float.parseFloat(diaryEntry.getCarbo());
-                                totalTotalSugar += Float.parseFloat(diaryEntry.getTotalSugar());
-                                totalProtein += Float.parseFloat(diaryEntry.getProtein());
                             }
+
+                            // Always collect data for bar entries
+                            totalCalorie += Float.parseFloat(diaryEntry.getCalorie());
+                            totalFat += Float.parseFloat(diaryEntry.getTotalFat());
+                            totalCholesterol += Float.parseFloat(diaryEntry.getCholesterol());
+                            totalSodium += Float.parseFloat(diaryEntry.getSodium());
+                            totalCarbo += Float.parseFloat(diaryEntry.getCarbo());
+                            totalTotalSugar += Float.parseFloat(diaryEntry.getTotalSugar());
+                            totalProtein += Float.parseFloat(diaryEntry.getProtein());
                         } catch (ParseException e) {
                             // Handle parsing exception if needed
                         }
                     }
 
+                    // Add bar entries for all meal types without filtering
                     barEntries.add(new BarEntry(barEntries.size(), totalCalorie));
                     barEntries.add(new BarEntry(barEntries.size(), totalFat));
                     barEntries.add(new BarEntry(barEntries.size(), totalCholesterol));
@@ -385,6 +387,7 @@ public class DiaryListActivity3 extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     public void onBackPressed() {

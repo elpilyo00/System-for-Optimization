@@ -33,7 +33,7 @@ public class profs extends AppCompatActivity {
     private TextView genderTextView;
     private ImageView categoryImageView;
     private TextView usernam2,heightTextView,weightTextView;
-    private Button btnup;
+    private Button btnup, updateBMIButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +59,7 @@ public class profs extends AppCompatActivity {
         ageTextView = findViewById(R.id.age);
         genderTextView = findViewById(R.id.gender);
         btnup = findViewById(R.id.update_btn);
+        updateBMIButton = findViewById(R.id.updateBMI_btn);
         categoryImageView = findViewById(R.id.categoryImage);
 
         // Call the new function to retrieve user details
@@ -68,6 +69,7 @@ public class profs extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), profileup.class);
+
 
                 // Pass the retrieved data as extras
                 intent.putExtra("username", usernameTextView.getText().toString());
@@ -81,6 +83,21 @@ public class profs extends AppCompatActivity {
 
                 // Pass the image URL as an extra
                 intent.putExtra("imageUrl", (String) categoryImageView.getTag());
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
+            }
+        });
+
+
+        updateBMIButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), bodymass_index1.class);
+                // Pass the height and weight values as extras
+                intent.putExtra("height", heightTextView.getText().toString());
+                intent.putExtra("weight", weightTextView.getText().toString());
+
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 finish();

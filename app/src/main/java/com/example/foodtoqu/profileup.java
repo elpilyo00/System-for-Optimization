@@ -266,7 +266,7 @@ public class profileup extends AppCompatActivity {
                                                                 progressDialog.dismiss();
                                                             }
                                                             Toast.makeText(profileup.this, "Please update the BMI to saved", Toast.LENGTH_SHORT).show();
-                                                            Intent intent = new Intent(profileup.this, bodymass_index1.class);
+                                                            Intent intent = new Intent(profileup.this, profs.class);
                                                             startActivity(intent);
                                                             overridePendingTransition(0,0);
                                                             finish();

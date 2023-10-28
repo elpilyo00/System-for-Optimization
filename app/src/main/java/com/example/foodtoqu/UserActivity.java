@@ -229,15 +229,19 @@ public class UserActivity extends AppCompatActivity {
                             switch (bmiCategory) {
                                 case "Underweight":
                                     bmiRadioGroup.check(R.id.underweight);
+                                    applyFilters();
                                     break;
                                 case "Normal weight":
                                     bmiRadioGroup.check(R.id.normal_weight);
+                                    applyFilters();
                                     break;
                                 case "Overweight":
                                     bmiRadioGroup.check(R.id.overweight);
+                                    applyFilters();
                                     break;
                                 case "Obesity":
                                     bmiRadioGroup.check(R.id.obese);
+                                    applyFilters();
                                     break;
                                 default:
                                     // Handle any other cases or set a default selection

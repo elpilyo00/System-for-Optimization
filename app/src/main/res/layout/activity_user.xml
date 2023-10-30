@@ -396,7 +396,17 @@
 
                 </RelativeLayout>
         </androidx.core.widget.NestedScrollView>
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabs23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_navigation"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_baseline_refresh_24"
+            app:backgroundTint="#D6CFD2" />
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"

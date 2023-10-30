@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -52,6 +53,7 @@ public class UserActivity extends AppCompatActivity {
     ArrayList<DataClass> list;
     UserAdapter adapter;
     int processedReferences = 0;
+    FloatingActionButton fab23;
     CheckBox diabetesCB,cardioCB,gastroC,osteoporosisCB,hypothyroidismCB,anemiaCB,hypoallergenicCB,
             hyperthyroidCb,PregnantCb,ArthritisCB;
     ValueEventListener eventListener;
@@ -87,6 +89,18 @@ public class UserActivity extends AppCompatActivity {
         ArthritisCB = findViewById(R.id.Arthritis);
         fullName = findViewById(R.id.name);
         recommendBtn = findViewById(R.id.recommendBtn);
+        fab23 = findViewById(R.id.fabs23);
+
+
+        fab23.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),UserActivity.class);
+                startActivity(i);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
 
         recyclerView2 = findViewById(R.id.recyclerView2);
 //

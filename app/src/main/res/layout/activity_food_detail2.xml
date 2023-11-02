@@ -13,29 +13,67 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:id="@+id/topDesign">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/add_btn_diary"
-                    android:layout_width="150dp"
+                <ImageView
+                    android:id="@+id/topBG"
+                    android:layout_width="340dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_button_black"
-                    android:drawableLeft="@drawable/add"
-                    android:text="Add to Diary"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:src="@drawable/top"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/splashLogo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/splashlogo"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:id="@+id/logoName"
+                    android:layout_toEndOf="@+id/splashLogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/bungee"
+                    android:text="Know your\nFood"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:padding="20dp"
+                    android:transitionName="slogan1"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/add_btn_diary"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_button_black"
+                        android:drawableLeft="@drawable/add"
+                        android:text="Add to Diary"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+
             </RelativeLayout>
+
+
 
             <TextView
                 android:id="@+id/detailTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="60dp"
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/bungee"
                 android:text="Title"
@@ -229,10 +267,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/calorie"/>
+
                     <TextView
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="20dp"
                         android:text="Calorie: "
@@ -264,10 +311,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/fat"/>
+
                     <TextView
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="20dp"
                         android:text="Total Fat: "
@@ -298,10 +354,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/cholesterol"/>
+
                     <TextView
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="20dp"
                         android:text="Cholesterol: "
@@ -332,10 +397,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/sodium"/>
+
                     <TextView
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="20dp"
                         android:text="Sodium: "
@@ -366,10 +440,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/carbs"/>
+
                     <TextView
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="20dp"
                         android:text="Total Carbohydrate: "
@@ -400,10 +483,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/sugar"/>
+
                     <TextView
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="20dp"
                         android:text="Total Sugar: "
@@ -434,10 +526,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/protein"/>
+
                     <TextView
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:padding="20dp"
                         android:text="Protein: "

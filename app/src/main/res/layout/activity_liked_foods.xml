@@ -18,21 +18,59 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/splashLogo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/splashlogo"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:id="@+id/topDesign">
+
+            <ImageView
+                android:id="@+id/topBG"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/top"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/filter_animation"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:layout_toEndOf="@id/logoName"
+                android:layout_marginLeft="30dp"
+                android:layout_centerVertical="true"
+                app:lottie_rawRes="@raw/like" />
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/splashLogo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/splashlogo"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/logoName"
+                android:layout_toEndOf="@+id/splashLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/bungee"
+                android:text="Show us what\nyou Like!"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:padding="20dp"
+                android:transitionName="slogan1"/>
+
+        </RelativeLayout>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/bar_chart"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:layout_below="@+id/splashLogo" />
+            android:layout_below="@+id/topDesign" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/splashLogo2"

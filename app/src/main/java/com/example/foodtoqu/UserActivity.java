@@ -4,8 +4,9 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+//import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,11 +21,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +49,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import me.tankery.lib.circularseekbar.CircularSeekBar;
 
 public class UserActivity extends AppCompatActivity {
     ImageView categoryImageView;
@@ -61,6 +70,7 @@ public class UserActivity extends AppCompatActivity {
     boolean filterHidden = true;
     private List<Food3> foodList;
     private FoodAdapter2 foodAdapter;
+    private CircularSeekBar progress_height, progress_weight, progress_bmi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +100,9 @@ public class UserActivity extends AppCompatActivity {
         fullName = findViewById(R.id.name);
         recommendBtn = findViewById(R.id.recommendBtn);
         fab23 = findViewById(R.id.fabs23);
+        progress_height = findViewById(R.id.progress_height);
+        progress_weight = findViewById(R.id.progress_weight);
+        progress_bmi = findViewById(R.id.progress_bmi);
 
 
         fab23.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +158,9 @@ public class UserActivity extends AppCompatActivity {
         loadFoods();
         retrieveUserDetails();
         retrieveUserDetails2();
+        setProgress_height();
+        setProgress_weight();
+        setProgress_bmi();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         Menu menu = bottomNavigationView.getMenu();
 
@@ -365,6 +381,88 @@ public class UserActivity extends AppCompatActivity {
         return false;
     }
 
+    private void setProgress_height() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Float height = dataSnapshot.child("height").getValue(Float.class);
+                    if (height != null) {
+                        float max = 229;
+                        progress_height.setMax(max);
+                        progress_height.setProgress(height);
+                    }
+                    // Handle the case if height data is missing or invalid
+                } else {
+                    // Handle the case if user data does not exist
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error if necessary
+            }
+        });
+    }
+
+    private void setProgress_weight() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Float weight = dataSnapshot.child("weight").getValue(Float.class);
+                    if (weight != null) {
+                        float max = 400;
+                        progress_weight.setMax(max);
+                        progress_weight.setProgress(weight);
+                    }
+                    // Handle the case if height data is missing or invalid
+                } else {
+                    // Handle the case if user data does not exist
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error if necessary
+            }
+        });
+    }
+
+
+    private void setProgress_bmi() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference bmiRef = FirebaseDatabase.getInstance().getReference().child("Body_massIndex").child(userId);
+
+        bmiRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Float bmi = dataSnapshot.child("bmi").getValue(Float.class);
+                    if (bmi != null) {
+                        float max = 50;
+                        progress_bmi.setMax(max);
+                        progress_bmi.setProgress(bmi);
+                    }
+                    // Handle the case if height data is missing or invalid
+                } else {
+                    // Handle the case if user data does not exist
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error if necessary
+            }
+        });
+    }
+
 
     private void retrieveUserDetails() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -374,7 +472,7 @@ public class UserActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String imageUrl = dataSnapshot.child("image").getValue(String.class);
-                    String name = dataSnapshot.child("name").getValue(String.class);
+                    String name = dataSnapshot.child("username").getValue(String.class);
                     Double height = dataSnapshot.child("height").getValue(Double.class);
                     Double weight = dataSnapshot.child("weight").getValue(Double.class);
 
@@ -388,13 +486,13 @@ public class UserActivity extends AppCompatActivity {
                         int feet = (int) (totalInches / 12); // Get the feet part
                         int inches = (int) (totalInches % 12); // Get the remaining inches
 
-                        heightText.setText("Your height: " + feet + "'" + inches + "\"");
+                        heightText.setText(feet + "'" + inches + "\"");
                     }
 
 
                     // Format weight as "Your weight: XX.XX kg"
                     if (weight != null) {
-                        weightText.setText("Your weight: " + String.format("%.2f lbs", weight));
+                        weightText.setText(String.format("%.2f lbs", weight));
                     }
 
                     // Load the image into the ImageView using a library like Picasso or Glide
@@ -418,6 +516,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
 
+
     private void retrieveUserDetails2() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference bmiRef = FirebaseDatabase.getInstance().getReference().child("Body_massIndex").child(userId);
@@ -430,11 +529,11 @@ public class UserActivity extends AppCompatActivity {
 
                     if (bmi != null) {
                         // Now you can set the retrieved data to your UI elements
-                        String bmiText = "Your BMI: " + String.valueOf(bmi);
+                        String bmiText = String.valueOf(bmi);
                         bmiTextView.setText(bmiText);
                     } else {
                         // Handle the case if the BMI data is null
-                        bmiTextView.setText("Your BMI: N/A");
+                        bmiTextView.setText("N/A");
                     }
 
                     String category = dataSnapshot.child("category").getValue(String.class);

@@ -14,12 +14,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class MainActivity extends AppCompatActivity {
-    private static int SPLASH_SCREEN = 4000;
+    private static int SPLASH_SCREEN = 6000;
 
     Animation topAnim, bottomAnim;
     ImageView image;
     TextView slogan1, slogan2;
+    LottieAnimationView loadingAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,21 +36,26 @@ public class MainActivity extends AppCompatActivity {
         image = findViewById(R.id.imageView);
         slogan1 = findViewById(R.id.textView);
         slogan2 = findViewById(R.id.textView2);
+        loadingAnimation = findViewById(R.id.utensil_loading);
 
 
         image.setAnimation(topAnim);
         slogan1.setAnimation(bottomAnim);
         slogan2.setAnimation(bottomAnim);
 
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
 
+
                 Pair[] pairs=new Pair[3];
                 pairs[0] = new Pair<View, String>(image, "logo_image");
                 pairs[1] = new Pair<View, String>(slogan1, "slogan1");
                 pairs[2] = new Pair<View, String>(slogan2, "slogan2");
+
+                loadingAnimation.playAnimation();
 
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
                 startActivity(intent, options.toBundle());

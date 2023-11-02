@@ -4,6 +4,6 @@
         android:topRightRadius="25dp" />
     <gradient
         android:angle="100"
-        android:endColor="#EEE9DA"
-        android:startColor="#bdc3c7 " />
+        android:endColor="@color/grey"
+        android:startColor="@color/ic_launcher_background" />
 </shape>

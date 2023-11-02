@@ -14,61 +14,136 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/splashLogo"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:src="@drawable/splashlogo"
-                            app:civ_border_color="#FF000000"
-                            app:civ_border_width="2dp" />
 
-                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/categoryImage"
-                            android:layout_width="180dp"
-                            android:layout_height="180dp"
-                            android:layout_below="@id/splashLogo"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="0dp"
-                            android:src="@drawable/astronaut"
-                            app:civ_border_color="@color/greenBtn"
-                            app:civ_border_width="2dp" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:orientation="horizontal"
+                            android:id="@+id/topDesign">
+
+                                <ImageView
+                                    android:id="@+id/topBG"
+                                    android:layout_width="340dp"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/top"/>
+
+                                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:id="@+id/splashLogo"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/splashlogo"
+                                    app:civ_border_color="#FF000000"
+                                    app:civ_border_width="2dp" />
+
+                                <TextView
+                                    android:id="@+id/logoName"
+                                    android:layout_toEndOf="@+id/splashLogo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/bungee"
+                                    android:text="Welcome Back\nFood Buddy!"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp"
+                                    android:padding="20dp"
+                                    android:transitionName="slogan1"/>
+
+                                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:id="@+id/categoryImage"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_toStartOf="@+id/name"
+                                    android:src="@drawable/astronaut"
+                                    app:civ_border_color="@color/greenBtn"
+                                    app:civ_border_width="2dp" />
+
+                                <TextView
+                                    android:id="@+id/name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="20dp"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/bungee"
+                                    android:layout_marginTop="15dp"
+                                    android:text="Name"
+                                    android:textSize="10dp" />
+
+                        </RelativeLayout>
 
                         <TextView
-                            android:id="@+id/name"
+                            android:id="@+id/bmiTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/categoryImage"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
                             android:fontFamily="@font/bungee"
-                            android:text="Name"
-                            android:textSize="20dp" />
+                            android:layout_below="@id/topDesign"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="24sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:text="Body Mass Index"/>
+
                         <androidx.cardview.widget.CardView
-                            android:layout_below="@+id/name"
+                            android:layout_below="@+id/bmiTxt"
                             android:layout_marginTop="20dp"
-                            android:layout_alignParentEnd="true"
                             android:id="@+id/card1"
-                            android:layout_marginRight="20dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="30dp"
                             app:cardCornerRadius="20dp"
-                            android:layout_width="200dp"
+                            android:layout_width="110dp"
                             app:cardElevation="10dp"
-                            android:layout_height="wrap_content">
-                                <LinearLayout
+                            android:layout_height="200dp">
+
+
+                                <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
+                                    android:layout_height="wrap_content">
+
+                                        <me.tankery.lib.circularseekbar.CircularSeekBar
+                                            android:id="@+id/progress_height"
+                                            android:layout_marginTop="5dp"
+                                            android:layout_width="100dp"
+                                            android:layout_height="100dp"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_below="@id/heightTxt"
+                                            app:cs_circle_style = "round"
+                                            app:cs_progress = "70"
+                                            app:cs_max = "100"
+                                            app:cs_negative_enabled = "false"
+                                            app:cs_move_outside_circle = "true"
+                                            app:cs_maintain_equal_circle = "true"
+                                            app:cs_use_custom_radii = "false"
+                                            app:cs_lock_enabled = "true"
+                                            app:cs_circle_x_radius = "0dp"
+                                            app:cs_circle_y_radius = "0dp"
+                                            app:cs_circle_stroke_width = "5dp"
+                                            app:cs_disable_pointer = "false"
+                                            app:cs_pointer_stroke_width = "5dp"
+                                            app:cs_circle_fill = "@color/transparent"
+                                            app:cs_circle_color = "@color/grey"
+                                            app:cs_circle_progress_color = "@color/red"
+                                            app:cs_pointer_color = "@color/red"
+                                            app:cs_pointer_alpha_ontouch = "5"
+                                            app:cs_pointer_angle = "0"
+                                            app:cs_disable_progress_glow = "true"
+                                            app:cs_hide_progress_when_empty = "true"/>
+
                                         <TextView
+                                            android:id="@+id/heightTxt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginTop="10dp"
-                                            android:fontFamily="@font/century_gothic"
+                                            android:fontFamily="@font/bungee"
                                             android:textSize="15sp"
                                             android:textColor="@color/black"
                                             android:textStyle="bold"
-                                            android:layout_marginStart="20dp"
-                                            android:text="BMI"/>
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="10dp"
+                                            android:text="Height: "/>
 
                                         <TextView
                                             android:id="@+id/height"
@@ -78,18 +153,167 @@
                                             android:textSize="15sp"
                                             android:textColor="@color/black"
                                             android:textStyle="bold"
-                                            android:layout_marginStart="20dp"
-                                            android:text="Your height: "/>
+                                            android:layout_below="@id/heightTxt"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="40dp"
+                                            android:text="Height: "/>
+
+
+                                        <com.airbnb.lottie.LottieAnimationView
+                                            android:id="@+id/height_animation"
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_alignParentBottom="true"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_gravity="center_horizontal"
+                                            app:lottie_autoPlay="true"
+                                            app:lottie_loop="true"
+                                            app:lottie_rawRes="@raw/height" />
+
+
+                                </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_below="@+id/bmiTxt"
+                            android:layout_marginTop="20dp"
+                            android:id="@+id/card2"
+                            android:layout_toEndOf="@+id/card1"
+                            android:layout_marginLeft="10dp"
+                            app:cardCornerRadius="20dp"
+                            android:layout_width="110dp"
+                            app:cardElevation="10dp"
+                            android:layout_height="200dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
                                         <TextView
-                                            android:id="@+id/weights"
+                                            android:id="@+id/weightTxt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:fontFamily="@font/century_gothic"
+                                            android:fontFamily="@font/bungee"
                                             android:textSize="15sp"
                                             android:textColor="@color/black"
                                             android:textStyle="bold"
-                                            android:layout_marginStart="20dp"
-                                            android:text="Your Weight"/>
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="10dp"
+                                            android:text="Weight: "/>
+
+                                        <me.tankery.lib.circularseekbar.CircularSeekBar
+                                            android:id="@+id/progress_weight"
+                                            android:layout_marginTop="5dp"
+                                            android:layout_width="100dp"
+                                            android:layout_height="100dp"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_below="@id/weightTxt"
+                                            app:cs_circle_style = "round"
+                                            app:cs_progress = "70"
+                                            app:cs_max = "100"
+                                            app:cs_negative_enabled = "false"
+                                            app:cs_move_outside_circle = "true"
+                                            app:cs_maintain_equal_circle = "true"
+                                            app:cs_use_custom_radii = "false"
+                                            app:cs_lock_enabled = "true"
+                                            app:cs_circle_x_radius = "0dp"
+                                            app:cs_circle_y_radius = "0dp"
+                                            app:cs_circle_stroke_width = "5dp"
+                                            app:cs_disable_pointer = "false"
+                                            app:cs_pointer_stroke_width = "5dp"
+                                            app:cs_circle_fill = "@color/transparent"
+                                            app:cs_circle_color = "@color/grey"
+                                            app:cs_circle_progress_color = "@color/blue"
+                                            app:cs_pointer_color = "@color/blue"
+                                            app:cs_pointer_alpha_ontouch = "5"
+                                            app:cs_pointer_angle = "0"
+                                            app:cs_disable_progress_glow = "true"
+                                            app:cs_hide_progress_when_empty = "true"/>
+
+                                <TextView
+                                    android:id="@+id/weights"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/century_gothic"
+                                    android:textSize="15sp"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold"
+                                    android:layout_below="@id/weightTxt"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="40dp"
+                                    android:text="Weight"/>
+
+                                        <com.airbnb.lottie.LottieAnimationView
+                                            android:id="@+id/weight_animation"
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_alignParentBottom="true"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_gravity="center_horizontal"
+                                            app:lottie_autoPlay="true"
+                                            app:lottie_loop="true"
+                                            app:lottie_rawRes="@raw/scale" />
+                                </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_below="@+id/bmiTxt"
+                            android:layout_marginTop="20dp"
+                            android:id="@+id/card3"
+                            android:layout_toEndOf="@+id/card2"
+                            android:layout_marginLeft="10dp"
+                            app:cardCornerRadius="20dp"
+                            android:layout_width="110dp"
+                            app:cardElevation="10dp"
+                            android:layout_height="200dp">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/bmiTxt1"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/bungee"
+                                            android:textSize="15sp"
+                                            android:textColor="@color/black"
+                                            android:textStyle="bold"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="10dp"
+                                            android:text="BMI: "/>
+
+                                        <me.tankery.lib.circularseekbar.CircularSeekBar
+                                            android:id="@+id/progress_bmi"
+                                            android:layout_marginTop="5dp"
+                                            android:layout_width="100dp"
+                                            android:layout_height="100dp"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_below="@id/bmiTxt1"
+                                            app:cs_circle_style = "round"
+                                            app:cs_progress = "70"
+                                            app:cs_max = "100"
+                                            app:cs_negative_enabled = "false"
+                                            app:cs_move_outside_circle = "true"
+                                            app:cs_maintain_equal_circle = "true"
+                                            app:cs_use_custom_radii = "false"
+                                            app:cs_lock_enabled = "true"
+                                            app:cs_circle_x_radius = "0dp"
+                                            app:cs_circle_y_radius = "0dp"
+                                            app:cs_circle_stroke_width = "5dp"
+                                            app:cs_disable_pointer = "false"
+                                            app:cs_pointer_stroke_width = "5dp"
+                                            app:cs_circle_fill = "@color/transparent"
+                                            app:cs_circle_color = "@color/grey"
+                                            app:cs_circle_progress_color = "@color/greenBtn"
+                                            app:cs_pointer_color = "@color/greenBtn"
+                                            app:cs_pointer_alpha_ontouch = "5"
+                                            app:cs_pointer_angle = "0"
+                                            app:cs_disable_progress_glow = "true"
+                                            app:cs_hide_progress_when_empty = "true"/>
+
                                         <TextView
                                             android:id="@+id/bmi"
                                             android:layout_width="wrap_content"
@@ -98,8 +322,41 @@
                                             android:textSize="15sp"
                                             android:textColor="@color/black"
                                             android:textStyle="bold"
-                                            android:layout_marginStart="20dp"
-                                            android:text="Your Bmi: "/>
+                                            android:layout_below="@id/bmiTxt1"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="40dp"
+                                            android:text="Bmi: "/>
+
+                                        <com.airbnb.lottie.LottieAnimationView
+                                            android:id="@+id/bmi_animation"
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_alignParentBottom="true"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_gravity="center_horizontal"
+                                            app:lottie_autoPlay="true"
+                                            app:lottie_loop="true"
+                                            app:lottie_rawRes="@raw/bmi" />
+
+                                </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_below="@+id/card1"
+                            android:layout_marginTop="20dp"
+                            android:id="@+id/card4"
+                            app:cardCornerRadius="20dp"
+                            android:layout_width="350dp"
+                            android:layout_centerHorizontal="true"
+                            app:cardElevation="10dp"
+                            android:layout_height="50dp">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
                                         <TextView
                                             android:id="@+id/category"
                                             android:layout_width="wrap_content"
@@ -112,21 +369,23 @@
                                             android:textColor="@color/black"
                                             android:textStyle="bold"
                                             android:text="BMI"/>
+
                                 </LinearLayout>
+
                         </androidx.cardview.widget.CardView>
+
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/filterBtn"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/card1"
+                            android:layout_width="40dp"
+                            android:layout_height="20dp"
+                            android:layout_below="@id/card4"
                             android:layout_marginLeft="10dp"
                             android:layout_marginBottom="20dp"
-                            android:layout_marginTop="-100dp"
+                            android:layout_marginTop="10dp"
                             android:background="@drawable/round_button_beige"
-                            android:drawableStart="@drawable/list"
+                            android:drawableStart="@drawable/filter6"
                             android:fontFamily="@font/bungee"
                             android:onClick="showFilterTapped"
-                            android:text="Filter"
                             android:textColor="@color/white" />
 
                         <RelativeLayout
@@ -134,8 +393,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/filterBtn"
-                            android:layout_marginTop="80dp"
+                            android:layout_marginTop="5dp"
                             android:background="@color/black">
+
+
+                                <com.airbnb.lottie.LottieAnimationView
+                                    android:id="@+id/filter_animation"
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    app:lottie_autoPlay="true"
+                                    app:lottie_loop="true"
+                                    android:layout_toEndOf="@id/mood"
+                                    android:layout_marginTop="40dp"
+                                    android:layout_marginRight="5dp"
+                                    app:lottie_rawRes="@raw/food_coin" />
 
                                 <LinearLayout
                                     android:id="@+id/mood"
@@ -366,29 +637,41 @@
                                                     android:textSize="12sp" />
                                         </LinearLayout>
                                 </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/recommendBtn"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/healthCondition"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:background="@drawable/round_button"
+                                    android:fontFamily="@font/bungee"
+                                    android:text="Recommend"
+                                    android:textSize="18sp" />
                         </RelativeLayout>
 
-                        <Button
-                            android:id="@+id/recommendBtn"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/recommendTxt"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/filterTab"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="50dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/round_button"
                             android:fontFamily="@font/bungee"
-                            android:text="Recommend"
-                            android:textSize="18sp" />
-
+                            android:layout_marginTop="10dp"
+                            android:text="Check out these foods!"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:padding="10dp"
+                            android:transitionName="slogan1"/>
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerView2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_below="@id/recommendBtn"
-                            android:layout_marginTop="20dp"
+                            android:layout_below="@id/recommendTxt"
+                            android:layout_marginTop="10dp"
                             android:layout_marginBottom="20dp"
                             android:clickable="false"
                             android:scrollbars="vertical" />

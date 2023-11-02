@@ -18,21 +18,48 @@
             android:layout_height="match_parent">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/splashLogo"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/splashlogo"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:id="@+id/topDesign">
+
+                <ImageView
+                    android:id="@+id/topBG"
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/top"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/splashLogo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/splashlogo"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:id="@+id/logoName"
+                    android:layout_toEndOf="@+id/splashLogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/bungee"
+                    android:text="Changing Something?"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:padding="20dp"
+                    android:transitionName="slogan1"/>
+
+            </RelativeLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/categoryImage"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
-                android:layout_below="@id/splashLogo"
+                android:layout_below="@id/topDesign"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="0dp"
                 android:src="@drawable/astronaut"

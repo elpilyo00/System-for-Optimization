@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/newBG">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -107,7 +107,8 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/bmiContainer">
 
                                         <me.tankery.lib.circularseekbar.CircularSeekBar
                                             android:id="@+id/progress_height"
@@ -191,7 +192,8 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/bmiContainer">
 
                                         <TextView
                                             android:id="@+id/weightTxt"
@@ -274,7 +276,8 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/bmiContainer">
 
                                         <TextView
                                             android:id="@+id/bmiTxt1"
@@ -359,8 +362,9 @@
                             android:layout_height="50dp">
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:background="@color/bmiContainer">
 
                                         <TextView
                                             android:id="@+id/category"
@@ -398,19 +402,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/filterBtn"
-                            android:layout_marginTop="5dp"
-                            android:background="@color/black">
+                            android:layout_margin="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/round_button_battle_green">
 
 
                                 <com.airbnb.lottie.LottieAnimationView
                                     android:id="@+id/filter_animation"
                                     android:layout_width="120dp"
                                     android:layout_height="120dp"
-                                    app:lottie_autoPlay="true"
-                                    app:lottie_loop="true"
-                                    android:layout_toEndOf="@id/mood"
                                     android:layout_marginTop="40dp"
                                     android:layout_marginRight="5dp"
+                                    android:layout_toEndOf="@id/mood"
+                                    app:lottie_autoPlay="true"
+                                    app:lottie_loop="true"
                                     app:lottie_rawRes="@raw/food_coin" />
 
                                 <LinearLayout
@@ -500,10 +507,10 @@
                                             android:textSize="18sp" />
 
                                         <LinearLayout
-                                            android:layout_marginStart="5dp"
-                                            android:layout_marginRight="5dp"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginRight="5dp"
                                             android:orientation="horizontal">
 
                                                 <CheckBox
@@ -528,10 +535,10 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-                                            android:layout_marginStart="5dp"
-                                            android:layout_marginRight="5dp"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginRight="5dp"
                                             android:orientation="horizontal">
 
                                                 <CheckBox
@@ -556,10 +563,10 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-                                            android:layout_marginStart="5dp"
-                                            android:layout_marginRight="5dp"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginRight="5dp"
                                             android:orientation="horizontal">
 
                                                 <CheckBox
@@ -584,10 +591,10 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-                                            android:layout_marginStart="5dp"
-                                            android:layout_marginRight="5dp"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginRight="5dp"
                                             android:orientation="horizontal">
 
                                                 <CheckBox
@@ -612,13 +619,12 @@
                                         </LinearLayout>
 
 
-
                                         <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginRight="5dp"
-                                            android:layout_width="match_parent"
                                             android:layout_marginBottom="10dp"
-                                            android:layout_height="wrap_content"
                                             android:orientation="horizontal">
 
                                                 <CheckBox
@@ -643,7 +649,7 @@
                                         </LinearLayout>
                                 </LinearLayout>
 
-                                <Button
+                                <androidx.appcompat.widget.AppCompatButton
                                     android:id="@+id/recommendBtn"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -652,8 +658,9 @@
                                     android:layout_marginTop="10dp"
                                     android:layout_marginEnd="10dp"
                                     android:layout_marginBottom="10dp"
-                                    android:background="@drawable/round_button"
+                                    android:background="@drawable/round_button_black"
                                     android:fontFamily="@font/bungee"
+                                    android:textColor="@color/white"
                                     android:text="Recommend"
                                     android:textSize="18sp" />
                         </RelativeLayout>

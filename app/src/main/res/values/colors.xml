@@ -12,6 +12,12 @@
     <color name="yellow">#FFB000</color>
     <color name="blue">#005EFF</color>
     <color name="green">#08771A</color>
+    <color name="newBG">#F1FDED</color>
+    <color name="filterContainer">#115010</color>
+    <color name="filterBox">#F8F8F8</color>
+    <color name="nutriValue">#7DD691</color>
+    <color name="userBox">#BBF298</color>
+    <color name="bmiContainer">#FAD091</color>
 
 
 

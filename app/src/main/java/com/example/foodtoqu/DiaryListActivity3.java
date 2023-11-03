@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,7 +58,7 @@ public class DiaryListActivity3 extends AppCompatActivity {
     private ImageView img;
     TextView names;
     private Calendar selectedDate  = Calendar.getInstance();
-    Button filterByDateButton;
+    AppCompatButton filterByDateButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -315,6 +316,9 @@ public class DiaryListActivity3 extends AppCompatActivity {
                 BarDataSet dataSet = new BarDataSet(barEntries, "Nutritional Values");
                 BarData barData = new BarData(dataSet);
                 barChart.setData(barData);
+                barData.setValueTextColor(Color.BLACK);
+                barData.setValueTextSize(13f);
+                barChart.animateY(2000);
 
                 // Customize the chart colors
                 int[] customColors = {

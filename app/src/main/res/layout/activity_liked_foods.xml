@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LikedFoodsActivity">
+    tools:context=".LikedFoodsActivity"
+    android:background="@color/newBG">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -78,18 +79,20 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/bar_chart"
             android:layout_centerHorizontal="true"
+            android:background="@color/transparent"
             android:layout_marginTop="30dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/greenBtn"
+                android:background="@drawable/round_button_black"
                 android:gravity="center"
+                android:layout_margin="5dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="My Favorite foods"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     app:fontFamily="@font/arbutus"/>

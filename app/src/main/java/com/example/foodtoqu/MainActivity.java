@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
         loadingAnimation = findViewById(R.id.utensil_loading);
 
 
-        image.setAnimation(topAnim);
-        slogan1.setAnimation(bottomAnim);
-        slogan2.setAnimation(bottomAnim);
+//        image.setAnimation(topAnim);
+//        slogan1.setAnimation(bottomAnim);
+//        slogan2.setAnimation(bottomAnim);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 pairs[1] = new Pair<View, String>(slogan1, "slogan1");
                 pairs[2] = new Pair<View, String>(slogan2, "slogan2");
 
-                loadingAnimation.playAnimation();
+//                loadingAnimation.playAnimation();
 
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
                 startActivity(intent, options.toBundle());

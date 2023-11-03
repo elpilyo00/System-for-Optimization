@@ -284,6 +284,7 @@ public class LikedFoodsActivity extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
         barChart.setData(data);
+        barChart.animateY(2000);
 
         // Customize the legend to match the custom labels
         Legend legend = barChart.getLegend();

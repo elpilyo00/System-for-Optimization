@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#053B50">
+            android:background="@color/userBox">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImageView"
@@ -34,8 +34,10 @@
         android:layout_toEndOf="@id/userImageView"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="@android:color/white" />
+        android:text="User's Name"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textColor="@color/black" />
 
     <View
         android:id="@+id/separatorLine"

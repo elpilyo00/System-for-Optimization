@@ -308,14 +308,16 @@ public class FoodDetailActivityU extends AppCompatActivity {
     private void configurePieChart() {
         pieChart.setUsePercentValues(false); // Set to false to display actual values
         pieChart.getDescription().setEnabled(false);
+        pieChart.animateY(2000);
         pieChart.setExtraOffsets(5, 10, 5, 5);
 
         Legend legend = pieChart.getLegend();
         legend.setEnabled(false);
 
         pieChart.setEntryLabelTypeface(Typeface.DEFAULT_BOLD);
-        pieChart.setEntryLabelTextSize(12f);
+        pieChart.setEntryLabelTextSize(15f);
         pieChart.setEntryLabelColor(Color.BLACK);
+
     }
 
 

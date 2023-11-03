@@ -11,14 +11,14 @@
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
         android:background="@color/background"
-        app:cardBackgroundColor="#F6F4EB"
+        app:cardBackgroundColor="@color/filterBox"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#191717">
+            android:background="@color/filterBox">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/categoryImage"
@@ -28,7 +28,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/uploading"
-                app:civ_border_color="@color/greenBtn"
+                app:civ_border_color="@color/black"
                 app:civ_border_width="2dp" />
 
             <TextView
@@ -41,7 +41,8 @@
                 android:layout_marginEnd="8dp"
                 android:gravity="center"
                 android:text="Category Name 1"
-                android:textColor="@android:color/white"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <TextView
@@ -53,7 +54,8 @@
                 android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="Category Name 2"
-                android:textColor="@android:color/white"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <!-- Material Rating Bar -->
@@ -97,7 +99,8 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="0"
-                android:textColor="@android:color/white"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textColor="@color/black"
                 android:textSize="12sp" />
 
         </RelativeLayout>

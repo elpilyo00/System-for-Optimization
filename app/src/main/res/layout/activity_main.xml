@@ -4,47 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splashbg"
+    android:background="@color/newBG"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="3000dp"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="30dp"
         android:src="@drawable/splashlogo"
         android:layout_centerHorizontal="true"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/utensil_loading"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_above="@id/textView"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/utensil" />
-
+        app:lottie_rawRes="@raw/utensil"
+        android:layout_below="@id/imageView"/>
+    
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bungee"
-        android:shadowColor="@color/black"
+        android:shadowColor="@color/grey"
         android:layout_marginTop="5dp"
         android:shadowDx="10"
         android:shadowDy="5"
         android:shadowRadius="1"
         android:text="You Name It"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHighlight="@color/black"
         android:textSize="24sp"
-        android:transitionName="slogan1"
-        android:layout_below="@id/imageView"/>
+        android:layout_below="@id/utensil_loading"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -52,17 +50,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/bungee"
-        android:shadowColor="@color/black"
+        android:shadowColor="@color/grey"
         android:shadowDx="10"
         android:shadowDy="5"
         android:shadowRadius="1"
         android:text="We Recommend It"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHighlight="@color/black"
         android:textSize="34sp"
         android:transitionName="slogan2"
         android:layout_below="@id/textView"/>
+    
+    
 
 
 </RelativeLayout>

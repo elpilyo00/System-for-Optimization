@@ -5,23 +5,82 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminActivity">
+    tools:context=".AdminActivity"
+    android:background="@color/newBG">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/topDesign">
+                    <ImageView
+                        android:id="@+id/topBG"
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/top"/>
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/splashLogo"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/splashlogo"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/diary"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/bungee"
+                    android:text="My Food Buddies"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+
+                <ImageButton
+                    android:id="@+id/diary"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_menu_book_24" />
+
+                <ImageButton
+                    android:id="@+id/user"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="70dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_person_24" />
+
 
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
+            android:layout_below="@id/topDesign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -39,9 +98,17 @@
             android:id="@+id/userView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
+            android:layout_below="@id/search"
+            android:layout_marginTop="10dp"
             android:scrollbars="vertical"/>
+
+
     </RelativeLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
 
     <com.github.clans.fab.FloatingActionMenu
         android:layout_width="wrap_content"
@@ -67,4 +134,6 @@
             app:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>
+
+
 </RelativeLayout>

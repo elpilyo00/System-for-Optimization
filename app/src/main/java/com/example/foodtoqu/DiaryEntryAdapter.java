@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -53,6 +55,8 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             // Bind the food item data here
             foodItemViewHolder.foodNameTextView.setText(foodItem.getFoodName()); // Set the food name
+            foodItemViewHolder.cardView.startAnimation(AnimationUtils.loadAnimation(foodItemViewHolder.itemView.getContext(), R.anim.recycler_animation2));
+
 
             // Load the image using Picasso
             Glide.with(context)  // Replace 'context' with your actual context
@@ -123,11 +127,15 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public class FoodItemViewHolder extends RecyclerView.ViewHolder {
         TextView foodNameTextView;
         ImageView imageView;
+        CardView cardView;
+
 
         public FoodItemViewHolder(View itemView) {
             super(itemView);
             foodNameTextView = itemView.findViewById(R.id.text_food_name);
             imageView = itemView.findViewById(R.id.image_view);
+            cardView = itemView.findViewById(R.id.cardView);
+
         }
     }
 }

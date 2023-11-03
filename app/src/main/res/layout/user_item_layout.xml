@@ -1,14 +1,27 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#053B50"
-    android:padding="5dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transparent"
+    android:layout_margin="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#053B50">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_baseline_person_24" />
 
@@ -31,6 +44,9 @@
         android:layout_below="@id/userImageView"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
 

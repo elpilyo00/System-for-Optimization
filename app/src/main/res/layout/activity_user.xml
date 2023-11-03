@@ -42,12 +42,11 @@
                                     android:layout_toEndOf="@+id/splashLogo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
                                     android:fontFamily="@font/bungee"
                                     android:text="Welcome Back\nFood Buddy!"
                                     android:textColor="@color/black"
-                                    android:textSize="18sp"
-                                    android:padding="20dp"
+                                    android:textSize="15sp"
+                                    android:padding="10dp"
                                     android:transitionName="slogan1"/>
 
                                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -88,12 +87,18 @@
                             android:textStyle="bold"
                             android:text="Body Mass Index"/>
 
-                        <androidx.cardview.widget.CardView
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/cardViews"
                             android:layout_below="@+id/bmiTxt"
+                            android:layout_centerHorizontal="true">
+
+                        <androidx.cardview.widget.CardView
                             android:layout_marginTop="20dp"
                             android:id="@+id/card1"
                             android:layout_alignParentLeft="true"
-                            android:layout_marginLeft="30dp"
                             app:cardCornerRadius="20dp"
                             android:layout_width="110dp"
                             app:cardElevation="10dp"
@@ -112,7 +117,7 @@
                                             android:layout_centerHorizontal="true"
                                             android:layout_below="@id/heightTxt"
                                             app:cs_circle_style = "round"
-                                            app:cs_progress = "70"
+                                            app:cs_progress = "0"
                                             app:cs_max = "100"
                                             app:cs_negative_enabled = "false"
                                             app:cs_move_outside_circle = "true"
@@ -175,7 +180,6 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:layout_below="@+id/bmiTxt"
                             android:layout_marginTop="20dp"
                             android:id="@+id/card2"
                             android:layout_toEndOf="@+id/card1"
@@ -209,7 +213,7 @@
                                             android:layout_centerHorizontal="true"
                                             android:layout_below="@id/weightTxt"
                                             app:cs_circle_style = "round"
-                                            app:cs_progress = "70"
+                                            app:cs_progress = "0"
                                             app:cs_max = "100"
                                             app:cs_negative_enabled = "false"
                                             app:cs_move_outside_circle = "true"
@@ -258,7 +262,6 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:layout_below="@+id/bmiTxt"
                             android:layout_marginTop="20dp"
                             android:id="@+id/card3"
                             android:layout_toEndOf="@+id/card2"
@@ -293,7 +296,7 @@
                                             android:layout_centerHorizontal="true"
                                             android:layout_below="@id/bmiTxt1"
                                             app:cs_circle_style = "round"
-                                            app:cs_progress = "70"
+                                            app:cs_progress = "0"
                                             app:cs_max = "100"
                                             app:cs_negative_enabled = "false"
                                             app:cs_move_outside_circle = "true"
@@ -342,9 +345,11 @@
 
                         </androidx.cardview.widget.CardView>
 
+                </RelativeLayout>
+
 
                         <androidx.cardview.widget.CardView
-                            android:layout_below="@+id/card1"
+                            android:layout_below="@+id/cardViews"
                             android:layout_marginTop="20dp"
                             android:id="@+id/card4"
                             app:cardCornerRadius="20dp"

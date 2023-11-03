@@ -4,10 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -36,6 +38,8 @@ public class UserAdapte2 extends RecyclerView.Adapter<UserAdapte2.ViewHolder> {
 
         // Bind user data to ViewHolder views
         holder.usernameTextView.setText(user.getUsername());
+        holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.recycler_animation3));
+
 
         // Load the user image using Picasso
         Glide.with(context)  // Replace 'context' with your actual context
@@ -58,11 +62,15 @@ public class UserAdapte2 extends RecyclerView.Adapter<UserAdapte2.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView userImageView;
         TextView usernameTextView; // Corrected view ID
+        CardView cardView;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userImageView = itemView.findViewById(R.id.userImageView);
             usernameTextView = itemView.findViewById(R.id.usernameTextView); // Corrected view ID
+            cardView = itemView.findViewById(R.id.cardView);
+
         }
     }
 }

@@ -9,12 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,6 +63,8 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.FoodViewHold
         holder.foodNameTextView.setText(food.getFoodName());
         holder.calorieTextView.setText("Calorie: " + food.getCalorie());
         // Add more TextViews for other food details as needed
+
+        holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.recyclerview_animation));
 
         // Load the food image using Picasso
         String imageUrl = food.getImageUrl();
@@ -338,6 +343,7 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.FoodViewHold
         TextView foodNameTextView;
         TextView calorieTextView;
         MaterialRatingBar starRatingBar;
+        CardView cardView;
 
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -348,6 +354,7 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.FoodViewHold
             foodNameTextView = itemView.findViewById(R.id.foodNameTextView);
             calorieTextView = itemView.findViewById(R.id.calorieTextView);
             starRatingBar = itemView.findViewById(R.id.starRatingBar);
+            cardView = itemView.findViewById(R.id.cardView);
         }
     }
 }

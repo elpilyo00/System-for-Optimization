@@ -604,7 +604,7 @@
                                                     android:button="@drawable/checkbox"
                                                     android:fontFamily="sans-serif-condensed-medium"
                                                     android:padding="5dp"
-                                                    android:text="hypothyroidism"
+                                                    android:text="Hypothyroidism"
                                                     android:textSize="12sp" />
 
                                                 <CheckBox

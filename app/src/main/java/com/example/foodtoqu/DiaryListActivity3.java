@@ -341,8 +341,8 @@ public class DiaryListActivity3 extends AppCompatActivity {
                         BarDataSet barDataSet = new BarDataSet(entries, "");
                         int colorIndex = i / 7;
                         int color = customColors[colorIndex % customColors.length];
-                        barDataSet.setColor(color);
-                        barDataSet.setValueTextSize(0f);
+                        barDataSet.setColors(color);
+                        barDataSet.setValueTextSize(10f);
                         dataSets.add(barDataSet);
                         entries = new ArrayList<>();
                     }

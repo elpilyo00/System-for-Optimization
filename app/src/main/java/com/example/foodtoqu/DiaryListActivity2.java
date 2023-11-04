@@ -37,6 +37,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -379,7 +380,6 @@ public class DiaryListActivity2 extends AppCompatActivity {
 
                     BarDataSet dataSet = new BarDataSet(barEntries, "Nutritional Values");
                     BarData barData = new BarData(dataSet);
-                    barChart.setData(barData);
                     barData.setValueTextColor(Color.BLACK);
                     barData.setValueTextSize(13f);
                     barChart.animateY(2000);
@@ -397,6 +397,7 @@ public class DiaryListActivity2 extends AppCompatActivity {
 
                     };
 
+
                     ArrayList<IBarDataSet> dataSets = new ArrayList<>();
                     ArrayList<BarEntry> entries = new ArrayList<>();
 
@@ -407,8 +408,8 @@ public class DiaryListActivity2 extends AppCompatActivity {
                             BarDataSet barDataSet = new BarDataSet(entries, "");
                             int colorIndex = i / 7;
                             int color = customColors[colorIndex % customColors.length];
-                            barDataSet.setColor(color);
-                            barDataSet.setValueTextSize(0f);
+                            barDataSet.setColors(color);
+                            barDataSet.setValueTextSize(10f);
                             dataSets.add(barDataSet);
                             entries = new ArrayList<>();
                         }
@@ -451,6 +452,7 @@ public class DiaryListActivity2 extends AppCompatActivity {
                     barChart.getDescription().setEnabled(false);
                     barChart.getLegend().setEnabled(false);
                     barChart.invalidate();
+
                 }
 
                 @Override

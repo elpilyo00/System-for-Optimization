@@ -224,7 +224,7 @@ public class profs extends AppCompatActivity {
                     }
 
                     if (weight != null) {
-                        weightTextView.setText(String.format("%.2f kg", weight));
+                        weightTextView.setText(String.format("%.2f lbs", weight));
                     } else {
                         // Handle the case if weight data is missing
                     }

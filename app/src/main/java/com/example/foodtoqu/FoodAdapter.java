@@ -49,9 +49,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         holder.sugarTextView.setText("Total Sugar: " + foodItem.getTotalSugar());
         holder.proteinTextView.setText("Protein: " + foodItem.getProtein());
 
-        holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.recyclerview_animation));
-
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

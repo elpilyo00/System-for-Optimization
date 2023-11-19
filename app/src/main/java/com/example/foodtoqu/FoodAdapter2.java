@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -114,8 +115,16 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.FoodViewHold
                 // Change the color of the rating bar based on the new rating value
                 int newRatingColor = getRatingColor(rating);
                 holder.starRatingBar.setProgressTintList(ColorStateList.valueOf(newRatingColor));
+
+                // Update the Food3 object's rating
+                food.setRating(rating);
+
+                // Update the view holder's TextView for rating
+                holder.rate.setText(String.valueOf(rating));
+
             }
         });
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,7 +230,6 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.FoodViewHold
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        // Like added successfully
                         Log.d("Firebase", "Like added successfully.");
 
                         // Now, you can increment the likes count in the "foods" node
@@ -244,8 +252,13 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.FoodViewHold
                             @Override
                             public void onComplete(@NonNull DatabaseError databaseError, boolean committed, @Nullable DataSnapshot dataSnapshot) {
                                 if (committed) {
-                                    // Likes count updated successfully
-                                    Log.d("Firebase", "Likes count updated successfully.");
+                                    int position = foodList.indexOf(food);
+                                    if (position != -1) {
+                                        food.setLikes(food.getLikes() + 1); // Update local likes count
+                                        food.setLiked(true); // Update local liked status
+                                        notifyItemChanged(position);
+                                        Log.d("Firebase", "Likes count updated successfully.");
+                                    }
                                 } else {
                                     // Likes count update failed
                                     Log.e("Firebase", "Error updating likes count: " + databaseError.getMessage());
@@ -293,7 +306,13 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.FoodViewHold
                             public void onComplete(@NonNull DatabaseError databaseError, boolean committed, @Nullable DataSnapshot dataSnapshot) {
                                 if (committed) {
                                     // Likes count updated successfully
-                                    Log.d("Firebase", "Likes count updated successfully.");
+                                    int position = foodList.indexOf(food);
+                                    if (position != -1) {
+                                        food.setLiked(false); // Update local liked status
+                                        food.setLikes(Math.max(0, food.getLikes() - 1)); // Update local likes count
+                                        notifyItemChanged(position);
+                                        Log.d("Firebase", "Likes count updated successfully.");
+                                    }
                                 } else {
                                     // Likes count update failed
                                     Log.e("Firebase", "Error updating likes count: " + databaseError.getMessage());
@@ -343,7 +362,7 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.FoodViewHold
         TextView foodNameTextView;
         TextView calorieTextView;
         MaterialRatingBar starRatingBar;
-        CardView cardView;
+        RelativeLayout cardView;
 
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -35,13 +35,16 @@
             app:closeIcon="@drawable/clear"
             app:queryHint="Search..."
             app:searchIcon="@drawable/search" />
-
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/toolbar">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/userView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:scrollbars="vertical"/>
+            android:layout_height="match_parent"/>
+        </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -348,7 +349,7 @@ public class FoodAdapter3 extends RecyclerView.Adapter<FoodAdapter3.FoodViewHold
         TextView foodNameTextView;
         TextView calorieTextView;
         MaterialRatingBar starRatingBar;
-        CardView cardView;
+        RelativeLayout cardView;
 
 
         public FoodViewHolder(@NonNull View itemView) {

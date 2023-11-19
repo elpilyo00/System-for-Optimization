@@ -597,10 +597,21 @@ public class UserActivity extends AppCompatActivity {
                 }
             }
 
+
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                // Handle the case where a child has been removed from the database
-                // You should remove the corresponding item from foodList and call foodAdapter.notifyDataSetChanged() here
+                try {
+                    Food3 removedFood = dataSnapshot.getValue(Food3.class);
+                    if (removedFood != null) {
+                        int position = findPositionById(removedFood.getFoodId());
+                        if (position != -1) {
+                            foodList.remove(position);
+                            foodAdapter.notifyItemRemoved(position);
+                        }
+                    }
+                } catch (DatabaseException e) {
+                    Log.e(TAG, "Error converting data: " + e.getMessage());
+                }
             }
 
             @Override

@@ -128,7 +128,7 @@
                                             app:cs_circle_x_radius = "0dp"
                                             app:cs_circle_y_radius = "0dp"
                                             app:cs_circle_stroke_width = "5dp"
-                                            app:cs_disable_pointer = "false"
+                                            app:cs_disable_pointer = "true"
                                             app:cs_pointer_stroke_width = "5dp"
                                             app:cs_circle_fill = "@color/transparent"
                                             app:cs_circle_color = "@color/grey"
@@ -225,7 +225,7 @@
                                             app:cs_circle_x_radius = "0dp"
                                             app:cs_circle_y_radius = "0dp"
                                             app:cs_circle_stroke_width = "5dp"
-                                            app:cs_disable_pointer = "false"
+                                            app:cs_disable_pointer = "true"
                                             app:cs_pointer_stroke_width = "5dp"
                                             app:cs_circle_fill = "@color/transparent"
                                             app:cs_circle_color = "@color/grey"
@@ -309,7 +309,7 @@
                                             app:cs_circle_x_radius = "0dp"
                                             app:cs_circle_y_radius = "0dp"
                                             app:cs_circle_stroke_width = "5dp"
-                                            app:cs_disable_pointer = "false"
+                                            app:cs_disable_pointer = "true"
                                             app:cs_pointer_stroke_width = "5dp"
                                             app:cs_circle_fill = "@color/transparent"
                                             app:cs_circle_color = "@color/grey"
@@ -385,8 +385,8 @@
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/filterBtn"
-                            android:layout_width="40dp"
-                            android:layout_height="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_below="@id/card4"
                             android:layout_marginLeft="10dp"
                             android:layout_marginBottom="20dp"
@@ -395,7 +395,8 @@
                             android:drawableStart="@drawable/filter6"
                             android:fontFamily="@font/bungee"
                             android:onClick="showFilterTapped"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:text="Filter Here"/>
 
                         <RelativeLayout
                             android:id="@+id/filterTab"

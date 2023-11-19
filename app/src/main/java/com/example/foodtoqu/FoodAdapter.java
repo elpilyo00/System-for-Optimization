@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,11 +48,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         holder.carboTextView.setText("Total Carbohydrate: " + foodItem.getCarbo());
         holder.sugarTextView.setText("Total Sugar: " + foodItem.getTotalSugar());
         holder.proteinTextView.setText("Protein: " + foodItem.getProtein());
-
-        holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.recyclerview_animation));
-
-
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +101,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         TextView carboTextView;
         TextView sugarTextView;
         TextView proteinTextView;
-        RelativeLayout cardView;
+        CardView cardView;
 
 
         public ViewHolder(@NonNull View itemView) {

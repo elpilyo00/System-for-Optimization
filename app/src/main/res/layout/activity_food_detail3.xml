@@ -556,9 +556,9 @@
                 android:layout_margin="10dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:padding="20dp"
-                android:text="Description: "
+                android:text="Benefits: "
                 android:textColor="@color/black"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
             <com.uncopt.android.widget.text.justify.JustifiedTextView
                 android:id="@+id/detailDescription"
                 android:layout_width="match_parent"

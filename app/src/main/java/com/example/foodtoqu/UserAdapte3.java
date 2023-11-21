@@ -45,7 +45,7 @@ public class UserAdapte3 extends RecyclerView.Adapter<UserAdapte3.ViewHolder> {
         User4 user = userList.get(position);
 
         // Bind user data to ViewHolder views
-        holder.usernameTextView.setText(user.getName());
+        holder.usernameTextView.setText(user.getUsername());
 
         holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.recycler_animation3));
 

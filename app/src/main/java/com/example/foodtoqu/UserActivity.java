@@ -2,8 +2,10 @@ package com.example.foodtoqu;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 //import android.support.annotation.Nullable;
@@ -293,7 +295,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void applyFilters() {
-             RadioGroup[] bmiRadioGroups = {findViewById(R.id.bmi_radio_group)
+                RadioGroup[] bmiRadioGroups = {findViewById(R.id.bmi_radio_group)
             };
 
             // Create an array for health condition CheckBoxes
@@ -381,6 +383,7 @@ public class UserActivity extends AppCompatActivity {
         return false;
     }
 
+    //Set the Circular Seek Bar Height
     private void setProgress_height() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
@@ -408,6 +411,7 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 
+    //Set the Circular Seek Bar Weight
     private void setProgress_weight() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
@@ -436,6 +440,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
 
+    //Set the Circular Seek Bar BMI
     private void setProgress_bmi() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference bmiRef = FirebaseDatabase.getInstance().getReference().child("Body_massIndex").child(userId);

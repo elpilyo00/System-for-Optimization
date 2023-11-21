@@ -94,7 +94,7 @@ public class DiaryListActivity3 extends AppCompatActivity {
                         Picasso.get().load(user.getImage()).into(img);
 
                         // Set user's name to TextView
-                        names.setText(user.getName());
+                        names.setText(user.getUsername());
                     }
                 }
             }

@@ -51,7 +51,7 @@ public class MyService extends Service {
                 Log.d("MyService", "Executing task to remove old diary entries.");
                 removeOldDiaryEntriesForCurrentUser();
                 // Schedule the task to run again after 15 minutes
-                handler.postDelayed(this, 7 * 24 * 60 * 60 * 1000); // 7 days (7 * 24 * 60 * 60 * 1000) 1 Minute (60*1000) 1 Hour (60 * 60 * 1000) 1 Day (24 * 60 * 60 * 1000)
+                handler.postDelayed(this,  7 * 24 * 60 * 60 * 1000); // 7 days (7 * 24 * 60 * 60 * 1000) 1 Minute (60*1000) 1 Hour (60 * 60 * 1000) 1 Day (24 * 60 * 60 * 1000)
             }
         }, 7 * 24 * 60 * 60 * 1000); // Initial delay of 7 days (7 * 24 * 60 * 60 * 1000) 1 Minute (60*1000) 1 Hour (60 * 60 * 1000) 1 Day (24 * 60 * 60 * 1000)
     }

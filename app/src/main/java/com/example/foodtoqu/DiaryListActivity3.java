@@ -179,8 +179,6 @@ public class DiaryListActivity3 extends AppCompatActivity {
                 return true;
             }
         });
-
-
         diaryButton.setBackgroundResource(R.drawable.button_highlight);
         userButton.setBackgroundResource(R.drawable.button_highlight);
 

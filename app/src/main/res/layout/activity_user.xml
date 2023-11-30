@@ -136,8 +136,8 @@
                                             app:cs_pointer_color = "@color/red"
                                             app:cs_pointer_alpha_ontouch = "5"
                                             app:cs_pointer_angle = "0"
-                                            app:cs_disable_progress_glow = "true"
-                                            app:cs_hide_progress_when_empty = "true"/>
+                                            app:cs_disable_progress_glow ="true"
+                                            app:cs_hide_progress_when_empty ="true"/>
 
                                         <TextView
                                             android:id="@+id/heightTxt"
@@ -385,11 +385,317 @@
 
                         </androidx.cardview.widget.CardView>
 
+
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_below="@+id/card4"
+                            android:id="@+id/cardnew"
+                            app:cardCornerRadius="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_width="350dp"
+                            android:layout_centerHorizontal="true"
+                            app:cardElevation="10dp"
+                            android:layout_height="370dp">
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/bmiContainer">
+                                    <TextView
+                                        android:id="@+id/title"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="10dp"
+                                        android:textSize="15dp"
+                                        android:textStyle="bold"
+                                        android:fontFamily="@font/bungee"
+                                        android:textColor="@color/black"
+                                        android:text="Calorie Daily Budget"
+                                        />
+
+                                        <TextView
+                                            android:id="@+id/total"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_below="@+id/title"
+                                            android:layout_marginTop="5dp"
+                                            android:textSize="12sp"
+                                            android:textStyle="bold"
+                                            android:fontFamily="@font/bungee"
+                                            android:textColor="@color/black"
+                                            android:text="0"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/fat"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="12dp"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginTop="70dp"
+                                            android:textStyle="bold"
+                                            android:textAllCaps="false"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textColor="@color/black"
+                                            android:text="Fat"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/Carbs"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="12dp"
+                                            android:textAllCaps="false"
+                                            android:layout_below="@+id/fat"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginTop="35dp"
+                                            android:textStyle="bold"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textColor="@color/black"
+                                            android:text="Carbs"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/Protein"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="12dp"
+                                            android:textAllCaps="false"
+                                            android:layout_below="@+id/Carbs"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginTop="35dp"
+                                            android:textStyle="bold"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textColor="@color/black"
+                                            android:text="Protein"
+                                            />
+
+
+
+
+
+
+
+
+                                        <!--//for weight-->
+                                        <TextView
+                                            android:id="@+id/current_weight"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textAllCaps="false"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="70dp"
+                                            android:textSize="12sp"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_marginRight="10dp"
+                                            android:textStyle="bold"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textColor="@color/black"
+                                            android:text="Current weight"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/target_weight"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textAllCaps="false"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="35dp"
+                                            android:layout_below="@+id/current_weight"
+                                            android:textSize="12sp"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_marginRight="10dp"
+                                            android:textStyle="bold"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textColor="@color/black"
+                                            android:text="Target weight"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/target_date"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textAllCaps="false"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_below="@+id/target_weight"
+                                            android:layout_marginTop="35dp"
+                                            android:textSize="12sp"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_marginRight="10dp"
+                                            android:textStyle="bold"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textColor="@color/black"
+                                            android:text="Target date"
+                                            />
+
+                                        <RelativeLayout
+                                            android:id="@+id/rl12"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="150dp"
+                                            android:layout_below="@+id/total">
+
+                                        <me.tankery.lib.circularseekbar.CircularSeekBar
+                                            android:id="@+id/color_count"
+                                            android:layout_marginTop="5dp"
+                                            android:layout_width="120dp"
+                                            android:layout_height="120dp"
+                                            app:cs_circle_style = "round"
+                                            android:layout_centerHorizontal="true"
+                                            app:cs_progress = "0"
+                                            app:cs_max = "100"
+                                            app:cs_negative_enabled = "false"
+                                            app:cs_move_outside_circle = "true"
+                                            app:cs_maintain_equal_circle = "true"
+                                            app:cs_use_custom_radii = "false"
+                                            app:cs_lock_enabled = "true"
+                                            app:cs_circle_x_radius = "0dp"
+                                            app:cs_circle_y_radius = "0dp"
+                                            app:cs_circle_stroke_width = "5dp"
+                                            app:cs_disable_pointer = "true"
+                                            app:cs_pointer_stroke_width = "5dp"
+                                            app:cs_circle_fill = "@color/transparent"
+                                            app:cs_circle_color = "@color/grey"
+                                            app:cs_circle_progress_color = "@color/red"
+                                            app:cs_pointer_color = "@color/red"
+                                            app:cs_pointer_alpha_ontouch = "5"
+                                            app:cs_pointer_angle = "0"
+                                            app:cs_disable_progress_glow ="true"
+                                            app:cs_hide_progress_when_empty ="true"/>
+                                                <TextView
+                                                    android:id="@+id/total2"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_centerHorizontal="true"
+                                                    android:layout_marginTop="20dp"
+                                                    android:textSize="12sp"
+                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/bungee"
+                                                    android:textColor="@color/green"
+                                                    android:text="0"/>
+                                                <TextView
+                                                    android:id="@+id/left23"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_centerHorizontal="true"
+                                                    android:layout_marginTop="5dp"
+                                                    android:layout_below="@+id/total2"
+                                                    android:textSize="12sp"
+                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/bungee"
+                                                    android:textColor="@color/black"
+                                                    android:text="left"/>
+
+                                                <TextView
+                                                    android:id="@+id/remaining"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_centerHorizontal="true"
+                                                    android:layout_marginTop="5dp"
+                                                    android:layout_below="@+id/left23"
+                                                    android:textSize="12sp"
+                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/bungee"
+                                                    android:textColor="@color/black"
+                                                    android:text="o"/>
+                                        </RelativeLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/rl12"
+                                            android:layout_marginTop="10dp"
+                                            android:gravity="center"
+                                            android:orientation="horizontal">
+
+                                                <androidx.appcompat.widget.AppCompatButton
+                                                    android:id="@+id/checkIn"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:background="@drawable/round_button3"
+                                                    android:fontFamily="@font/century_gothic"
+                                                    android:text="Check in"
+                                                    android:textAllCaps="false"
+                                                    android:textColor="@color/white"
+                                                    android:textSize="12dp" />
+
+                                                <androidx.appcompat.widget.AppCompatButton
+                                                    android:id="@+id/Plan"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="50dp"
+                                                    android:background="@drawable/round_button3"
+                                                    android:fontFamily="@font/century_gothic"
+                                                    android:text="Plan"
+                                                    android:textAllCaps="false"
+                                                    android:textColor="@color/white"
+                                                    android:textSize="12dp" />
+
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_alignParentBottom="true"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="45dp"
+                                            android:gravity="center"
+                                            android:orientation="horizontal">
+                                                <TextView
+                                                    android:id="@+id/Breakfast"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_centerHorizontal="true"
+                                                    android:layout_marginTop="5dp"
+                                                    android:layout_below="@+id/left23"
+                                                    android:textSize="15dp"
+                                                    android:textStyle="bold"
+                                                    android:textAllCaps="false"
+                                                    android:fontFamily="@font/century_gothic"
+                                                    android:textColor="@color/black"
+                                                    android:text="Breakfast"/>
+
+                                                <TextView
+                                                    android:id="@+id/lunch"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_centerHorizontal="true"
+                                                    android:layout_marginTop="5dp"
+                                                    android:layout_below="@+id/left23"
+                                                    android:textSize="15dp"
+                                                    android:textStyle="bold"
+                                                    android:layout_marginLeft="20dp"
+                                                    android:textAllCaps="false"
+                                                    android:fontFamily="@font/century_gothic"
+                                                    android:textColor="@color/black"
+                                                    android:text="Lunch"/>
+
+                                                <TextView
+                                                    android:id="@+id/Dinner"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_centerHorizontal="true"
+                                                    android:layout_marginTop="5dp"
+                                                    android:layout_below="@+id/left23"
+                                                    android:textSize="15dp"
+                                                    android:textStyle="bold"
+                                                    android:layout_marginLeft="20dp"
+                                                    android:textAllCaps="false"
+                                                    android:fontFamily="@font/century_gothic"
+                                                    android:textColor="@color/black"
+                                                    android:text="Dinner"/>
+                                        </LinearLayout>
+                                </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/filterBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/card4"
+                            android:layout_below="@id/cardnew"
                             android:layout_marginLeft="10dp"
                             android:layout_marginBottom="20dp"
                             android:layout_marginTop="10dp"

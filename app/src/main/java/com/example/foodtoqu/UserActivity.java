@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodtoqu.Dialog_utils.Dialog;
 import com.example.foodtoqu.Dialog_utils.Dialog_logout;
+import com.example.foodtoqu.Dialog_utils.PlanDialog;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -57,6 +58,7 @@ import java.util.Map;
 import me.tankery.lib.circularseekbar.CircularSeekBar;
 
 public class UserActivity extends AppCompatActivity {
+    AppCompatButton plan;
     ImageView categoryImageView;
     AppCompatButton filterBtn, recommendBtn;
     RelativeLayout filterLayout;
@@ -75,7 +77,7 @@ public class UserActivity extends AppCompatActivity {
     private List<Food3> foodList;
     private FoodAdapter2 foodAdapter;
     private CircularSeekBar progress_height, progress_weight, progress_bmi;
-
+    private TextView current_weight, target_weight, targetDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +89,10 @@ public class UserActivity extends AppCompatActivity {
         //CheckBoxes
         //Health Conditions
         diabetesCB = findViewById(R.id.diabetes);
+        current_weight = findViewById(R.id.current_weight);
+        target_weight = findViewById(R.id.target_weight);
+        targetDate = findViewById(R.id.target_date);
+        plan = findViewById(R.id.Plan);
         gastroC = findViewById(R.id.gastro);
         osteoporosisCB = findViewById(R.id.osteo);
         hypoallergenicCB = findViewById(R.id.hypoallergenic);
@@ -107,6 +113,62 @@ public class UserActivity extends AppCompatActivity {
         progress_height = findViewById(R.id.progress_height);
         progress_weight = findViewById(R.id.progress_weight);
         progress_bmi = findViewById(R.id.progress_bmi);
+
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("User");
+        //Retrieve targetWeight and date used firebase auth and database reference to retrieve
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
+            DatabaseReference weightManagementReference = FirebaseDatabase.getInstance().getReference().child("Weight_management").child(uid);
+            ValueEventListener valueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String targetDate2 = dataSnapshot.child("target_date").getValue(String.class);
+                        Object targetWeightObj = dataSnapshot.child("target_weight").getValue();
+
+                        if (targetWeightObj != null) {
+                            String formattedTargetWeight;
+                            if (targetWeightObj instanceof String) {
+                                try {
+                                    double targetWeight = Double.parseDouble((String) targetWeightObj);
+                                    formattedTargetWeight = String.format("Target Weight\n "+"%.2f lbs", targetWeight);
+                                } catch (NumberFormatException e) {
+                                    formattedTargetWeight = "Invalid weight format";
+                                }
+                            } else if (targetWeightObj instanceof Double) {
+                                double targetWeight = (Double) targetWeightObj;
+                                formattedTargetWeight = String.format("Target Weight\n "+"%.2f lbs", targetWeight);
+                            } else {
+                                formattedTargetWeight = "Invalid weight format";
+                            }
+
+                            target_weight.setText(formattedTargetWeight);
+                        }
+
+                        targetDate.setText("  Target Date\n "+targetDate2);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle database error
+                }
+            };
+            weightManagementReference.addValueEventListener(valueEventListener);
+        }
+
+
+
+        plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //dialog from PlanDialog
+                PlanDialog plan = new PlanDialog();
+                plan.PlanDialog(UserActivity.this);
+            }
+        });
+
 
 
         fab23.setOnClickListener(new View.OnClickListener() {
@@ -223,7 +285,22 @@ public class UserActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String uid = user.getUid();
-
+            userReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        Double userWeightKg = dataSnapshot.child("weight").getValue(Double.class);
+                        if (userWeightKg != null) {
+                            String formattedWeight = String.format("Current Weight\n "+  "%.2f lbs", userWeightKg);
+                            current_weight.setText(formattedWeight);
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle database error
+                }
+            });
             // Construct the database reference using the UID
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Body_massIndex/" + uid);
 

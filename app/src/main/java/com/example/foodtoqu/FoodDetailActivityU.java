@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 
+import com.example.foodtoqu.Dialog_utils.Dialog;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
@@ -129,7 +130,7 @@ public class FoodDetailActivityU extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Show a dialog to select the meal
-                showMealSelectionDialog();
+                dialog();
             }
         });
 
@@ -149,32 +150,11 @@ public class FoodDetailActivityU extends AppCompatActivity {
         });
     }
 
-    private void showMealSelectionDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Meal");
-
-        // Define a list of meal options
-        final String[] mealOptions = {"Breakfast", "Lunch", "Dinner"};
-
-        builder.setItems(mealOptions, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String selectedMeal = mealOptions[which];
-                // Call saveFoodToDatabase with the selected meal and user UID
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                FirebaseUser user = auth.getCurrentUser();
-                if (user != null) {
-                    String userUid = user.getUid();
-                    saveFoodToDatabase(selectedMeal, userUid);
-                }
-
-            }
-        });
-
-        builder.show();
+    private void dialog() {
+        Dialog dialog = new Dialog(this); // Passing the instance of the Activity
+        dialog.showMealSelectionDialog(this);
     }
-
-    private void saveFoodToDatabase(String selectedMeal, String userUid) {
+        public void saveFoodToDatabase(String selectedMeal, String userUid) {
         // Get a reference to the "diary" node in your Firebase Realtime Database for the user
         DatabaseReference userDiaryRef = databaseReference.child(userUid);
 

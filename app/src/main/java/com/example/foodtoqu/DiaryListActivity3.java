@@ -22,6 +22,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodtoqu.Dialog_utils.Dialog_logout;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
@@ -171,28 +172,8 @@ public class DiaryListActivity3 extends AppCompatActivity {
                         break;
 
                     case R.id.logout:
-                        // Handle Profile item click
-                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DiaryListActivity3.this);
-                        builder.setTitle("Logout");
-                        builder.setMessage("Are you sure you want to logout?");
-                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_SHORT).show();
-                                FirebaseAuth.getInstance().signOut();
-                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                overridePendingTransition(0, 0);
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
-                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Do nothing
-                            }
-                        });
-                        builder.show();
+                        Dialog_logout logout = new Dialog_logout();
+                        logout.logout(DiaryListActivity3.this);
                         break;
                 }
                 return true;

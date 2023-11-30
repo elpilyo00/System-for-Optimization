@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 
+import com.example.foodtoqu.Dialog_utils.Dialog2;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
@@ -36,7 +37,11 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
@@ -146,34 +151,13 @@ public class FoddDetailActivity5 extends AppCompatActivity {
     }
 
     private void showMealSelectionDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Meal");
-
-        // Define a list of meal options
-        final String[] mealOptions = {"Breakfast", "Lunch", "Dinner"};
-
-        builder.setItems(mealOptions, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String selectedMeal = mealOptions[which];
-                // Call saveFoodToDatabase with the selected meal and user UID
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                FirebaseUser user = auth.getCurrentUser();
-                if (user != null) {
-                    String userUid = user.getUid();
-                    saveFoodToDatabase(selectedMeal, userUid);
-                }
-
-            }
-        });
-
-        builder.show();
+        Dialog2 dialog2 = new Dialog2(FoddDetailActivity5.this);
+        dialog2.showMealSelectionDialog(FoddDetailActivity5.this);
     }
 
-    private void saveFoodToDatabase(String selectedMeal, String userUid) {
+    public void saveFoodToDatabase(String selectedMeal, String userUid) {
         // Get a reference to the "diary" node in your Firebase Realtime Database for the user
         DatabaseReference userDiaryRef = databaseReference.child(userUid);
-
         // Create a new entry (child node) under the selected meal with a unique key
         String entryKey = userDiaryRef.child(selectedMeal).push().getKey();
 
@@ -191,6 +175,10 @@ public class FoddDetailActivity5 extends AppCompatActivity {
         foodItem.setRating(ratingBar.getRating());
         foodItem.setDescription(detailDescription.getText().toString());
         foodItem.setImageUrl(imageUrl);
+        Date currentDate = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
+        String formattedDate = dateFormat.format(currentDate);
+        foodItem.setDate(formattedDate);
 
         // Set meal type based on user selection
         foodItem.setMealType(selectedMeal);
@@ -230,6 +218,7 @@ public class FoddDetailActivity5 extends AppCompatActivity {
             }
         });
     }
+
 
 
     private int getRatingColor(float rating) {

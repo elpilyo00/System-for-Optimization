@@ -613,7 +613,6 @@
                         app:fab_colorNormal="@color/red"
                         app:fab_showShadow="true"
                         app:fab_size="mini" />
-
                 </com.github.clans.fab.FloatingActionMenu>
 
                 <TextView

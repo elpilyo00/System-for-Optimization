@@ -49,7 +49,6 @@ public class FoodDetailActivity2 extends AppCompatActivity {
             detailSodium, detailCarbo, detailSugar, detailProtein, detailDescription;
     private String foodName;
     private PieChart pieChart;
-    private AppCompatButton addDiary;
     private DatabaseReference databaseReference;
     private String imageUrl;
     private FirebaseAuth auth;
@@ -74,7 +73,6 @@ public class FoodDetailActivity2 extends AppCompatActivity {
         detailProtein = findViewById(R.id.detailProtein);
         detailDescription = findViewById(R.id.detailDescription);
         ratingBar = findViewById(R.id.starRatingBar);
-        addDiary = findViewById(R.id.add_btn_diary);
 
         // Configure the rating bar color based on the rating value
         float rating = getIntent().getFloatExtra("rating", 0.0f);
@@ -118,16 +116,6 @@ public class FoodDetailActivity2 extends AppCompatActivity {
                 .placeholder(R.drawable.ic_baseline_local_pizza_24)
                 .error(R.drawable.ic_baseline_local_pizza_24)
                 .into(detailImage);
-
-
-
-        addDiary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Show a dialog to select the meal
-                showMealSelectionDialog();
-            }
-        });
 
         // Initialize Firebase Realtime Database reference
         databaseReference = FirebaseDatabase.getInstance().getReference("diary");

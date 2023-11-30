@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.foodtoqu.Dialog_utils.Delete_dialog;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
@@ -111,7 +112,8 @@ public class FoodDetailActivity extends AppCompatActivity {
         findViewById(R.id.deleteBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteFoodItem();
+                Delete_dialog delete = new Delete_dialog(FoodDetailActivity.this);
+                delete.Delete(FoodDetailActivity.this);
             }
         });
 
@@ -206,11 +208,8 @@ public class FoodDetailActivity extends AppCompatActivity {
         pieChart.setEntryLabelTextSize(12f);
         pieChart.setEntryLabelColor(Color.BLACK);
     }
-
-
-
     // Method to delete the food item from Firebase Realtime Database
-    private void deleteFoodItem() {
+    public void deleteFoodItem() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("foods");
 
         // Create a query to find the item with the specified foodName

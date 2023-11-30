@@ -29,6 +29,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodtoqu.Dialog_utils.Dialog;
+import com.example.foodtoqu.Dialog_utils.Dialog_logout;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -209,32 +211,9 @@ public class UserActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         finish();
                         break;
-
-
                     case R.id.logout:
-                        // Handle Profile item click
-                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UserActivity.this);
-                        builder.setTitle("Logout");
-                        builder.setMessage("Are you sure you want to logout?");
-                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(UserActivity.this, "Logout", Toast.LENGTH_SHORT).show();
-                                FirebaseAuth.getInstance().signOut();
-                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                overridePendingTransition(0, 0);
-                                stopService(new Intent(UserActivity.this, MyService.class));
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
-                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Do nothing
-                            }
-                        });
-                        builder.show();
+                         Dialog_logout dialog = new Dialog_logout();
+                         dialog.logout(UserActivity.this);
                         break;
                 }
                 return true;

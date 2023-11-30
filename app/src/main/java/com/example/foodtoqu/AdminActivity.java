@@ -21,6 +21,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodtoqu.Dialog_utils.Dialog_logout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -162,28 +163,9 @@ public class AdminActivity extends AppCompatActivity {
                         break;
                     }
 
-
                     case R.id.logout: {
-                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(AdminActivity.this);
-                        builder.setTitle("Logout");
-                        builder.setMessage("Are you sure you want to logout?");
-                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(AdminActivity.this, "Logout", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                startActivity(intent);
-                                FirebaseAuth.getInstance().signOut();
-                                finish();
-                            }
-                        });
-                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Do nothing
-                            }
-                        });
-                        builder.show();
+                        Dialog_logout dialog = new Dialog_logout();
+                        dialog.logout(AdminActivity.this);
                         break;
 
 

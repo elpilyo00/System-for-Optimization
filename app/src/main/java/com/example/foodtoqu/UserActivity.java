@@ -51,8 +51,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import me.tankery.lib.circularseekbar.CircularSeekBar;
@@ -69,8 +73,8 @@ public class UserActivity extends AppCompatActivity {
     UserAdapter adapter;
     int processedReferences = 0;
     FloatingActionButton fab23;
-    CheckBox diabetesCB,cardioCB,gastroC,osteoporosisCB,hypothyroidismCB,anemiaCB,hypoallergenicCB,
-            hyperthyroidCb,PregnantCb,ArthritisCB;
+    CheckBox diabetesCB, cardioCB, gastroC, osteoporosisCB, hypothyroidismCB, anemiaCB, hypoallergenicCB,
+            hyperthyroidCb, PregnantCb, ArthritisCB;
     ValueEventListener eventListener;
     TextView fullName;
     boolean filterHidden = true;
@@ -78,6 +82,9 @@ public class UserActivity extends AppCompatActivity {
     private FoodAdapter2 foodAdapter;
     private CircularSeekBar progress_height, progress_weight, progress_bmi;
     private TextView current_weight, target_weight, targetDate;
+    private TextView BreakFast, Lunch, dinner;
+    private DatabaseReference diaryReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +120,33 @@ public class UserActivity extends AppCompatActivity {
         progress_height = findViewById(R.id.progress_height);
         progress_weight = findViewById(R.id.progress_weight);
         progress_bmi = findViewById(R.id.progress_bmi);
+
+        // Assuming you have the necessary variables breakfastCalories, lunchCalories, and dinnerCalories available with the required values.
+
+        BreakFast = findViewById(R.id.Breakfast);
+        Lunch = findViewById(R.id.Lunch);
+        dinner = findViewById(R.id.Dinner);
+
+        diaryReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            String userId = user.getUid();
+            DatabaseReference diary1 = diaryReference.child("diary").child(userId);
+
+            diary1.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    //current time zone
+                    Calendar selectedDate = Calendar.getInstance();
+                    displayMealsTotalFromFirebase(selectedDate);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle errors here
+                }
+            });
+        }
 
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("User");
         //Retrieve targetWeight and date used firebase auth and database reference to retrieve
@@ -282,7 +316,7 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String uid = user.getUid();
             userReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -336,15 +370,77 @@ public class UserActivity extends AppCompatActivity {
                                     break;
                             }
                         }
-
-                        // Continue with the rest of your filter logic here...
-                        // (The code for filtering food items remains the same)
                     }
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     // Handle database error
+                }
+            });
+        }
+    }
+
+    private void displayMealsTotalFromFirebase(Calendar selectedDate) {
+        DatabaseReference diaryReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            String userId = user.getUid();
+            DatabaseReference diary = diaryReference.child("diary").child(userId);
+
+            diary.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    float breakfastCalories = 0f;
+                    float lunchCalories = 0f;
+                    float dinnerCalories = 0f;
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
+
+                    for (DataSnapshot mealSnapshot : dataSnapshot.getChildren()) {
+                        String mealType = mealSnapshot.getKey();
+
+                        for (DataSnapshot entrySnapshot : mealSnapshot.getChildren()) {
+                            FoodItem2 diaryEntry = entrySnapshot.getValue(FoodItem2.class);
+                            String mealDate = diaryEntry.getDate();
+                            Calendar entryCalendar = Calendar.getInstance();
+
+                            try {
+                                entryCalendar.setTime(sdf.parse(mealDate));
+
+                                if (selectedDate.get(Calendar.YEAR) == entryCalendar.get(Calendar.YEAR) &&
+                                        selectedDate.get(Calendar.MONTH) == entryCalendar.get(Calendar.MONTH) &&
+                                        selectedDate.get(Calendar.DAY_OF_MONTH) == entryCalendar.get(Calendar.DAY_OF_MONTH)) {
+
+                                    // Check the meal type and accumulate calories accordingly
+                                    switch (mealType) {
+                                        case "Breakfast":
+                                            breakfastCalories += Float.parseFloat(diaryEntry.getCalorie());
+                                            break;
+                                        case "Lunch":
+                                            lunchCalories += Float.parseFloat(diaryEntry.getCalorie());
+                                            break;
+                                        case "Dinner":
+                                            dinnerCalories += Float.parseFloat(diaryEntry.getCalorie());
+                                            break;
+                                    }
+                                }
+                            } catch (ParseException e) {
+                                // Handle parsing exception if needed
+                            }
+                        }
+                    }
+
+                    // Update TextViews with fetched data
+                    BreakFast.setText("Breakfast\n " + breakfastCalories);
+                    Lunch.setText("Lunch\n " + lunchCalories);
+                    dinner.setText("Dinner\n " + dinnerCalories);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle errors here
                 }
             });
         }

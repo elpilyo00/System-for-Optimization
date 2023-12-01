@@ -396,7 +396,7 @@
                             android:layout_width="350dp"
                             android:layout_centerHorizontal="true"
                             app:cardElevation="10dp"
-                            android:layout_height="370dp">
+                            android:layout_height="400dp">
                                 <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
@@ -439,8 +439,77 @@
                                             android:textAllCaps="false"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="Fat"
-                                            />
+                                            android:text="Fat" />
+
+                                        <TextView
+                                            android:id="@+id/percentfat_cal"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="12dp"
+                                            android:layout_toRightOf="@+id/fat"
+                                            android:layout_marginStart="30dp"
+                                            android:layout_marginTop="70dp"
+                                            android:textStyle="bold"
+                                            android:textAllCaps="false"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textColor="@color/black"
+                                            android:text="30%cals" />
+
+
+                                        <me.tankery.lib.circularseekbar.CircularSeekBar
+                                            android:layout_below="@+id/fat"
+                                            android:id="@+id/fat_percent"
+                                            android:layout_marginTop="5dp"
+                                            android:layout_marginLeft="40dp"
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            app:cs_circle_style = "round"
+                                            app:cs_progress = "0"
+                                            app:cs_max = "100"
+                                            app:cs_negative_enabled = "false"
+                                            app:cs_move_outside_circle = "true"
+                                            app:cs_maintain_equal_circle = "true"
+                                            app:cs_use_custom_radii = "false"
+                                            app:cs_lock_enabled = "true"
+                                            app:cs_circle_x_radius = "0dp"
+                                            app:cs_circle_y_radius = "0dp"
+                                            app:cs_circle_stroke_width = "5dp"
+                                            app:cs_disable_pointer = "true"
+                                            app:cs_pointer_stroke_width = "5dp"
+                                            app:cs_circle_fill = "@color/transparent"
+                                            app:cs_circle_color = "@color/grey"
+                                            app:cs_circle_progress_color = "@color/red"
+                                            app:cs_pointer_color = "@color/red"
+                                            app:cs_pointer_alpha_ontouch = "5"
+                                            app:cs_pointer_angle = "0"
+                                            app:cs_disable_progress_glow ="true"
+                                            app:cs_hide_progress_when_empty ="true"/>
+                                        <TextView
+                                            android:id="@+id/total_grams"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/fat_percent"
+                                            android:textSize="8dp"
+                                            android:layout_marginStart="15dp"
+                                            android:textStyle="bold"
+                                            android:textAllCaps="false"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textColor="@color/black"
+                                            android:text="51g" />
+                                        <TextView
+                                            android:id="@+id/left_grams"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/fat_percent"
+                                            android:layout_toRightOf="@+id/total_grams"
+                                            android:textSize="8dp"
+                                            android:layout_marginStart="45dp"
+                                            android:textStyle="bold"
+                                            android:textAllCaps="false"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textColor="@color/black"
+                                            android:text="10g" />
+
 
                                         <TextView
                                             android:id="@+id/Carbs"
@@ -448,14 +517,61 @@
                                             android:layout_height="wrap_content"
                                             android:textSize="12dp"
                                             android:textAllCaps="false"
-                                            android:layout_below="@+id/fat"
+                                            android:layout_below="@+id/total_grams"
                                             android:layout_marginStart="10dp"
-                                            android:layout_marginTop="35dp"
+                                            android:layout_marginTop="15dp"
                                             android:textStyle="bold"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="Carbs"
-                                            />
+                                            android:text="Carbs"/>
+
+
+                                        <TextView
+                                            android:id="@+id/carbs_cal"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="12dp"
+                                            android:layout_toRightOf="@+id/Carbs"
+                                            android:layout_marginTop="15dp"
+                                            android:layout_below="@+id/left_grams"
+                                            android:layout_marginStart="15dp"
+                                            android:textStyle="bold"
+                                            android:textAllCaps="false"
+                                            android:fontFamily="@font/century_gothic"
+                                            android:textColor="@color/black"
+                                            android:text="30%cals" />
+
+
+                                        <me.tankery.lib.circularseekbar.CircularSeekBar
+                                            android:layout_below="@+id/Carbs"
+                                            android:id="@+id/carbs_percent"
+                                            android:layout_marginTop="5dp"
+                                            android:layout_marginLeft="40dp"
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            app:cs_circle_style = "round"
+                                            app:cs_progress = "0"
+                                            app:cs_max = "100"
+                                            app:cs_negative_enabled = "false"
+                                            app:cs_move_outside_circle = "true"
+                                            app:cs_maintain_equal_circle = "true"
+                                            app:cs_use_custom_radii = "false"
+                                            app:cs_lock_enabled = "true"
+                                            app:cs_circle_x_radius = "0dp"
+                                            app:cs_circle_y_radius = "0dp"
+                                            app:cs_circle_stroke_width = "5dp"
+                                            app:cs_disable_pointer = "true"
+                                            app:cs_pointer_stroke_width = "5dp"
+                                            app:cs_circle_fill = "@color/transparent"
+                                            app:cs_circle_color = "@color/grey"
+                                            app:cs_circle_progress_color = "@color/red"
+                                            app:cs_pointer_color = "@color/red"
+                                            app:cs_pointer_alpha_ontouch = "5"
+                                            app:cs_pointer_angle = "0"
+                                            app:cs_disable_progress_glow ="true"
+                                            app:cs_hide_progress_when_empty ="true"/>
+
+
 
                                         <TextView
                                             android:id="@+id/Protein"
@@ -605,32 +721,32 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_below="@+id/rl12"
-                                            android:layout_marginTop="10dp"
+                                            android:layout_marginTop="40dp"
                                             android:gravity="center"
                                             android:orientation="horizontal">
 
                                                 <androidx.appcompat.widget.AppCompatButton
                                                     android:id="@+id/checkIn"
                                                     android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
+                                                    android:layout_height="35dp"
                                                     android:background="@drawable/round_button3"
                                                     android:fontFamily="@font/century_gothic"
                                                     android:text="Check in"
                                                     android:textAllCaps="false"
                                                     android:textColor="@color/white"
-                                                    android:textSize="12dp" />
+                                                    android:textSize="15dp" />
 
                                                 <androidx.appcompat.widget.AppCompatButton
                                                     android:id="@+id/Plan"
                                                     android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
+                                                    android:layout_height="35dp"
                                                     android:layout_marginLeft="50dp"
                                                     android:background="@drawable/round_button3"
                                                     android:fontFamily="@font/century_gothic"
                                                     android:text="Plan"
                                                     android:textAllCaps="false"
                                                     android:textColor="@color/white"
-                                                    android:textSize="12dp" />
+                                                    android:textSize="15dp" />
 
 
                                         </LinearLayout>
@@ -639,7 +755,7 @@
                                             android:layout_alignParentBottom="true"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginBottom="45dp"
+                                            android:layout_marginBottom="40dp"
                                             android:gravity="center"
                                             android:orientation="horizontal">
                                                 <TextView
@@ -649,7 +765,7 @@
                                                     android:layout_centerHorizontal="true"
                                                     android:layout_marginTop="5dp"
                                                     android:layout_below="@+id/left23"
-                                                    android:textSize="15dp"
+                                                    android:textSize="12sp"
                                                     android:textStyle="bold"
                                                     android:textAllCaps="false"
                                                     android:fontFamily="@font/century_gothic"
@@ -657,13 +773,13 @@
                                                     android:text="Breakfast"/>
 
                                                 <TextView
-                                                    android:id="@+id/lunch"
+                                                    android:id="@+id/Lunch"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
                                                     android:layout_centerHorizontal="true"
                                                     android:layout_marginTop="5dp"
                                                     android:layout_below="@+id/left23"
-                                                    android:textSize="15dp"
+                                                    android:textSize="12sp"
                                                     android:textStyle="bold"
                                                     android:layout_marginLeft="20dp"
                                                     android:textAllCaps="false"
@@ -678,7 +794,7 @@
                                                     android:layout_centerHorizontal="true"
                                                     android:layout_marginTop="5dp"
                                                     android:layout_below="@+id/left23"
-                                                    android:textSize="15dp"
+                                                    android:textSize="12sp"
                                                     android:textStyle="bold"
                                                     android:layout_marginLeft="20dp"
                                                     android:textAllCaps="false"

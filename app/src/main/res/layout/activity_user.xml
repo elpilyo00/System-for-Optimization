@@ -453,7 +453,7 @@
                                             android:textAllCaps="false"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="30%cals" />
+                                            android:text="0%" />
 
 
                                         <me.tankery.lib.circularseekbar.CircularSeekBar
@@ -495,7 +495,7 @@
                                             android:textAllCaps="false"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="51g" />
+                                            android:text="0g" />
                                         <TextView
                                             android:id="@+id/fat_left_grams"
                                             android:layout_width="wrap_content"
@@ -508,7 +508,7 @@
                                             android:textAllCaps="false"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="10g" />
+                                            android:text="0g" />
 
 
                                         <TextView
@@ -539,7 +539,7 @@
                                             android:textAllCaps="false"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="30%cals" />
+                                            android:text="0%" />
 
 
                                         <me.tankery.lib.circularseekbar.CircularSeekBar
@@ -582,7 +582,7 @@
                                             android:textAllCaps="false"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="51g" />
+                                            android:text="0g" />
 
                                         <TextView
                                             android:id="@+id/left_carbs_grams"
@@ -596,7 +596,7 @@
                                             android:textAllCaps="false"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="10g" />
+                                            android:text="0g" />
 
                                         <TextView
                                             android:id="@+id/Protein"
@@ -625,7 +625,7 @@
                                             android:textAllCaps="false"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="30%cals" />
+                                            android:text="0%" />
 
                                         <me.tankery.lib.circularseekbar.CircularSeekBar
                                             android:layout_below="@+id/Protein"
@@ -667,7 +667,7 @@
                                             android:textAllCaps="false"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="51g" />
+                                            android:text="0g" />
 
                                         <TextView
                                             android:id="@+id/left_protein_grams"
@@ -681,7 +681,7 @@
                                             android:textAllCaps="false"
                                             android:fontFamily="@font/century_gothic"
                                             android:textColor="@color/black"
-                                            android:text="51g" />
+                                            android:text="0g" />
 
 
                                         <!--//for weight-->

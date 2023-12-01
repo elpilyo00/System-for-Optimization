@@ -27,9 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
 public class PlanDialog {
     //dialog to passed to UserActivity
     @SuppressLint("NotConstructor")
@@ -63,9 +65,52 @@ public class PlanDialog {
                             String formattedWeight = String.format("%.2f lbs", userWeightKg);
                             currentWeight.setText(formattedWeight);
                             Log.e(TAG, "Formatted Weight in lbs: " + formattedWeight);
+
+                            Button save = dialogView.findViewById(R.id.saved);
+                            save.setOnClickListener(v -> {
+                                String targetWeightValue = targetWeight.getText().toString();
+                                String selectedDate = targetDate.getText().toString();
+
+                                if (targetWeightValue.isEmpty() || selectedDate.isEmpty()) {
+                                    // Display a toast message prompting the user to fill up the fields
+                                    Toast.makeText(activity, "Please fill up target weight and date to proceed", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    // Calculate weight to lose
+                                    double targetWeightValueDouble = Double.parseDouble(targetWeightValue);
+                                    double weightToLose = userWeightKg - targetWeightValueDouble;
+
+                                    // Convert selected date to Calendar object
+                                    Calendar selectedCalendar = Calendar.getInstance();
+                                    SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
+                                    try {
+                                        selectedCalendar.setTime(sdf.parse(selectedDate));
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    // Calculate target days based on selected date
+                                    int targetDays = calculateTotaldAYS(selectedCalendar);
+
+                                    // Calculate daily calorie intake
+                                    double caloricDeficit = weightToLose * 3500.0;
+                                    double dailyCaloricDeficit = caloricDeficit / targetDays;
+                                    double dailyCalorieIntake = 2000.0 - dailyCaloricDeficit;
+
+                                    // Save target weight and date to Firebase
+                                    weightManagementReference.child(uid).child("target_weight").setValue(targetWeightValue);
+                                    weightManagementReference.child(uid).child("target_date").setValue(selectedDate);
+
+                                    // Save daily calorie intake to Firebase
+                                    weightManagementReference.child(uid).child("daily_calorie_intake").setValue(dailyCalorieIntake);
+                                    calculateAndSaveNutritionalIntake(uid, dailyCalorieIntake, userWeightKg);
+                                    dialog.dismiss();
+                                }
+                            });
+
                         }
                     }
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     Log.e(TAG, "Error: " + databaseError.getMessage());
@@ -73,32 +118,33 @@ public class PlanDialog {
                 }
             });
 
-
-            Button save = dialogView.findViewById(R.id.saved);
             Button cancel = dialogView.findViewById(R.id.cancel);
-
-            save.setOnClickListener(v -> {
-                String targetWeightValue = targetWeight.getText().toString();
-                String selectedDate = targetDate.getText().toString();
-
-                if (targetWeightValue.isEmpty() || selectedDate.isEmpty()) {
-                    // Display a toast message prompting the user to fill up the fields
-                    Toast.makeText(activity, "Please fill up target weight and date to proceed", Toast.LENGTH_SHORT).show();
-                } else {
-                    weightManagementReference.child(uid).child("target_weight").setValue(targetWeightValue);
-                    weightManagementReference.child(uid).child("target_date").setValue(selectedDate);
-
-                    dialog.dismiss();
-                }
-            });
-
-
             cancel.setOnClickListener(v -> {
                 dialog.dismiss();
             });
 
             dialog.show();
         }
+    }
+
+    private void calculateAndSaveNutritionalIntake(String uid, double dailyCalorieIntake, double userWeightKg) {
+        // Calculate daily protein intake
+        double caloriesToProtein = dailyCalorieIntake * 0.20;
+        double dailyProteinIntake = caloriesToProtein / 4;
+
+        // Calculate daily fat intake
+        double caloriesToFat = dailyCalorieIntake * 0.30;
+        double dailyFatIntake = caloriesToFat / 9;
+
+        // Calculate daily carbohydrate intake
+        double caloriesToCarbs = dailyCalorieIntake - (caloriesToProtein + caloriesToFat);
+        double dailyCarbohydrateIntake = caloriesToCarbs / 4;
+
+        // Save daily nutritional intake to Firebase
+        DatabaseReference weightManagementReference = FirebaseDatabase.getInstance().getReference().child("Weight_management");
+        weightManagementReference.child(uid).child("daily_protein_intake").setValue(dailyProteinIntake);
+        weightManagementReference.child(uid).child("daily_fat_intake").setValue(dailyFatIntake);
+        weightManagementReference.child(uid).child("daily_carbohydrate_intake").setValue(dailyCarbohydrateIntake);
     }
     //datepicker method
     private void showDatePickerDialog(Activity activity, TextView targetDate) {
@@ -108,9 +154,31 @@ public class PlanDialog {
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
             String selectedDate = sdf.format(calendar.getTime());
             targetDate.setText(selectedDate);
+
+            int totalDays = calculateTotaldAYS(calendar); // Calculate total days based on selected date
+            Log.d("TotalDays", "Total Days: " + totalDays);
+
+            // Save total days to Firebase
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser != null) {
+                String uid = currentUser.getUid();
+                saveTotalDaysToFirebase(uid, totalDays);
+            }
+
         }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
         datePickerDialog.show();
     }
 
+    private void saveTotalDaysToFirebase(String uid, int totalDays) {
+        DatabaseReference weightManagementReference = FirebaseDatabase.getInstance().getReference().child("Weight_management");
+        weightManagementReference.child(uid).child("total_days").setValue(totalDays);
+    }
+
+    // Placeholder method for calculating target days
+    private int calculateTotaldAYS(Calendar selectedCalendar) {
+        Calendar currentCalendar = Calendar.getInstance();
+        long differenceInMillis = selectedCalendar.getTimeInMillis() - currentCalendar.getTimeInMillis();
+        return (int) (differenceInMillis / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+    }
 }

@@ -203,6 +203,7 @@ public class FoodDetailActivityU extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Data saved successfully
                                         Toast.makeText(getApplicationContext(), "Food item saved to diary", Toast.LENGTH_SHORT).show();
+                                        dailyIntake();
                                     } else {
                                         // Handle the error
                                         Toast.makeText(getApplicationContext(), "Failed to save food item", Toast.LENGTH_SHORT).show();
@@ -219,6 +220,55 @@ public class FoodDetailActivityU extends AppCompatActivity {
         });
     }
 
+    public void dailyIntake() {
+        // Get the current user's UID using Firebase Auth
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String currentUserId = currentUser.getUid();
+
+            DatabaseReference weightManagementRef = FirebaseDatabase.getInstance().getReference("Weight_management").child(currentUserId);
+            weightManagementRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // Retrieve each daily intake value separately
+                        Double currentCalorieIntake = dataSnapshot.child("daily_calorie_intake").getValue(Double.class);
+                        Double currentCarbIntake = dataSnapshot.child("daily_carbohydrate_intake").getValue(Double.class);
+                        Double currentFatIntake = dataSnapshot.child("daily_fat_intake").getValue(Double.class);
+                        Double currentProteinIntake = dataSnapshot.child("daily_protein_intake").getValue(Double.class);
+
+                        // Decrement each value by 1 if they exist
+                        if (currentCalorieIntake != null && currentCarbIntake != null && currentFatIntake != null && currentProteinIntake != null) {
+                            Double updatedCalorieIntake = currentCalorieIntake - 1;
+                            Double updatedCarbIntake = currentCarbIntake - 1;
+                            Double updatedFatIntake = currentFatIntake - 1;
+                            Double updatedProteinIntake = currentProteinIntake - 1;
+
+                            // Update the values in the database
+                            dataSnapshot.getRef().child("daily_calorie_intake").setValue(updatedCalorieIntake);
+                            dataSnapshot.getRef().child("daily_carbohydrate_intake").setValue(updatedCarbIntake);
+                            dataSnapshot.getRef().child("daily_fat_intake").setValue(updatedFatIntake);
+                            dataSnapshot.getRef().child("daily_protein_intake").setValue(updatedProteinIntake)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (!task.isSuccessful()) {
+                                                // Handle the error
+                                                Toast.makeText(getApplicationContext(), "Failed to update daily intake", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle any errors
+                }
+            });
+        }
+    }
 
     private int getRatingColor(float rating) {
         if (rating >= 4.0) {

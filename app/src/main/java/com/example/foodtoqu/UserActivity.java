@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +82,7 @@ public class UserActivity extends AppCompatActivity {
     private List<Food3> foodList;
     private FoodAdapter2 foodAdapter;
     private CircularSeekBar progress_height, progress_weight, progress_bmi;
+    private  CircularSeekBar daily_calorie,proteinSeekBar,fatSeekBar,carbohydrateSeekBar;
     private TextView current_weight, target_weight, targetDate;
     private TextView BreakFast, Lunch, dinner;
     private DatabaseReference diaryReference;
@@ -121,6 +123,12 @@ public class UserActivity extends AppCompatActivity {
         progress_weight = findViewById(R.id.progress_weight);
         progress_bmi = findViewById(R.id.progress_bmi);
 
+        //SeekBars
+        daily_calorie = findViewById(R.id.color_count);
+        proteinSeekBar = findViewById(R.id.protein_percent);
+        fatSeekBar = findViewById(R.id.fat_percent);
+        carbohydrateSeekBar = findViewById(R.id.carbs_percent);
+
         // Assuming you have the necessary variables breakfastCalories, lunchCalories, and dinnerCalories available with the required values.
 
         BreakFast = findViewById(R.id.Breakfast);
@@ -141,6 +149,7 @@ public class UserActivity extends AppCompatActivity {
                     Calendar selectedDate = Calendar.getInstance();
                     displayMealsTotalFromFirebase(selectedDate);
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Handle errors here
@@ -166,13 +175,13 @@ public class UserActivity extends AppCompatActivity {
                             if (targetWeightObj instanceof String) {
                                 try {
                                     double targetWeight = Double.parseDouble((String) targetWeightObj);
-                                    formattedTargetWeight = String.format("Target Weight\n "+"%.2f lbs", targetWeight);
+                                    formattedTargetWeight = String.format("Target Weight\n" + "%.2f lbs", targetWeight);
                                 } catch (NumberFormatException e) {
                                     formattedTargetWeight = "Invalid weight format";
                                 }
                             } else if (targetWeightObj instanceof Double) {
                                 double targetWeight = (Double) targetWeightObj;
-                                formattedTargetWeight = String.format("Target Weight\n "+"%.2f lbs", targetWeight);
+                                formattedTargetWeight = String.format("Target Weight\n" + "%.2f lbs", targetWeight);
                             } else {
                                 formattedTargetWeight = "Invalid weight format";
                             }
@@ -180,7 +189,24 @@ public class UserActivity extends AppCompatActivity {
                             target_weight.setText(formattedTargetWeight);
                         }
 
-                        targetDate.setText("  Target Date\n "+targetDate2);
+                        targetDate.setText("  Target Date\n" + targetDate2);
+
+                        // Retrieve and display daily calorie intake
+                        Double dailyCalorieIntake = dataSnapshot.child("daily_calorie_intake").getValue(Double.class);
+                        if (dailyCalorieIntake != null) {
+                            TextView calorieIntakeTextView = findViewById(R.id.total);
+                            TextView total = findViewById(R.id.total2);
+                            TextView left = findViewById(R.id.remaining);
+                            // Convert Double value to an integer if you want to display only the integer part
+                            int calorieIntake = dailyCalorieIntake.intValue();
+                            calorieIntakeTextView.setText(String.valueOf(calorieIntake));
+                            total.setText(String.valueOf(calorieIntake));
+                            left.setText(String.valueOf(calorieIntake));
+                            daily_calorie.setMax(calorieIntake);
+                            daily_calorie.setProgress(calorieIntake);
+                            //otherIntakessNAPshot
+                            otherIntakes(dataSnapshot);
+                        }
                     }
                 }
 
@@ -191,8 +217,6 @@ public class UserActivity extends AppCompatActivity {
             };
             weightManagementReference.addValueEventListener(valueEventListener);
         }
-
-
 
         plan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -380,6 +404,78 @@ public class UserActivity extends AppCompatActivity {
             });
         }
     }
+    private void otherIntakes(DataSnapshot dataSnapshot) {
+        Double dailyProteinIntake = dataSnapshot.child("daily_protein_intake").getValue(Double.class);
+        Double dailyFatIntake = dataSnapshot.child("daily_fat_intake").getValue(Double.class);
+        Double dailyCarbohydrateIntake = dataSnapshot.child("daily_carbohydrate_intake").getValue(Double.class);
+        Double dailyCalorieIntake = dataSnapshot.child("daily_calorie_intake").getValue(Double.class);
+        updateIntakeUI(dailyProteinIntake, dailyFatIntake, dailyCarbohydrateIntake, dailyCalorieIntake);
+    }
+
+    private void updateIntakeUI(Double dailyProteinIntake, Double dailyFatIntake, Double dailyCarbohydrateIntake, Double dailyCalorieIntake) {
+        TextView proteinPercentageTextView = findViewById(R.id.protein_cal);
+        TextView fatPercentageTextView = findViewById(R.id.percentfat_cal);
+        TextView carbPercentageTextView = findViewById(R.id.carbs_cal);
+
+        // Total grams TextViews
+        TextView totalProteinGramsTextView = findViewById(R.id.total_protein_grams);
+        TextView totalFatGramsTextView = findViewById(R.id.total_fat_grams);
+        TextView totalCarbGramsTextView = findViewById(R.id.total_carbs_grams);
+
+        // Left grams TextViews
+        TextView proteinLeftGramsTextView = findViewById(R.id.left_protein_grams);
+        TextView fatLeftGramsTextView = findViewById(R.id.fat_left_grams);
+        TextView carbLeftGramsTextView = findViewById(R.id.left_carbs_grams);
+        final double threshold = 5.0;
+        if (dailyCalorieIntake != null) {
+            double caloriesToProtein = dailyCalorieIntake * 0.20;
+            double caloriesToFat = dailyCalorieIntake * 0.30;
+            double caloriesToCarbs = dailyCalorieIntake - (caloriesToProtein + caloriesToFat);
+
+            // Calculating total grams
+            double totalProteinGrams = caloriesToProtein / 4;
+            double totalFatGrams = caloriesToFat / 9;
+            double totalCarbGrams = caloriesToCarbs / 4;
+
+            // Set total grams text
+            totalProteinGramsTextView.setText(String.format("%.2fg", totalProteinGrams));
+            totalFatGramsTextView.setText(String.format("%.2fg", totalFatGrams));
+            totalCarbGramsTextView.setText(String.format("%.2fg", totalCarbGrams));
+
+            // Calculate remaining grams if intake values are available
+            double remainingProteinGrams = (dailyProteinIntake != null) ? Math.max(0, totalProteinGrams - dailyProteinIntake) : totalProteinGrams;
+            double remainingFatGrams = (dailyFatIntake != null) ? Math.max(0, totalFatGrams - dailyFatIntake) : totalFatGrams;
+            double remainingCarbGrams = (dailyCarbohydrateIntake != null) ? Math.max(0, totalCarbGrams - dailyCarbohydrateIntake) : totalCarbGrams;
+
+            // Set left grams text
+            proteinLeftGramsTextView.setText(String.format("%.2fg", remainingProteinGrams));
+            fatLeftGramsTextView.setText(String.format("%.2fg", remainingFatGrams));
+            carbLeftGramsTextView.setText(String.format("%.2fg", remainingCarbGrams));
+
+            if (remainingProteinGrams <= threshold) {
+                showToast("Low protein intake!");
+            }
+            if (remainingFatGrams <= threshold) {
+                showToast("Low fat intake!");
+            }
+            if (remainingCarbGrams <= threshold) {
+                showToast("Low carbohydrate intake!");
+            }
+            // Calculate and display percentages
+            double proteinPercentage = (caloriesToProtein / dailyCalorieIntake) * 100;
+            double fatPercentage = (caloriesToFat / dailyCalorieIntake) * 100;
+            double carbPercentage = (caloriesToCarbs / dailyCalorieIntake) * 100;
+
+            proteinPercentageTextView.setText(String.format("%.2f%%", proteinPercentage));
+            fatPercentageTextView.setText(String.format("%.2f%%", fatPercentage));
+            carbPercentageTextView.setText(String.format("%.2f%%", carbPercentage));
+        }
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
 
     private void displayMealsTotalFromFirebase(Calendar selectedDate) {
         DatabaseReference diaryReference = FirebaseDatabase.getInstance().getReference();

@@ -12,11 +12,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check in?"
+        android:text="Daily Intake status"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:fontFamily="@font/bungee"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="8dp" />
 

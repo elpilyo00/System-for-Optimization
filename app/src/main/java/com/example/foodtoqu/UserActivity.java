@@ -10,10 +10,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 //import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -51,6 +53,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -83,7 +87,7 @@ public class UserActivity extends AppCompatActivity {
     private List<Food3> foodList;
     private FoodAdapter2 foodAdapter;
     private CircularSeekBar progress_height, progress_weight, progress_bmi;
-    private  CircularSeekBar daily_calorie,proteinSeekBar,fatSeekBar,carbohydrateSeekBar;
+    private CircularSeekBar daily_calorie, proteinSeekBar, fatSeekBar, carbohydrateSeekBar;
     private TextView current_weight, target_weight, targetDate;
     private TextView BreakFast, Lunch, dinner;
     private DatabaseReference diaryReference;
@@ -170,8 +174,6 @@ public class UserActivity extends AppCompatActivity {
         }
 
 
-
-
         FirebaseUser currentUser2 = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser2 != null) {
             String uid = currentUser2.getUid();
@@ -196,7 +198,6 @@ public class UserActivity extends AppCompatActivity {
                 }
             });
         }
-
 
 
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("User");
@@ -276,13 +277,12 @@ public class UserActivity extends AppCompatActivity {
         });
 
 
-
         fab23.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),UserActivity.class);
+                Intent i = new Intent(getApplicationContext(), UserActivity.class);
                 startActivity(i);
-                overridePendingTransition(0,0);
+                overridePendingTransition(0, 0);
                 finish();
             }
         });
@@ -380,8 +380,8 @@ public class UserActivity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.logout:
-                         Dialog_logout dialog = new Dialog_logout();
-                         dialog.logout(UserActivity.this);
+                        Dialog_logout dialog = new Dialog_logout();
+                        dialog.logout(UserActivity.this);
                         break;
                 }
                 return true;
@@ -397,11 +397,12 @@ public class UserActivity extends AppCompatActivity {
                     if (dataSnapshot.exists()) {
                         Double userWeightKg = dataSnapshot.child("weight").getValue(Double.class);
                         if (userWeightKg != null) {
-                            String formattedWeight = String.format("Current Weight\n "+  "%.2f lbs", userWeightKg);
+                            String formattedWeight = String.format("Current Weight\n " + "%.2f lbs", userWeightKg);
                             current_weight.setText(formattedWeight);
                         }
                     }
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Handle database error
@@ -452,6 +453,7 @@ public class UserActivity extends AppCompatActivity {
             });
         }
     }
+
     private void otherIntakes(DataSnapshot dataSnapshot) {
         Double dailyProteinIntake = dataSnapshot.child("daily_protein_intake").getValue(Double.class);
         Double dailyFatIntake = dataSnapshot.child("daily_fat_intake").getValue(Double.class);
@@ -474,6 +476,13 @@ public class UserActivity extends AppCompatActivity {
         TextView proteinLeftGramsTextView = findViewById(R.id.left_protein_grams);
         TextView fatLeftGramsTextView = findViewById(R.id.fat_left_grams);
         TextView carbLeftGramsTextView = findViewById(R.id.left_carbs_grams);
+
+        //SeekBar
+        CircularSeekBar fatSeekbar = findViewById(R.id.fat_percent);
+        CircularSeekBar carbsSeekBar = findViewById(R.id.carbs_percent);
+        CircularSeekBar proteinSeekBar = findViewById(R.id.protein_percent);
+
+
         final double threshold = 5.0;
         if (dailyCalorieIntake != null) {
             double caloriesToProtein = dailyCalorieIntake * 0.20;
@@ -500,31 +509,56 @@ public class UserActivity extends AppCompatActivity {
             fatLeftGramsTextView.setText(String.format("%.2fg", remainingFatGrams));
             carbLeftGramsTextView.setText(String.format("%.2fg", remainingCarbGrams));
 
-            if (remainingProteinGrams <= threshold) {
-                showToast("Low protein intake!");
-            }
-            if (remainingFatGrams <= threshold) {
-                showToast("Low fat intake!");
-            }
-            if (remainingCarbGrams <= threshold) {
-                showToast("Low carbohydrate intake!");
-            }
+            String proteinMessage = (remainingProteinGrams <= threshold) ? "Low protein intake!" : "";
+            String fatMessage = (remainingFatGrams <= threshold) ? "Low fat intake!" : "";
+            String carbMessage = (remainingCarbGrams <= threshold) ? "Low carbohydrate intake!" : "";
+            StatusDialog(proteinMessage, fatMessage, carbMessage);
+
             // Calculate and display percentages
+            //proteinSeekbar
             double proteinPercentage = (caloriesToProtein / dailyCalorieIntake) * 100;
+            proteinSeekBar.setMax(100);
+            proteinSeekBar.setProgress((float) proteinPercentage);
+
+            //fatSeekBar
             double fatPercentage = (caloriesToFat / dailyCalorieIntake) * 100;
+            fatSeekbar.setMax(100);
+            fatSeekbar.setProgress((float) fatPercentage);
+
+            //carbsSeekbar
             double carbPercentage = (caloriesToCarbs / dailyCalorieIntake) * 100;
+            carbsSeekBar.setMax(100);
+            carbsSeekBar.setProgress((float) carbPercentage);
 
             proteinPercentageTextView.setText(String.format("%.2f%%", proteinPercentage));
             fatPercentageTextView.setText(String.format("%.2f%%", fatPercentage));
             carbPercentageTextView.setText(String.format("%.2f%%", carbPercentage));
         }
     }
+//showDialog
+    private void StatusDialog(String proteinMessage, String fatMessage, String carbMessage) {
+        DialogPlus dialog = DialogPlus.newDialog(this)
+                .setContentHolder(new ViewHolder(R.layout.dialog_pop))
+                .setGravity(Gravity.CENTER)
+                .setCancelable(false)
+                .create();
 
-    private void showToast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        View dialogView = dialog.getHolderView();
+
+        TextView proteinTextView = dialogView.findViewById(R.id.protienMessage);
+        proteinTextView.setText(proteinMessage);
+
+        TextView fatTextView = dialogView.findViewById(R.id.fatMessage);
+        fatTextView.setText(fatMessage);
+
+        TextView carbTextView = dialogView.findViewById(R.id.carbsmessage);
+        carbTextView.setText(carbMessage);
+
+        Button okButton = dialogView.findViewById(R.id.okButton);
+        okButton.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
-
-
 
 
 

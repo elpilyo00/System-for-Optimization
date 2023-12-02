@@ -1,0 +1,39 @@
+<!-- custom_dialog_layout.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+    <include layout="@layout/dialog_header25"/>
+
+    <TextView
+        android:id="@+id/carbsmessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/century_gothic"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:text="Message Placeholder" />
+    <TextView
+        android:textStyle="bold"
+        android:fontFamily="@font/century_gothic"
+        android:id="@+id/protienMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:text="Message Placeholder" />
+    <TextView
+        android:textStyle="bold"
+        android:fontFamily="@font/century_gothic"
+        android:id="@+id/fatMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="10dp"
+        android:text="Message Placeholder" />
+    <include layout="@layout/dialog_footer26"/>
+</LinearLayout>

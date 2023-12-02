@@ -102,6 +102,14 @@ public class PlanDialog {
 
                                     // Save daily calorie intake to Firebase
                                     weightManagementReference.child(uid).child("daily_calorie_intake").setValue(dailyCalorieIntake);
+                                    weightManagementReference.child(uid).child("recent_calorie_intake").setValue(dailyCalorieIntake);
+                                    DatabaseReference dailyCalorieIntakeTotalReference = FirebaseDatabase.getInstance()
+                                            .getReference()
+                                            .child("daily_calorie_intake_total")
+                                            .child(uid)
+                                            .child("total");
+
+                                    dailyCalorieIntakeTotalReference.setValue(dailyCalorieIntake);
                                     calculateAndSaveNutritionalIntake(uid, dailyCalorieIntake, userWeightKg);
                                     dialog.dismiss();
                                 }

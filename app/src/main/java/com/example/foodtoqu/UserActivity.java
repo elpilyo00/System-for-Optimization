@@ -30,6 +30,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodtoqu.Dialog_utils.CheckIn_dialog;
 import com.example.foodtoqu.Dialog_utils.Dialog;
 import com.example.foodtoqu.Dialog_utils.Dialog_logout;
 import com.example.foodtoqu.Dialog_utils.PlanDialog;
@@ -86,6 +87,7 @@ public class UserActivity extends AppCompatActivity {
     private TextView current_weight, target_weight, targetDate;
     private TextView BreakFast, Lunch, dinner;
     private DatabaseReference diaryReference;
+    private AppCompatButton checkIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,7 @@ public class UserActivity extends AppCompatActivity {
         current_weight = findViewById(R.id.current_weight);
         target_weight = findViewById(R.id.target_weight);
         targetDate = findViewById(R.id.target_date);
+        checkIn = findViewById(R.id.checkIn);
         plan = findViewById(R.id.Plan);
         gastroC = findViewById(R.id.gastro);
         osteoporosisCB = findViewById(R.id.osteo);
@@ -135,6 +138,15 @@ public class UserActivity extends AppCompatActivity {
         Lunch = findViewById(R.id.Lunch);
         dinner = findViewById(R.id.Dinner);
 
+
+        checkIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckIn_dialog check = new CheckIn_dialog();
+                check.checkIn(UserActivity.this);
+            }
+        });
+
         diaryReference = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -156,6 +168,36 @@ public class UserActivity extends AppCompatActivity {
                 }
             });
         }
+
+
+
+
+        FirebaseUser currentUser2 = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser2 != null) {
+            String uid = currentUser2.getUid();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("daily_calorie_intake_total").child(uid).child("total");
+
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        double totalCalories = dataSnapshot.getValue(Double.class);
+                        int calorieIntake = (int) totalCalories;
+                        TextView calorieIntakeTextView = findViewById(R.id.total);
+                        TextView calorieIntakeTextView2 = findViewById(R.id.total2);
+                        calorieIntakeTextView.setText(String.valueOf(calorieIntake));
+                        calorieIntakeTextView2.setText(String.valueOf(calorieIntake));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle any errors here
+                }
+            });
+        }
+
+
 
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("User");
         //Retrieve targetWeight and date used firebase auth and database reference to retrieve
@@ -190,23 +232,29 @@ public class UserActivity extends AppCompatActivity {
                         }
 
                         targetDate.setText("  Target Date\n" + targetDate2);
-
                         // Retrieve and display daily calorie intake
                         Double dailyCalorieIntake = dataSnapshot.child("daily_calorie_intake").getValue(Double.class);
                         if (dailyCalorieIntake != null) {
-                            TextView calorieIntakeTextView = findViewById(R.id.total);
-                            TextView total = findViewById(R.id.total2);
                             TextView left = findViewById(R.id.remaining);
-                            // Convert Double value to an integer if you want to display only the integer part
                             int calorieIntake = dailyCalorieIntake.intValue();
-                            calorieIntakeTextView.setText(String.valueOf(calorieIntake));
-                            total.setText(String.valueOf(calorieIntake));
                             left.setText(String.valueOf(calorieIntake));
-                            daily_calorie.setMax(calorieIntake);
+
+                            int max = 360;
+                            int decrease = dailyCalorieIntake.intValue();
+                            max -= decrease;
+                            daily_calorie.setMax(max);
                             daily_calorie.setProgress(calorieIntake);
-                            //otherIntakessNAPshot
+
+                            // otherIntakessNAPshot
                             otherIntakes(dataSnapshot);
+                        } else {
+                            Double dailyCalorieIntake2 = dataSnapshot.child("recent_calorie_intake").getValue(Double.class);
+                            if (dailyCalorieIntake2 != null) {
+                                otherIntakes(dataSnapshot);
+                            }
                         }
+
+
                     }
                 }
 
@@ -408,7 +456,7 @@ public class UserActivity extends AppCompatActivity {
         Double dailyProteinIntake = dataSnapshot.child("daily_protein_intake").getValue(Double.class);
         Double dailyFatIntake = dataSnapshot.child("daily_fat_intake").getValue(Double.class);
         Double dailyCarbohydrateIntake = dataSnapshot.child("daily_carbohydrate_intake").getValue(Double.class);
-        Double dailyCalorieIntake = dataSnapshot.child("daily_calorie_intake").getValue(Double.class);
+        Double dailyCalorieIntake = dataSnapshot.child("recent_calorie_intake").getValue(Double.class);
         updateIntakeUI(dailyProteinIntake, dailyFatIntake, dailyCarbohydrateIntake, dailyCalorieIntake);
     }
 
@@ -475,6 +523,9 @@ public class UserActivity extends AppCompatActivity {
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
+
+
+
 
 
     private void displayMealsTotalFromFirebase(Calendar selectedDate) {

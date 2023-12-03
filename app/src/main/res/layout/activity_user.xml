@@ -1019,6 +1019,14 @@
                                             android:textAlignment="center"
                                             android:textColor="@color/black"
                                             android:textSize="18sp" />
+                                        <TextView
+                                            android:layout_width="250dp"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="sans-serif-condensed-medium"
+                                            android:text="Please select your prescribed Health Condition/s:"
+                                            android:layout_marginLeft="5dp"
+                                            android:textColor="@color/black"
+                                            android:textSize="12sp" />
 
                                         <LinearLayout
                                             android:layout_width="match_parent"

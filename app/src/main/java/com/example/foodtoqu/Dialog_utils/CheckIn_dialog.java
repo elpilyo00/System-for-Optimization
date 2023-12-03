@@ -59,10 +59,13 @@ public class CheckIn_dialog {
 
             Task<Void> removeDiaryTotal = diaryRef.child("diary_total").removeValue();
             Task<Void> removeDailyCalorieIntake = weightRef.child("daily_calorie_intake").removeValue();
+            Task<Void> fat = weightRef.child("daily_fat_intake").removeValue();
+            Task<Void> protein = weightRef.child("daily_protein_intake").removeValue();
+            Task<Void> carbs = weightRef.child("daily_carbohydrate_intake").removeValue();
             Task<Void> removedDiary = diary.child(uid).removeValue();
 
             // Combine both tasks into a single composite task
-            Task<Void> combinedTask = Tasks.whenAll(removeDiaryTotal, removeDailyCalorieIntake,removedDiary);
+            Task<Void> combinedTask = Tasks.whenAll(removeDiaryTotal, removeDailyCalorieIntake,removedDiary,fat,protein,carbs);
 
             combinedTask.addOnSuccessListener(aVoid -> {
                 // Show toast message when both values are successfully removed

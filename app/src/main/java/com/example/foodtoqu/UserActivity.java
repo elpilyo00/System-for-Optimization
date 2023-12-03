@@ -236,16 +236,24 @@ public class UserActivity extends AppCompatActivity {
                         // Retrieve and display daily calorie intake
                         Double dailyCalorieIntake = dataSnapshot.child("daily_calorie_intake").getValue(Double.class);
                         if (dailyCalorieIntake != null) {
+                            int remainingCalories3 = dailyCalorieIntake.intValue();
+                            TextView left = findViewById(R.id.remaining);
+                            left.setText(String.valueOf(remainingCalories3));
                             otherIntakes(dataSnapshot);
                         } else {
                             Double dailyCalorieIntake2 = dataSnapshot.child("recent_calorie_intake").getValue(Double.class);
                             if (dailyCalorieIntake2 != null) {
+                                int remainingCalories2 = dailyCalorieIntake2.intValue();
+                                TextView left = findViewById(R.id.remaining);
+                                left.setText(String.valueOf(remainingCalories2));
+                                daily_calorie.setMax(remainingCalories2);
+                                daily_calorie.setProgress(remainingCalories2);
                                 otherIntakes(dataSnapshot);
                             }
                         }
-                            Double dailyCalorieIntake2 = dataSnapshot.child("daily_calorie_intake").getValue(Double.class);
-                            if (dailyCalorieIntake2 != null) {
-                                int calorieIntake2 = dailyCalorieIntake2.intValue();
+                        Double dailyCalorieIntake2 = dataSnapshot.child("daily_calorie_intake").getValue(Double.class);
+                        if (dailyCalorieIntake2 != null) {
+                            int calorieIntake = dailyCalorieIntake2.intValue(); // Convert the daily calorie intake to an integer
 
                             DatabaseReference diaryFoodTotalRef = FirebaseDatabase.getInstance().getReference()
                                     .child("diary_food_total")
@@ -256,18 +264,15 @@ public class UserActivity extends AppCompatActivity {
                                     if (snapshot.exists()) {
                                         Integer diaryFoodTotal = snapshot.child("diary_total").getValue(Integer.class);
                                         if (diaryFoodTotal != null) {
-                                            int remainingCalories = calorieIntake2 - diaryFoodTotal;
+                                            int remainingCalories = calorieIntake - diaryFoodTotal; // Calculate remaining calories
                                             TextView left = findViewById(R.id.remaining);
                                             left.setText(String.valueOf(remainingCalories));
-                                            int max = 360;
-                                            daily_calorie.setMax(max);
-                                            daily_calorie.setProgress(calorieIntake2);
+
+                                            daily_calorie.setMax(calorieIntake);
+                                            daily_calorie.setProgress(remainingCalories);
                                         }
-                                        // otherIntakessNAPshot
                                     }
-
                                 }
-
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
                                     // Handle potential errors
@@ -536,18 +541,11 @@ public class UserActivity extends AppCompatActivity {
             // Calculate and display percentages
             //proteinSeekbar
             double proteinPercentage = (caloriesToProtein / dailyCalorieIntake) * 100;
-            proteinSeekBar.setMax(100);
-            proteinSeekBar.setProgress((float) proteinPercentage);
-
             //fatSeekBar
             double fatPercentage = (caloriesToFat / dailyCalorieIntake) * 100;
-            fatSeekbar.setMax(100);
-            fatSeekbar.setProgress((float) fatPercentage);
 
             //carbsSeekbar
             double carbPercentage = (caloriesToCarbs / dailyCalorieIntake) * 100;
-            carbsSeekBar.setMax(100);
-            carbsSeekBar.setProgress((float) carbPercentage);
 
             proteinPercentageTextView.setText(String.format("%.2f%%", proteinPercentage));
             fatPercentageTextView.setText(String.format("%.2f%%", fatPercentage));
@@ -660,6 +658,17 @@ public class UserActivity extends AppCompatActivity {
                     float remainingProtein = (totalProtein);
                     float remainingFat = (totalFat);
                     float remainingCarbo = (totalCarbo);
+
+                    CircularSeekBar fatSeekbar = findViewById(R.id.fat_percent);
+                    CircularSeekBar carbsSeekBar = findViewById(R.id.carbs_percent);
+                    CircularSeekBar proteinSeekBar = findViewById(R.id.protein_percent);
+
+                    proteinSeekBar.setProgress((float) remainingProtein);
+
+                    fatSeekbar.setProgress((float) remainingFat);
+
+                    carbsSeekBar.setProgress((float) remainingCarbo);
+
 
                     TextView proteinLeftGramsTextView = findViewById(R.id.left_protein_grams);
                     TextView fatLeftGramsTextView = findViewById(R.id.fat_left_grams);

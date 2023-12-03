@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import com.example.foodtoqu.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -34,8 +36,8 @@ public class CheckIn_dialog {
         Button no = dialogView.findViewById(R.id.no);
 
         yes.setOnClickListener(v -> {
-            checkOut(activity); // Call checkOut method when "Yes" button is clicked
-            dialog.dismiss(); // Dismiss the dialog after performing the checkOut action
+            removeValues(activity);
+            dialog.dismiss(); // Dismiss the dialog after initiating the removeValues action
         });
 
         no.setOnClickListener(v -> {
@@ -45,29 +47,29 @@ public class CheckIn_dialog {
         dialog.show();
     }
 
-    private void checkOut(Activity activity) {
+    private void removeValues(Activity activity) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser != null) {
             String uid = currentUser.getUid();
 
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Weight_management").child(uid);
+            DatabaseReference diaryRef = FirebaseDatabase.getInstance().getReference().child("diary_food_total").child(uid);
+            DatabaseReference weightRef = FirebaseDatabase.getInstance().getReference().child("Weight_management").child(uid);
+            DatabaseReference diary = FirebaseDatabase.getInstance().getReference().child("diary");
 
-            // Removing specific child values
-            userRef.child("daily_calorie_intake").removeValue()
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // Show toast message when the value is successfully removed
-                            Toast.makeText(activity, "Check in success", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(activity, "Failed to remove value", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            Task<Void> removeDiaryTotal = diaryRef.child("diary_total").removeValue();
+            Task<Void> removeDailyCalorieIntake = weightRef.child("daily_calorie_intake").removeValue();
+            Task<Void> removedDiary = diary.child(uid).removeValue();
+
+            // Combine both tasks into a single composite task
+            Task<Void> combinedTask = Tasks.whenAll(removeDiaryTotal, removeDailyCalorieIntake,removedDiary);
+
+            combinedTask.addOnSuccessListener(aVoid -> {
+                // Show toast message when both values are successfully removed
+                Toast.makeText(activity, "Check in success", Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> {
+                Toast.makeText(activity, "Failed to remove values", Toast.LENGTH_SHORT).show();
+            });
         }
     }
 }

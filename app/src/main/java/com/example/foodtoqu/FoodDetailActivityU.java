@@ -240,15 +240,15 @@ public class FoodDetailActivityU extends AppCompatActivity {
                         // Decrement each value by 1 if they exist
                         if (currentCalorieIntake != null && currentCarbIntake != null && currentFatIntake != null && currentProteinIntake != null) {
                             Double updatedCalorieIntake = currentCalorieIntake - 1;
-                            Double updatedCarbIntake = currentCarbIntake - 1;
-                            Double updatedFatIntake = currentFatIntake - 1;
-                            Double updatedProteinIntake = currentProteinIntake - 1;
+//                            Double updatedCarbIntake = currentCarbIntake - 1;
+//                            Double updatedFatIntake = currentFatIntake - 1;
+//                            Double updatedProteinIntake = currentProteinIntake - 1;
 
                             // Update the values in the database
-                            dataSnapshot.getRef().child("daily_calorie_intake").setValue(updatedCalorieIntake);
-                            dataSnapshot.getRef().child("daily_carbohydrate_intake").setValue(updatedCarbIntake);
-                            dataSnapshot.getRef().child("daily_fat_intake").setValue(updatedFatIntake);
-                            dataSnapshot.getRef().child("daily_protein_intake").setValue(updatedProteinIntake)
+                            dataSnapshot.getRef().child("daily_calorie_intake").setValue(updatedCalorieIntake)
+//                            dataSnapshot.getRef().child("daily_carbohydrate_intake").setValue(updatedCarbIntake);
+//                            dataSnapshot.getRef().child("daily_fat_intake").setValue(updatedFatIntake);
+//                            dataSnapshot.getRef().child("daily_protein_intake").setValue(updatedProteinIntake)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
